@@ -9,12 +9,13 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 15,
+    ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.json',
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    'jsx-quotes': ['error', 'prefer-single'],
     indent: ['error', 2],
     'linebreak-style': ['error', 'windows'],
     quotes: ['error', 'single'],
