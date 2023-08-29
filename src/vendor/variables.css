@@ -1,0 +1,10 @@
+:root {
+  /* global */
+  --base-color-of-text: #fff;
+  --base-color-of-text-contr: #000;
+
+  /* header */
+  --header-background-color: #202020;
+  --header-account-btn-color-icon: #313131;
+  --header-signin-btn-background-color: #3ddc84;
+}

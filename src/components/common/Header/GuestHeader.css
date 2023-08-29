@@ -1,0 +1,30 @@
+.navigation-guest {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.navigation-guest__link {
+  text-decoration: none;
+  color: var(--base-color-of-text);
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.navigation-guest__signin-btn {
+  border-radius: 3px;
+
+  min-width: 76px;
+  height: 32px;
+
+  background-color: var(--header-signin-btn-background-color);
+  cursor: pointer;
+}
+
+.navigation-guest__signin-btn-text {
+  color: var(--base-color-of-text-contr);
+}

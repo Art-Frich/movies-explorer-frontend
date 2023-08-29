@@ -9,18 +9,21 @@ import SavedMoviesContainer from '../../containers/SavedMoviesContainer';
 import ProfileContainer from '../../containers/ProfileContainer';
 import RegisterContainer from '../../containers/RegisterContainer';
 import LoginContainer from '../../containers/LoginContainer';
+import { CurrentUserProvider } from '../../contexts/CurrentUserContext';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/signin' element={<LoginContainer />} />
-      <Route path='/signup' element={<RegisterContainer />} />
-      <Route path='/profile' element={<ProfileContainer />} />
-      <Route path='/saves-movies' element={<SavedMoviesContainer />} />
-      <Route path='/movies' element={<MoviesContainer />} />
-      <Route path='/' element={<MainContainer />} />
-      <Route path='*' element={<NotFoundContainer />} />
-    </Routes>
+    <CurrentUserProvider>
+      <Routes>
+        <Route path='/signin' element={<LoginContainer />} />
+        <Route path='/signup' element={<RegisterContainer />} />
+        <Route path='/profile' element={<ProfileContainer />} />
+        <Route path='/saves-movies' element={<SavedMoviesContainer />} />
+        <Route path='/movies' element={<MoviesContainer />} />
+        <Route path='/' element={<MainContainer />} />
+        <Route path='*' element={<NotFoundContainer />} />
+      </Routes>
+    </CurrentUserProvider>
   );
 }
 
