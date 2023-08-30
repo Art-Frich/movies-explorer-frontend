@@ -19,6 +19,10 @@
   line-height: 18px; /* 128.571% */
 }
 
+.navigation-auth__link.active {
+  font-weight: 500;
+}
+
 .navigation-auth__account-btn {
   min-width: 100px;
   height: 32px;

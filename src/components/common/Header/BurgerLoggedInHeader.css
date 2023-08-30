@@ -50,6 +50,10 @@
   line-height: normal;
 }
 
+.navigation-auth-burger__link.active {
+  border-bottom: var(--base-color-of-text) var(--border-active-size) solid;
+}
+
 .navigation-auth-burger__account-btn {
   min-width: 100px;
   height: 32px;
