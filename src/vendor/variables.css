@@ -2,9 +2,13 @@
   /* global */
   --base-color-of-text: #fff;
   --base-color-of-text-contr: #000;
+  --border-active-size: 2px;
+  --animation-hover-time: 0.2s;
+  --animation-hover-type: linear;
 
   /* header */
   --header-background-color: #202020;
   --header-account-btn-color-icon: #313131;
   --header-signin-btn-background-color: #3ddc84;
+  --header-vertical-padding: 21px;
 }

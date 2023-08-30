@@ -4,8 +4,7 @@
 }
 
 .header {
-  margin: 0;
-  padding: 21px 70px;
+  padding: var(--header-vertical-padding) 70px;
 
   display: flex;
   flex-direction: row;

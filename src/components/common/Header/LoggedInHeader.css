@@ -1,8 +1,12 @@
-.navigation-auth {
+.navigation-auth__list {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 20px;
+}
+
+.navigation-auth__list-element:last-child {
+  margin-left: 30px;
 }
 
 .navigation-auth__link {
@@ -13,10 +17,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 18px; /* 128.571% */
-}
-
-.navigation-auth__link:last-child {
-  margin-left: 30px;
 }
 
 .navigation-auth__account-btn {

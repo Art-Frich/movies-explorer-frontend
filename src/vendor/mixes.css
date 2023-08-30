@@ -7,3 +7,56 @@
   color: inherit;
   cursor: pointer;
 }
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link-hover {
+  transition: opacity var(--animation-hover-time) var(--animation-hover-type);
+}
+
+.link-active {
+  padding: 4px 0;
+  border-top: var(--border-active-size) solid transparent; /* для компенсации смещения нижней границы */
+  border-bottom: var(--border-active-size) solid transparent;
+  transition: border-bottom var(--animation-hover-time)
+    var(--animation-hover-type);
+}
+
+.link-active.link-hover {
+  transition: border-bottom var(--animation-hover-time)
+      var(--animation-hover-type),
+    opacity var(--animation-hover-time) var(--animation-hover-type);
+}
+
+.link-hover:hover {
+  opacity: 0.7;
+}
+
+.link-active:active {
+  border-bottom: var(--base-color-of-text) var(--border-active-size) solid;
+}
+
+.btn-hover {
+  transition: opacity var(--animation-hover-time) var(--animation-hover-type);
+}
+
+.btn-hover:hover {
+  opacity: 0.8;
+}
+
+.btn-active {
+  transition: outline var(--animation-hover-time) var(--animation-hover-type);
+}
+
+.btn-active:active {
+  border-bottom: var(--border-active-size) solid var(--base-color-of-text-contr);
+}
+
+.btn-active.btn-hover {
+  transition: outline var(--animation-hover-time) var(--animation-hover-type),
+    opacity var(--animation-hover-time) var(--animation-hover-type);
+}

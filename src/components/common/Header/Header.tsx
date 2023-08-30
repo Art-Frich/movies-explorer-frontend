@@ -40,7 +40,7 @@ export default function Header() {
       ) : (
         <BurgerBtn onClick={toggleBurgerState} isOpen={isOpenBurger} />
       )}
-      <BurgerLoggedInHeader isOpen={isOpenBurger} />
+      <BurgerLoggedInHeader isOpen={isOpenBurger && isSmallScreen} />
     </header>
   );
 }
