@@ -1,7 +1,7 @@
 import './Promo.css';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-scroll';
 
 export default function Promo() {
   return (
@@ -12,11 +12,11 @@ export default function Promo() {
         </h1>
         <span className='promo__subtitle'>Листайте ниже, чтобы узнать больше про этот проект и его создателя.</span>
       </div>
-      <button type='button' className='promo__btn btn-reset btn-hover btn-active'>
-        <Link to='/' className='promo__link'>
+      <Link to='about-project' smooth duration={500} className='promo__link'>
+        <button type='button' className='promo__btn btn-reset btn-hover btn-active'>
           Узнать больше
-        </Link>
-      </button>
+        </button>
+      </Link>
     </section>
   );
 }

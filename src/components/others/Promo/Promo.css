@@ -38,16 +38,6 @@
   opacity: 0.5;
 }
 
-.promo__link {
-  color: var(--base-color-of-text);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px; /* 133.333% */
-
-  text-decoration: none;
-}
-
 .promo__btn {
   border-radius: 3px;
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -55,4 +45,12 @@
   background: inherit;
 
   padding: 10px 20px;
+
+  cursor: pointer;
+
+  color: var(--base-color-of-text);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
 }

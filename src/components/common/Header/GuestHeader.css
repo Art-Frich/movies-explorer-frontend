@@ -21,10 +21,7 @@
   min-width: 76px;
   height: 32px;
 
+  color: var(--base-color-of-text-contr);
   background-color: var(--background-color-green);
   cursor: pointer;
-}
-
-.navigation-guest__signin-btn-text {
-  color: var(--base-color-of-text-contr);
 }
