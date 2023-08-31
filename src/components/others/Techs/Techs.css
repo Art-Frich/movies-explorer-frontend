@@ -11,7 +11,7 @@
   line-height: normal;
   letter-spacing: -0.88px;
 
-  margin-bottom: 23px;
+  margin: 0 0 23px;
 }
 
 .techs__row {
@@ -31,7 +31,7 @@
   line-height: 58px; /* 116% */
   letter-spacing: -2px;
 
-  margin-bottom: 26px;
+  margin: 0 0 26px;
 }
 
 .techs__text {
