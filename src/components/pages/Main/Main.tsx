@@ -5,6 +5,7 @@ import Promo from '../../others/Promo/Promo';
 import AboutProject from '../../others/AboutProject/AboutProject';
 import Techs from '../../others/Techs/Techs';
 import AboutMe from '../../others/AboutMe/AboutMe';
+import Portfolio from '../../others/Portfolio/Portfolio';
 
 // import Header from '../../common/Header/Header';
 
@@ -15,6 +16,7 @@ export default function Main() {
       <AboutProject />
       <Techs />
       <AboutMe />
+      <Portfolio />
     </main>
   );
 }

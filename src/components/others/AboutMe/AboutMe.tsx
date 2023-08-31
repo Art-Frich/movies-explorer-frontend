@@ -8,9 +8,9 @@ import photo from '../../../images/pic__COLOR_pic.png';
 export default function AboutMe() {
   return (
     <section className='about-me'>
-      <h1 className='about-me__title'>
+      <h2 className='about-me__title'>
         Студент
-      </h1>
+      </h2>
       <div className='about-me__row' />
       <div className='about-me__info'>
         <div className='about-me__info-description'>

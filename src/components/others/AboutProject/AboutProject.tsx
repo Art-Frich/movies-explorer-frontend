@@ -5,9 +5,9 @@ import React from 'react';
 export default function AboutProject() {
   return (
     <section className='about-project' id='about-project'>
-      <h1 className='about-project__title'>
+      <h2 className='about-project__title'>
         О проекте
-      </h1>
+      </h2>
       <div className='about-project__row' />
       <div className='about-project__info'>
         <div className='about-project__info-element'>

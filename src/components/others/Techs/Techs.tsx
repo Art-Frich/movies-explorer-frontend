@@ -5,9 +5,9 @@ import React from 'react';
 export default function Techs() {
   return (
     <section className='techs'>
-      <h1 className='techs__title'>
+      <h2 className='techs__title'>
         Технологии
-      </h1>
+      </h2>
       <div className='techs__row' />
       <h3 className='techs__subtitle'>7 технологий</h3>
       <p className='techs__text'>
