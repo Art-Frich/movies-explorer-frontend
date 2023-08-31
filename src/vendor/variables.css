@@ -5,9 +5,10 @@
   --border-active-size: 2px;
   --animation-hover-time: 0.2s;
   --animation-hover-type: linear;
+  --background-color-light-black: #202020;
 
   /* header */
-  --header-background-color: #202020;
+  --header-background-color: var(--background-color-light-black);
   --header-account-btn-color-icon: #313131;
   --header-signin-btn-background-color: #3ddc84;
   --header-vertical-padding: 21px;

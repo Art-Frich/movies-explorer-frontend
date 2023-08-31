@@ -13,6 +13,7 @@ import LoginContainer from '../../containers/LoginContainer';
 
 import { CurrentUserProvider } from '../../contexts/CurrentUserContext';
 import Header from '../common/Header/Header';
+import Footer from '../common/Footer/Footer';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/' element={<MainContainer />} />
         <Route path='*' element={<NotFoundContainer />} />
       </Routes>
+      <Footer />
     </CurrentUserProvider>
   );
 }
