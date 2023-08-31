@@ -32,6 +32,7 @@
 
 .about-project__info-element {
   display: flex;
+  width: 550px;
   flex-direction: column;
   gap: 26px;
 }

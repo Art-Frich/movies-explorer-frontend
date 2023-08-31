@@ -23,6 +23,8 @@
 .portfolio__list-element {
   display: flex;
   justify-content: space-between;
+
+  max-height: 50px;
 }
 
 .portfolio__list-element:not(:last-child) {
@@ -31,6 +33,8 @@
 }
 
 .portfolio__list-element-text {
+  margin: 0;
+
   color: var(--base-color-of-text);
   font-size: 30px;
   font-style: normal;

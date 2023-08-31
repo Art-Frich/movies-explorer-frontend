@@ -9,7 +9,11 @@
   background-position: right top;
   background-size: initial;
 
-  min-height: 449px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 425px;
 }
 
 .promo__title {
@@ -41,6 +45,9 @@
 .promo__btn {
   border-radius: 3px;
   border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+
+  height: 36px;
 
   background: inherit;
 

@@ -6,4 +6,6 @@
   justify-content: space-between;
 
   background-color: var(--header-background-color);
+
+  overflow-x: hidden;
 }
