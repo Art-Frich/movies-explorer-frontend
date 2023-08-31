@@ -1,10 +1,16 @@
 import './Main.css';
 
-// import React from 'react';
+import React from 'react';
+import Promo from '../../others/Promo/Promo';
+import AboutProject from '../../others/AboutProject/AboutProject';
+
 // import Header from '../../common/Header/Header';
 
 export default function Main() {
   return (
-    null
+    <main>
+      <Promo />
+      <AboutProject />
+    </main>
   );
 }

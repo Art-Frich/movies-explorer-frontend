@@ -21,7 +21,7 @@
   min-width: 76px;
   height: 32px;
 
-  background-color: var(--header-signin-btn-background-color);
+  background-color: var(--background-color-green);
   cursor: pointer;
 }
 

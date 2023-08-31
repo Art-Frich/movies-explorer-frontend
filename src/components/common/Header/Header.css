@@ -1,8 +1,3 @@
-.main-header-style {
-  --header-background-color: #073042;
-  --header-account-btn-color-icon: #0f4157;
-}
-
 .header {
   padding: var(--header-vertical-padding) 70px;
 

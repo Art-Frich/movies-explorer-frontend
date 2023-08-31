@@ -49,14 +49,14 @@
 }
 
 .btn-active {
-  transition: outline var(--animation-hover-time) var(--animation-hover-type);
+  transition: box-shadow var(--animation-hover-time) var(--animation-hover-type);
 }
 
 .btn-active:active {
-  border-bottom: var(--border-active-size) solid var(--base-color-of-text-contr);
+  box-shadow: 0 0 10px #000;
 }
 
 .btn-active.btn-hover {
-  transition: outline var(--animation-hover-time) var(--animation-hover-type),
+  transition: box-shadow var(--animation-hover-time) var(--animation-hover-type),
     opacity var(--animation-hover-time) var(--animation-hover-type);
 }

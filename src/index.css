@@ -11,7 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* чтобы скрыть aside-bar абсолютно спозиционированный за экран справа */
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 code {
