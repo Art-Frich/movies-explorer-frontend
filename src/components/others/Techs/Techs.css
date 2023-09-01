@@ -91,7 +91,7 @@
 
   .techs__text {
     font-size: 12px;
-    line-height: 18px; /* 150% */
+    line-height: 18px;
     letter-spacing: -0.48px;
 
     margin-bottom: 83px;
@@ -100,5 +100,38 @@
   .techs__list-element {
     min-width: 84px;
     min-height: 57px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+
+    margin-bottom: 28px;
+  }
+
+  .techs__row {
+    margin-bottom: 60px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+
+    margin-bottom: 24px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.44px;
+
+    margin-bottom: 50px;
   }
 }
