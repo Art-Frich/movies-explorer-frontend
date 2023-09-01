@@ -53,3 +53,21 @@
 
   text-decoration: none;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 45px 50px 90px;
+  }
+
+  .portfolio__list-element-text {
+    font-size: 28px;
+    line-height: 50px;
+    letter-spacing: -1.12px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 60px;
+    letter-spacing: -1.12px;
+  }
+}
