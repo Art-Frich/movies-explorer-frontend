@@ -13,7 +13,6 @@
   /* header */
   --header-background-color: var(--background-color-light-black);
   --header-account-btn-color-icon: #313131;
-  --header-vertical-padding: 18px;
 }
 
 .main-header-style {

@@ -99,3 +99,24 @@
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__info-text {
+    font-size: 12px;
+    line-height: 18px; /* 142.857% */
+  }
+
+  .about-project__info {
+    gap: 30px;
+
+    margin-bottom: 93px;
+  }
+
+  .about-project__info-element {
+    gap: 22px;
+  }
+}

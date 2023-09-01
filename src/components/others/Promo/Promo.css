@@ -6,21 +6,9 @@
 .promo__content {
   display: flex;
   flex-direction: column;
-  /* justify-content: start; */
 
   position: relative;
-
-  /* min-height: 425px; */
 }
-
-/* .promo__background {
-  background-image: url(../../../images/landing-logo.svg);
-  background-repeat: no-repeat;
-  background-position: right top;
-  background-size: initial;
-
-  min-height: 304px;
-} */
 
 .promo__logo {
   display: block;
@@ -83,24 +71,14 @@
 }
 
 @media screen and (max-width: 1100px) {
-  .promo {
-    /* padding-top: 140px; */
-  }
-
   .promo__content {
     align-items: center;
-    /* justify-content: flex-end; */
-    /* gap: 92px; */
   }
 
   .promo__logo {
     top: 65px;
     right: auto;
   }
-
-  /* .promo__background {
-    background-position: center;
-  } */
 
   .promo__title {
     text-align: center;
