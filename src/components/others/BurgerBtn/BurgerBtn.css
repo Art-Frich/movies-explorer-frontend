@@ -47,3 +47,11 @@
   opacity: 1;
   z-index: 1;
 }
+
+@media screen and (max-width: 400px) {
+  .burger-menu {
+    width: 40px;
+    height: 43px;
+    padding: 12px 9px;
+  }
+}

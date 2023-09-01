@@ -117,3 +117,9 @@
     height: 307px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .about-me__info {
+    flex-direction: column-reverse;
+  }
+}

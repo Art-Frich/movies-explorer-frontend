@@ -15,3 +15,17 @@
     padding: 18px 30px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .header {
+    padding: 18px 14px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background-color: var(--header-background-color);
+
+    overflow-x: hidden;
+  }
+}

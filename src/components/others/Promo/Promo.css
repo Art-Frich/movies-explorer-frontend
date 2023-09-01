@@ -94,3 +94,30 @@
     text-align: center;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .promo {
+    padding: 70px 10px 30px;
+    background-color: var(--background-color-blue);
+  }
+
+  .promo__logo {
+    top: 0px;
+    right: auto;
+
+    width: 210px;
+    height: 206px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 38px; /* 125% */
+    letter-spacing: -1.2px;
+
+    margin: 250px 0 24px;
+  }
+
+  .promo__subtitle {
+    margin: 0 0 80px;
+  }
+}

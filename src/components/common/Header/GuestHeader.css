@@ -17,11 +17,26 @@
 
 .navigation-guest__signin-btn {
   border-radius: 3px;
-
-  min-width: 76px;
-  height: 32px;
+  padding: 8px 20px;
 
   color: var(--base-color-of-text-contr);
   background-color: var(--background-color-green);
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .navigation-guest {
+    gap: 14px;
+  }
+
+  .navigation-guest__link {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+
+  .navigation-guest__signin-btn {
+    border-radius: 3px;
+    padding: 5px 12px;
+  }
 }
