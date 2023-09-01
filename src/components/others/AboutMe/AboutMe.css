@@ -25,6 +25,7 @@
 .about-me__info {
   display: flex;
   justify-content: space-between;
+  gap: 40px;
 }
 
 .about-me__info-description {
@@ -84,4 +85,35 @@
 
   width: 270px;
   height: 327px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    padding: 90px 50px 45px;
+  }
+
+  .about-me__info-title {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+
+    margin-bottom: 16px;
+  }
+
+  .about-me__info-subtitle {
+    font-size: 12px;
+    line-height: 18px;
+
+    margin-bottom: 20px;
+  }
+
+  .about-me__info-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__info-photo {
+    width: 255px;
+    height: 307px;
+  }
 }
