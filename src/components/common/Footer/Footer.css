@@ -63,3 +63,32 @@
     padding: 79px 30px 20px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .footer {
+    padding: 79px 10px 20px;
+  }
+
+  .footer__title {
+    font-size: 12px;
+  }
+
+  .footer__dividing-line {
+    margin: 1px 0 10px;
+  }
+
+  .footer__row {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+
+  .footer__list {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer__signature {
+    color: #8b8b8b;
+    font-size: 12px;
+  }
+}
