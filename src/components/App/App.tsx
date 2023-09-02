@@ -12,23 +12,22 @@ import RegisterContainer from '../../containers/RegisterContainer';
 import LoginContainer from '../../containers/LoginContainer';
 
 import { CurrentUserProvider } from '../../contexts/CurrentUserContext';
-import Header from '../common/Header/Header';
-import Footer from '../common/Footer/Footer';
+import PageWrapper from '../common/PageWrapper';
 
 function App() {
   return (
     <CurrentUserProvider>
-      <Header />
       <Routes>
         <Route path='/signin' element={<LoginContainer />} />
         <Route path='/signup' element={<RegisterContainer />} />
-        <Route path='/profile' element={<ProfileContainer />} />
-        <Route path='/saved-movies' element={<SavedMoviesContainer />} />
-        <Route path='/movies' element={<MoviesContainer />} />
-        <Route path='/' element={<MainContainer />} />
+        <Route path='/' element={<PageWrapper />}>
+          <Route path='/profile' element={<ProfileContainer />} />
+          <Route path='/saved-movies' element={<SavedMoviesContainer />} />
+          <Route path='/movies' element={<MoviesContainer />} />
+          <Route index element={<MainContainer />} />
+        </Route>
         <Route path='*' element={<NotFoundContainer />} />
       </Routes>
-      <Footer />
     </CurrentUserProvider>
   );
 }

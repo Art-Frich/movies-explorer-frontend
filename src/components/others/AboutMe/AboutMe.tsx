@@ -25,7 +25,11 @@ export default function AboutMe() {
             </p>
           </div>
           <span>
-            <Link to='https://github.com/Art-Frich' className='about-me__info-link footer__link link-hover link-active'>
+            <Link
+              to='https://github.com/Art-Frich'
+              className='about-me__info-link footer__link link-hover link-active'
+              target='_blank'
+            >
               Github
             </Link>
           </span>

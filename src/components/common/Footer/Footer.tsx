@@ -12,12 +12,20 @@ export default function Footer() {
         <span className='footer__signature'>© Art Frich 2023</span>
         <ul className='footer__list list-reset'>
           <li className='footer__list-element'>
-            <Link to='https://practicum.yandex.ru/' className='footer__link link-hover link-active'>
+            <Link
+              to='https://practicum.yandex.ru/'
+              className='footer__link link-hover link-active'
+              target='_blank'
+            >
               Яндекс.Практикум
             </Link>
           </li>
           <li className='footer__list-element'>
-            <Link to='https://github.com/Art-Frich' className='footer__link link-hover link-active'>
+            <Link
+              to='https://github.com/Art-Frich'
+              className='footer__link link-hover link-active'
+              target='_blank'
+            >
               Github
             </Link>
           </li>
