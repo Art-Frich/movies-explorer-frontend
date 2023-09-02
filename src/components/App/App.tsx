@@ -1,7 +1,7 @@
 import './App.css';
 
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 import MainContainer from '../../containers/MainContainer';
 import NotFoundContainer from '../../containers/NotFoundContainer';
@@ -12,7 +12,8 @@ import RegisterContainer from '../../containers/RegisterContainer';
 import LoginContainer from '../../containers/LoginContainer';
 
 import { CurrentUserProvider } from '../../contexts/CurrentUserContext';
-import PageWrapper from '../common/PageWrapper';
+import Header from '../common/Header/Header';
+import Footer from '../common/Footer/Footer';
 
 function App() {
   return (
@@ -20,12 +21,36 @@ function App() {
       <Routes>
         <Route path='/signin' element={<LoginContainer />} />
         <Route path='/signup' element={<RegisterContainer />} />
-        <Route path='/' element={<PageWrapper />}>
+
+        {/* // add header for pages */}
+        <Route
+          path='/'
+          element={(
+            <>
+              <Header />
+              <Outlet />
+            </>
+          )}
+        >
           <Route path='/profile' element={<ProfileContainer />} />
-          <Route path='/saved-movies' element={<SavedMoviesContainer />} />
-          <Route path='/movies' element={<MoviesContainer />} />
-          <Route index element={<MainContainer />} />
+
+          {/* add footer for pages */}
+          <Route
+            path='/'
+            element={(
+              <>
+                <Outlet />
+                <Footer />
+              </>
+            )}
+          >
+            <Route path='/saved-movies' element={<SavedMoviesContainer />} />
+            <Route path='/movies' element={<MoviesContainer />} />
+            <Route index element={<MainContainer />} />
+          </Route>
         </Route>
+
+        {/* otherRouter */}
         <Route path='*' element={<NotFoundContainer />} />
       </Routes>
     </CurrentUserProvider>

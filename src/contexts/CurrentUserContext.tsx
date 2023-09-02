@@ -6,6 +6,10 @@ interface CurrentUserContextType {
   loggedIn: boolean,
   login: () => void,
   logout: () => void,
+  setName: (name: string) => void,
+  setEmail: (email: string) => void,
+  name: string,
+  email: string,
 }
 
 interface ReactChildren {
@@ -18,6 +22,8 @@ export const useCurrentUser = () => useContext(CurrentUserContext);
 
 export function CurrentUserProvider({ children }: ReactChildren) {
   const [loggedIn, setLoggedIn] = useState(true);
+  const [name, setName] = useState('Name');
+  const [email, setEmail] = useState('Email');
 
   const login = () => {
     setLoggedIn(true);
@@ -27,7 +33,9 @@ export function CurrentUserProvider({ children }: ReactChildren) {
     setLoggedIn(false);
   };
 
-  const contextValue = useMemo(() => ({ loggedIn, login, logout }), [loggedIn]);
+  const contextValue = useMemo(() => ({
+    loggedIn, login, logout, name, email, setName, setEmail,
+  }), [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={contextValue}>

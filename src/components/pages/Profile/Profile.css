@@ -1,0 +1,112 @@
+.page-profile {
+  background-color: var(--background-color-light-black);
+  padding: 70px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  /* 74px - высота Header, важно за этим следить */
+  min-height: calc(100vh - 74px);
+  box-sizing: border-box;
+}
+
+.page-profile__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 410px;
+}
+
+.page-profile__title {
+  color: var(--base-color-of-text);
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  margin: 0 0 123px;
+}
+
+.page-profile__field {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid #424242;
+}
+
+.page-profile__field:last-of-type {
+  padding: 16px 0 0;
+  border: 0;
+  margin-bottom: 220px;
+}
+
+.page-profile__desctiption {
+  color: var(--base-color-of-text);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.page-profile__input {
+  color: var(--base-color-of-text);
+  text-align: right;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  width: 100%;
+  max-width: 350px;
+
+  transition: color 0.2s linear;
+}
+
+.page-profile__input:hover {
+  color: #ee3465;
+}
+
+.page-profile__input:focus {
+  color: #ee3465;
+}
+
+.page-profile__btn-submit {
+  padding: 0 5px 0;
+
+  color: var(--base-color-of-text);
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.page-profile__btn-logout {
+  padding: 0 5px 0;
+
+  color: #ee3465;
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+@media screen and (max-width: 768px) {
+  .page-profile__title {
+    margin: 0 0 96px;
+  }
+
+  .page-profile__field:last-of-type {
+    margin-bottom: 210px;
+  }
+}
