@@ -70,7 +70,7 @@ export default function Register({
         </label>
 
         <button
-          className='page-register__btn-submit button-reset btn-hover btn-active'
+          className='page-register__btn-submit btn-reset btn-hover btn-active'
           type='submit'
           name='submit-btn-change-user-data-form'
           disabled={!isValidForm}

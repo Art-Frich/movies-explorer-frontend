@@ -19,7 +19,7 @@ export default function BurgerLoggedInHeader({ isOpen }: { isOpen: boolean }) {
           </li>
         </ul>
         <NavLink className='navigation-auth-burger__link link-hover' to='/profile'>
-          <button type='button' className='navigation-auth-burger__account-btn button-reset'>
+          <button type='button' className='navigation-auth-burger__account-btn btn-reset'>
             <span className='navigation-auth-burger__account-btn-text link-active'>Аккаунт</span>
             <span className='navigation-auth-burger__account-btn-icon' />
           </button>

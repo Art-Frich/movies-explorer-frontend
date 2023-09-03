@@ -15,7 +15,7 @@ export default function LoggedInHeader() {
         </li>
         <li className='navigation-auth__list-element'>
           <NavLink className='navigation-auth__link link-hover' to='/profile'>
-            <button type='button' className='navigation-auth__account-btn button-reset'>
+            <button type='button' className='navigation-auth__account-btn btn-reset'>
               <span className='navigation-auth__account-btn-text link-active'>Аккаунт</span>
               <span className='navigation-auth__account-btn-icon' />
             </button>

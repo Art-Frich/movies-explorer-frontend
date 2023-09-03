@@ -54,7 +54,7 @@ export default function Profile({
         </label>
 
         <button
-          className='page-profile__btn-submit button-reset btn-hover btn-active'
+          className='page-profile__btn-submit btn-reset btn-hover btn-active'
           type='submit'
           name='submit-btn-change-user-data-form'
           disabled={!isValidForm}
@@ -64,7 +64,7 @@ export default function Profile({
       </form>
 
       <button
-        className='page-profile__btn-logout button-reset btn-hover btn-active'
+        className='page-profile__btn-logout btn-reset btn-hover btn-active'
         type='button'
         onClick={onLogout}
       >

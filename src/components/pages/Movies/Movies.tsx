@@ -1,7 +1,17 @@
 import './Movies.css';
 
-export default function Movies() {
+import React from 'react';
+
+import SearchForm from '../../others/SearchForm/SearchForm';
+
+interface MoviesInterface {
+  isShort: boolean,
+  setIsShort: (newValue: boolean) => void,
+}
+
+export default function Movies({ isShort, setIsShort }: MoviesInterface) {
   return (
-    null
+    <SearchForm isShort={isShort} setIsShort={setIsShort} />
+
   );
 }
