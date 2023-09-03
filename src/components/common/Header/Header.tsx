@@ -31,7 +31,7 @@ export default function Header() {
   return (
     <header className={`header ${isMain ? 'main-header-style' : ''}`}>
       <Link to='/'>
-        <img src={logo} alt='Логотип' className='header__logo' />
+        <img src={logo} alt='Логотип' className='header__logo btn-hover' />
       </Link>
       {!curUser?.loggedIn ? (
         <GuestHeader />

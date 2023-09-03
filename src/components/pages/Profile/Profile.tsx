@@ -22,6 +22,7 @@ export default function Profile({
         name='change-user-data-form'
         noValidate
         onSubmit={onSubmit}
+        autoComplete='off'
       >
 
         <h1 className='page-profile__title'>{`Здравствуйте, ${nameUser} ;)`}</h1>

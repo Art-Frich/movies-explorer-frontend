@@ -1,0 +1,147 @@
+.page-register {
+  background-color: var(--background-color-light-black);
+  padding: 70px 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.page-register__logo {
+  display: block;
+  margin: 0 0 40px;
+  height: 38px;
+  width: 38px;
+  object-fit: cover;
+}
+
+.page-register__form {
+  width: 100%;
+  max-width: 396px;
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 16px;
+}
+
+.page-register__title {
+  color: var(--base-color-of-text);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  margin: 0 0 40px;
+}
+
+.page-register__field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page-register__field:last-of-type {
+  margin-bottom: 128px;
+}
+
+.page-register__desctiption {
+  color: #8b8b8b;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin-bottom: 5px;
+}
+
+.page-register__input {
+  color: var(--base-color-of-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  padding-bottom: 10px;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 6px;
+}
+
+.page-register__input::placeholder {
+  color: var(--base-color-of-text);
+  opacity: 0.3;
+}
+
+.page-register__input_type_password {
+  color: #ee3465;
+}
+
+.page-register__error {
+  color: #ee3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  display: inline-block;
+  min-height: 12px;
+  margin-bottom: 6px;
+}
+
+.page-register__btn-submit {
+  border-radius: 3px;
+  background: #4285f4;
+  padding: 13px 0;
+
+  color: var(--base-color-of-text);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  width: 100%;
+}
+
+.page-register__yet-register-text {
+  color: #8b8b8b;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.page-register__yet-register-link {
+  color: #4285f4;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  text-decoration: none;
+}
+
+@media screen and (max-width: 400px) {
+  .page-register {
+    padding: 56px 30px 30px;
+  }
+
+  .page-register__logo {
+    margin-bottom: 50px;
+  }
+
+  .page-register__form {
+    margin-bottom: 14px;
+    align-items: center;
+  }
+
+  .page-register__title {
+    margin-bottom: 80px;
+  }
+}

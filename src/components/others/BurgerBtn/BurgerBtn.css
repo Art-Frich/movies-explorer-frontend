@@ -53,5 +53,6 @@
     width: 40px;
     height: 43px;
     padding: 12px 9px;
+    --shift: calc(var(--size-menu-burger) * 0.85 / 4);
   }
 }

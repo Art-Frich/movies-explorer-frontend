@@ -14,6 +14,7 @@
 
   /* Добавляем растяжение по вертикали */
   display: flex;
+  max-height: 100vh;
 }
 
 .aside-bar_visible {
@@ -79,7 +80,14 @@
   height: 30px;
 
   background-image: url(../../../images/icon-account.svg);
-  background-color: var(--header-account-btn-color-icon);
+  background-color: #313131;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 520px) {
+  .aside-bar {
+    min-width: min-content;
+    width: 100%;
+  }
 }
