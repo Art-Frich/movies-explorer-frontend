@@ -3,6 +3,7 @@ import './Movies.css';
 import React from 'react';
 
 import SearchForm from '../../others/SearchForm/SearchForm';
+import MoviesCardList from '../../others/MoviesCardList/MoviesCardList';
 
 interface MoviesInterface {
   isShort: boolean,
@@ -11,7 +12,10 @@ interface MoviesInterface {
 
 export default function Movies({ isShort, setIsShort }: MoviesInterface) {
   return (
-    <SearchForm isShort={isShort} setIsShort={setIsShort} />
-
+    <main className='movies'>
+      <SearchForm isShort={isShort} setIsShort={setIsShort} />
+      <MoviesCardList />
+      <button className='movies__btn-load-films btn-reset btn-hover btn-active' type='button'>Ещё</button>
+    </main>
   );
 }

@@ -16,6 +16,8 @@
   border: 1.5px solid rgba(170, 170, 170, 0.2);
 
   margin-bottom: 26px;
+
+  box-sizing: border-box;
 }
 
 .sercher__input {
@@ -24,6 +26,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 111.111% */
+
+  flex-grow: 1;
 }
 
 .sercher__input::placeholder {

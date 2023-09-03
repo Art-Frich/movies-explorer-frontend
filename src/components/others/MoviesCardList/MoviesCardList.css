@@ -1,1 +1,11 @@
-ÿþ
+.movies-list {
+  background-color: var(--background-color-light-black);
+  padding: 70px 70px 10px;
+}
+
+.movies-list__list {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+}

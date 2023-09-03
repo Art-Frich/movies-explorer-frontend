@@ -1,0 +1,19 @@
+.movies {
+  background-color: #202020;
+}
+
+.movies__btn-load-films {
+  border-radius: 6px;
+  background: #2f2f2f;
+
+  padding: 9px;
+  width: 100%;
+  max-width: 1140px;
+  margin: 50px 70px 80px;
+
+  color: var(--base-color-of-text);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
