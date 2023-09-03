@@ -12,9 +12,9 @@ interface SavedMoviesInterface {
 
 export default function SavedMovies({ isShort, setIsShort }: SavedMoviesInterface) {
   return (
-    <>
+    <main className='saved-movies'>
       <SearchForm isShort={isShort} setIsShort={setIsShort} />
       <MoviesCardList />
-    </>
+    </main>
   );
 }

@@ -59,6 +59,10 @@
     padding: 45px 50px 90px;
   }
 
+  .portfolio__title {
+    color: #a0a0a0;
+  }
+
   .portfolio__list-element-text {
     font-size: 28px;
     line-height: 50px;
@@ -75,6 +79,11 @@
 @media screen and (max-width: 400px) {
   .portfolio {
     padding: 35px 14px 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    margin-bottom: 40px;
   }
 
   .portfolio__list-element-text {

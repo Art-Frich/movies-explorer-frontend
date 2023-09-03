@@ -87,6 +87,22 @@
     gap: 12px;
   }
 
+  /* !Поправить */
+
+  .footer__link {
+    font-size: 12px;
+
+    /* т.к. линк имеет класс link-hover & link-active из-за чего чуть больше планового */
+    position: relative;
+    top: -4px;
+  }
+
+  /* т.к. смещение получается каскадным, то второй линк тоже нужно сдвинуть */
+  .footer__list-element:last-of-type {
+    position: relative;
+    top: -4px;
+  }
+
   .footer__signature {
     color: #8b8b8b;
     font-size: 12px;

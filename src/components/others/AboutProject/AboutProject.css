@@ -107,7 +107,7 @@
 
   .about-project__graph {
     grid-template-columns: 140px 1fr;
-    grid-template-rows: 35px 24px;
+    grid-template-rows: 35px 31px;
   }
 
   .about-project__info-text {
