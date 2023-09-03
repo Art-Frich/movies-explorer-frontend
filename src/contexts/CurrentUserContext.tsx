@@ -21,7 +21,7 @@ const CurrentUserContext = createContext<CurrentUserContextType | undefined>(und
 export const useCurrentUser = () => useContext(CurrentUserContext);
 
 export function CurrentUserProvider({ children }: ReactChildren) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [name, setName] = useState('Name');
   const [email, setEmail] = useState('Email');
 

@@ -13,13 +13,13 @@ interface MoviesCardProps {
 
 export default function MoviesCard({ data }: MoviesCardProps) {
   return (
-    <article className='movie'>
-      <div className='movie__header'>
-        <span className='movie__name'>{data.name}</span>
-        <span className='movie__time'>{data.time}</span>
+    <article className='movies-card'>
+      <div className='movies-card__header'>
+        <span className='movies-card__name'>{data.name}</span>
+        <span className='movies-card__time'>{data.time}</span>
       </div>
-      <img src={data.link} alt='контент карточки' className='movie__img' />
-      <button className='movie__btn btn-reset btn-hover btn-active' type='button' aria-label='movie-btn' />
+      <img src={data.link} alt='контент карточки' className='movies-card__img' />
+      <button className='movies-card__btn btn-reset btn-hover btn-active' type='button' aria-label='movies-card-btn' />
     </article>
   );
 }

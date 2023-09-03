@@ -79,7 +79,8 @@
 
   .footer__row {
     flex-direction: column-reverse;
-    gap: 30px;
+    /* по макету 30, но с учетом смещения... */
+    gap: 22px;
   }
 
   .footer__list {

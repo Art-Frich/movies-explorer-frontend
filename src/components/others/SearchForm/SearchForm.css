@@ -5,7 +5,7 @@
 
 .sercher__form {
   width: 100%;
-  padding: 10px;
+  padding: 10px 10px 10px 25px;
 
   display: flex;
   gap: 20px;
@@ -49,6 +49,9 @@
   font-style: normal;
   font-weight: 500;
   line-height: 18px; /* 128.571% */
+
+  max-width: 100px;
+  width: 100%;
 }
 
 .sercher__filter-list {
@@ -61,13 +64,32 @@
   opacity: 0.2;
 }
 
+@media screen and (max-width: 768px) {
+  .sercher__filter-list {
+    margin-bottom: 51px;
+  }
+}
+
 @media screen and (max-width: 400px) {
+  .sercher {
+    padding: 0 4px 10px;
+  }
+
+  .sercher__filter-list {
+    margin-bottom: 63px;
+  }
+
+  .sercher__form {
+    padding: 6px 6px 6px 12px;
+    margin-bottom: 30px;
+  }
   .sercher__input {
     font-size: 16px;
     line-height: 16px; /* 100% */
   }
 
   .sercher__btn-submit {
+    max-width: 80px;
     padding: 13px 10px;
   }
 }

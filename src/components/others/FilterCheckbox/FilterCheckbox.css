@@ -1,7 +1,7 @@
 .checkbox {
   --width: 36px;
   --height: 20px;
-  --offset: 4px;
+  --offset: 5px;
   --first-color: #fff;
   --second-color: #3ddc84;
   --duration: 0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8),

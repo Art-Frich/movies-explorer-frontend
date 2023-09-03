@@ -7,10 +7,10 @@
   border-radius: 6px;
   background: #2f2f2f;
 
-  padding: 9px;
+  padding: 10px;
   width: 100%;
   max-width: 1140px;
-  margin: 50px 0 0;
+  margin: 60px 0 0;
 
   color: var(--base-color-of-text);
   font-size: 12px;
@@ -23,10 +23,18 @@
   .movies {
     padding: 70px 30px 80px;
   }
+
+  .movies__btn-load-films {
+    margin-top: 70px;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .movies {
-    padding: 70px 14px 80px;
+    padding: 70px 10px 80px;
+  }
+
+  .movies__btn-load-films {
+    margin-top: 80px;
   }
 }
