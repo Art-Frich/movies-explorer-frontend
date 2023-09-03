@@ -1,6 +1,7 @@
 .movies-list {
   background-color: var(--background-color-light-black);
   padding-top: 70px;
+  min-height: 460px;
 }
 
 .movies-list__list {
