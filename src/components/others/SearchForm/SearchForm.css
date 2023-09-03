@@ -1,5 +1,5 @@
 .sercher {
-  padding: 70px 70px 10px;
+  padding: 0 0 10px;
   background-color: var(--background-color-light-black);
 }
 
@@ -28,6 +28,9 @@
   line-height: 20px; /* 111.111% */
 
   flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .sercher__input::placeholder {
@@ -38,8 +41,7 @@
   border-radius: 5px;
   background: #4285f4;
 
-  width: 100px;
-  height: 52px;
+  padding: 17px 20px;
   flex-shrink: 0;
 
   color: var(--base-color-of-text);
@@ -57,4 +59,15 @@
   height: 1px;
   background-color: #aaa;
   opacity: 0.2;
+}
+
+@media screen and (max-width: 400px) {
+  .sercher__input {
+    font-size: 16px;
+    line-height: 16px; /* 100% */
+  }
+
+  .sercher__btn-submit {
+    padding: 13px 10px;
+  }
 }

@@ -1,6 +1,5 @@
 .movies-list {
   background-color: var(--background-color-light-black);
-  padding: 70px 70px 10px;
 }
 
 .movies-list__list {
