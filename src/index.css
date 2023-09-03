@@ -1,7 +1,7 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts.css);
-@import url(./vendor/variables.css);
-@import url(./vendor/mixes.css);
+@import url(./helpers/variables.css);
+@import url(./helpers/mixes.css);
 
 .body {
   margin: 0;
