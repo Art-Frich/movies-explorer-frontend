@@ -14,7 +14,7 @@ export default function SavedMovies({ isShort, setIsShort }: SavedMoviesInterfac
   return (
     <main className='saved-movies'>
       <SearchForm isShort={isShort} setIsShort={setIsShort} />
-      <MoviesCardList />
+      <MoviesCardList cardType='movies-card__btn_delete' />
     </main>
   );
 }

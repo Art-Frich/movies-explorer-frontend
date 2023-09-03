@@ -47,11 +47,22 @@
 }
 
 .movies-card__btn {
-  background-image: url(../../../images/save-btn.svg);
   object-fit: cover;
   object-position: center;
   width: 100px;
   height: 29px;
+}
+
+.movies-card__btn_saved {
+  background-image: url(../../../images/saved-btn.svg);
+}
+
+.movies-card__btn_delete {
+  background-image: url(../../../images/delete-btn.svg);
+}
+
+.movies-card__btn_save {
+  background-image: url(../../../images/save-btn.svg);
 }
 
 @media screen and (max-width: 768px) {

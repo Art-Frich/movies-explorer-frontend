@@ -14,7 +14,7 @@ export default function Movies({ isShort, setIsShort }: MoviesInterface) {
   return (
     <main className='movies'>
       <SearchForm isShort={isShort} setIsShort={setIsShort} />
-      <MoviesCardList />
+      <MoviesCardList cardType='movies-card__btn_save' />
       <button className='movies__btn-load-films btn-reset btn-hover btn-active' type='button'>Ещё</button>
     </main>
   );

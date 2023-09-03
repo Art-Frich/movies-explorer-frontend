@@ -37,7 +37,7 @@
 .checkbox__container {
   width: var(--width);
   height: var(--height);
-  background-color: var(--first-color);
+  background-color: #adacac;
   border-radius: var(--width);
   position: relative;
   transition: var(--duration);
@@ -50,7 +50,7 @@
   position: absolute;
   top: var(--offset);
   left: var(--offset);
-  background-color: var(--second-color);
+  background-color: #dcdbdb;
   border-radius: var(--width);
   transition: var(--duration);
 }
