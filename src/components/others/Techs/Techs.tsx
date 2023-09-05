@@ -9,7 +9,7 @@ export default function Techs() {
         Технологии
       </h2>
       <div className='techs__row' />
-      <h3 className='techs__subtitle'>8 технологий</h3>
+      <h3 className='techs__subtitle'>7 технологий</h3>
       <p className='techs__text'>
         На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
       </p>
@@ -34,9 +34,6 @@ export default function Techs() {
         </li>
         <li className='techs__list-element'>
           <span className='techs__list-element-text'>mongoDB</span>
-        </li>
-        <li className='techs__list-element'>
-          <span className='techs__list-element-text'>TS</span>
         </li>
       </ul>
     </section>

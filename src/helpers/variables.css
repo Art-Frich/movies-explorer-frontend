@@ -16,6 +16,10 @@
   /* header */
   --header-background-color: var(--background-color-light-black);
   --header-account-btn-color-icon: #313131;
+
+  /* techs on main */
+  --tech-card-width: 90px;
+  --tech-cards-gap: 10px;
 }
 
 .main-header-style {
