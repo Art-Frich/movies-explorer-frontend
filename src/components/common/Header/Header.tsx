@@ -26,6 +26,7 @@ export default function Header() {
 
   useEffect(() => {
     setIsMain(location.pathname === '/');
+    setIsOpenBurger(false);
   }, [location.pathname]);
 
   return (

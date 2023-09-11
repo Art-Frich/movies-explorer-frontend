@@ -1,18 +1,18 @@
 import './MoviesCard.css';
 import React from 'react';
 
-interface MovieData {
+interface IMovieData {
   name: string,
   time: string,
   link: string,
 }
 
-interface MoviesCardProps {
-  data: MovieData,
+interface IMoviesCardProps {
+  data: IMovieData,
   type: string,
 }
 
-export default function MoviesCard({ data, type }: MoviesCardProps) {
+export default function MoviesCard({ data, type }: IMoviesCardProps) {
   return (
     <article className='movies-card'>
       <div className='movies-card__header'>

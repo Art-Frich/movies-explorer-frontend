@@ -11,16 +11,17 @@ export default function Portfolio() {
       </h2>
       <ul className='portfolio__list list-reset'>
         <li className='portfolio__list-element'>
-          <span className='portfolio__list-element-text'>Статичный сайт</span>
-          <span>
-            <Link
-              to='https://github.com/Art-Frich/YP.Project-1.how-to-learn'
-              className='portfolio__link link-hover link-active'
-              target='_blank'
-            >
+          <Link
+            to='https://github.com/Art-Frich/YP.Project-1.how-to-learn'
+            className='portfolio__link link-hover link-active'
+            target='_blank'
+          >
+            <span className='portfolio__list-element-text'>Статичный сайт</span>
+            <span>
+
               ↗
-            </Link>
-          </span>
+            </span>
+          </Link>
         </li>
         <li className='portfolio__list-element'>
           <span className='portfolio__list-element-text'>Адаптивный сайт</span>

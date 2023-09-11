@@ -2,13 +2,13 @@ import './FilterCheckbox.css';
 
 import React from 'react';
 
-interface FilterCheckboxInterface {
+interface IFilterCheckbox {
   content: string,
   state: boolean,
   setState: (newValue: boolean) => void,
 }
 
-export default function FilterCheckbox({ content, state, setState }: FilterCheckboxInterface) {
+export default function FilterCheckbox({ content, state, setState }: IFilterCheckbox) {
   function chengeCheckbox() {
     setState(!state);
   }

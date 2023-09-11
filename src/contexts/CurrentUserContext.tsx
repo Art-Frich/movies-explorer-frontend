@@ -12,7 +12,7 @@ interface CurrentUserContextType {
   email: string,
 }
 
-interface ReactChildren {
+interface IReactChildren {
   children: ReactNode
 }
 
@@ -20,7 +20,7 @@ const CurrentUserContext = createContext<CurrentUserContextType | undefined>(und
 
 export const useCurrentUser = () => useContext(CurrentUserContext);
 
-export function CurrentUserProvider({ children }: ReactChildren) {
+export function CurrentUserProvider({ children }: IReactChildren) {
   const [loggedIn, setLoggedIn] = useState(true);
   const [name, setName] = useState('Name');
   const [email, setEmail] = useState('Email');

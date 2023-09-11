@@ -2,12 +2,12 @@
 import './BurgerBtn.css';
 import React from 'react';
 
-interface BurgerBtnProps {
+interface IBurgerBtnProps {
   onClick: () => void;
   isOpen: boolean;
 }
 
-const BurgerBtn: React.FC<BurgerBtnProps> = ({ onClick, isOpen }) => (
+const BurgerBtn: React.FC<IBurgerBtnProps> = ({ onClick, isOpen }) => (
   <div
     className={`burger-menu ${isOpen ? 'burger-menu_open' : ''}`}
     onClick={onClick}

@@ -11,9 +11,11 @@
   box-sizing: border-box;
 }
 
+.page-register__header {
+  margin-bottom: 40px;
+}
+
 .page-register__logo {
-  display: block;
-  margin: 0 0 40px;
   height: 38px;
   width: 38px;
   object-fit: cover;
@@ -132,7 +134,7 @@
     padding: 56px 30px 30px;
   }
 
-  .page-register__logo {
+  .page-register__header {
     margin-bottom: 50px;
   }
 
@@ -143,5 +145,13 @@
 
   .page-register__title {
     margin-bottom: 80px;
+  }
+
+  .page-register__yet-register-text {
+    font-size: 12px;
+  }
+
+  .page-register__yet-register-link {
+    font-size: 12px;
   }
 }

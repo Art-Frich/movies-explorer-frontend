@@ -4,16 +4,21 @@ import React from 'react';
 
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-interface SearchFormInterface {
+interface ISearchForm {
   isShort: boolean,
   setIsShort: (newValue: boolean) => void,
 }
 
-export default function SearchForm({ isShort, setIsShort }: SearchFormInterface) {
+export default function SearchForm({ isShort, setIsShort }: ISearchForm) {
   return (
     <section className='sercher'>
       <form className='sercher__form'>
-        <input className='sercher__input input-reset' placeholder='Введите название фильма' />
+        <input
+          className='sercher__input input-reset'
+          placeholder='Введите название фильма'
+          minLength={2}
+          maxLength={150}
+        />
         <button type='submit' className='sercher__btn-submit btn-reset btn-hover btn-active'>Поиск</button>
       </form>
       <ul className='sercher__filter-list list-reset'>

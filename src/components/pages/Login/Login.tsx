@@ -4,8 +4,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../../images/logo.svg';
+import InputBlock from '../../others/InputBlock/InputBlock';
+import { inputEmailSettings, inputPasswordSettings } from '../../../helpers/constants';
 
-interface LoginInterface {
+interface ILogin {
   isValidForm: boolean,
   onSubmit: () => void,
   fetchCondition: boolean,
@@ -14,7 +16,7 @@ interface LoginInterface {
 
 export default function Login({
   isValidForm, onSubmit, fetchCondition,
-}: LoginInterface) {
+}: ILogin) {
   return (
     <main className='page-login'>
       <form
@@ -24,36 +26,29 @@ export default function Login({
         onSubmit={onSubmit}
         autoComplete='off'
       >
-        <Link to='/'>
-          <img src={logo} alt='Логотип' className='page-login__logo btn-hover btn-active' />
-        </Link>
+        <header className='page-login__header'>
+          <Link to='/'>
+            <img src={logo} alt='Логотип' className='page-login__logo btn-hover btn-active' />
+          </Link>
+        </header>
         <h1 className='page-login__title'>Рады видеть!</h1>
 
-        <label className='page-login__field' htmlFor='user-email'>
-          <span className='page-login__desctiption'>E&#8209;mail</span>
-          <input
-            className='page-login__input page-login__input_type_email input-reset'
-            id='user-email'
-            name='user email'
-            placeholder='Email'
-            type='email'
-            required
-          />
-          <span className='page-login__error' />
-        </label>
-
-        <label className='page-login__field' htmlFor='user-password'>
-          <span className='page-login__desctiption'>Пароль</span>
-          <input
-            className='page-login__input page-login__input_type_password input-reset'
-            id='user-password'
-            name='user password'
-            placeholder='Password'
-            type='password'
-            required
-          />
-          <span className='page-login__error'>Демонстрация ошибки</span>
-        </label>
+        <InputBlock
+          labelClass='page-login__field'
+          titleSpanClass='page-login__desctiption'
+          titleSpanContent='E&#8209;mail'
+          inputClass='page-login__input page-login__input_type_email'
+          errSpanClass='page-login__error'
+          inputSettings={inputEmailSettings}
+        />
+        <InputBlock
+          labelClass='page-login__field'
+          titleSpanClass='page-login__desctiption'
+          titleSpanContent='Пароль'
+          inputClass='page-login__input page-login__input_type_password'
+          errSpanClass='page-login__error'
+          inputSettings={inputPasswordSettings}
+        />
 
         <button
           className='page-login__btn-submit btn-reset btn-hover btn-active'

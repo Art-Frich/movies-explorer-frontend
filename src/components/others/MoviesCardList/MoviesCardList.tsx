@@ -5,11 +5,11 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import data from '../../../helpers/initialCards';
 
-interface MoviesCardListInterface {
+interface IMoviesCardList {
   cardType: string,
 }
 
-export default function MoviesCardList({ cardType }: MoviesCardListInterface) {
+export default function MoviesCardList({ cardType }: IMoviesCardList) {
   return (
     <section className='movies-list'>
       <ul className='movies-list__list list-reset'>

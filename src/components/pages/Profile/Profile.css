@@ -33,12 +33,13 @@
 }
 
 .page-profile__field {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  column-gap: 20px;
+  row-gap: 2px;
   width: 100%;
 
-  padding-bottom: 16px;
+  padding-bottom: 2px;
 
   border-bottom: 1px solid #424242;
 }
@@ -76,7 +77,22 @@
 }
 
 .page-profile__input:focus {
+  color: var(--base-color-of-text);
+}
+
+.page-profile__error {
   color: #ee3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  text-align: right;
+
+  display: inline-block;
+  min-height: 12px;
+
+  grid-column: span 2;
 }
 
 .page-profile__btn-submit {

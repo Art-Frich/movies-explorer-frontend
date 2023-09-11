@@ -5,12 +5,12 @@ import React from 'react';
 import SearchForm from '../../others/SearchForm/SearchForm';
 import MoviesCardList from '../../others/MoviesCardList/MoviesCardList';
 
-interface MoviesInterface {
+interface IMovies {
   isShort: boolean,
   setIsShort: (newValue: boolean) => void,
 }
 
-export default function Movies({ isShort, setIsShort }: MoviesInterface) {
+export default function Movies({ isShort, setIsShort }: IMovies) {
   return (
     <main className='movies'>
       <SearchForm isShort={isShort} setIsShort={setIsShort} />

@@ -4,8 +4,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../../images/logo.svg';
+import InputBlock from '../../others/InputBlock/InputBlock';
+import { inputEmailSettings, inputNameSettings, inputPasswordSettings } from '../../../helpers/constants';
 
-interface RegisterInterface {
+interface IRegister {
   isValidForm: boolean,
   onSubmit: () => void,
   fetchCondition: boolean,
@@ -14,7 +16,7 @@ interface RegisterInterface {
 
 export default function Register({
   isValidForm, onSubmit, fetchCondition,
-}: RegisterInterface) {
+}: IRegister) {
   return (
     <main className='page-register'>
 
@@ -25,49 +27,37 @@ export default function Register({
         onSubmit={onSubmit}
         autoComplete='off'
       >
-        <Link to='/'>
-          <img src={logo} alt='Логотип' className='page-register__logo btn-hover btn-active' />
-        </Link>
+        <header className='page-register__header'>
+          <Link to='/'>
+            <img src={logo} alt='Логотип' className='page-register__logo btn-hover btn-active' />
+          </Link>
+        </header>
         <h1 className='page-register__title'>Добро пожаловать!</h1>
 
-        <label className='page-register__field' htmlFor='user-name'>
-          <span className='page-register__desctiption'>Имя</span>
-          <input
-            className='page-register__input page-register__input_type_string input-reset'
-            id='user-name'
-            name='user name'
-            placeholder='Name'
-            type='string'
-            required
-          />
-          <span className='page-register__error' />
-        </label>
-
-        <label className='page-register__field' htmlFor='user-email'>
-          <span className='page-register__desctiption'>E&#8209;mail</span>
-          <input
-            className='page-register__input page-register__input_type_email input-reset'
-            id='user-email'
-            name='user email'
-            placeholder='Email'
-            type='email'
-            required
-          />
-          <span className='page-register__error' />
-        </label>
-
-        <label className='page-register__field' htmlFor='user-password'>
-          <span className='page-register__desctiption'>Пароль</span>
-          <input
-            className='page-register__input page-register__input_type_password input-reset'
-            id='user-password'
-            name='user password'
-            placeholder='Password'
-            type='password'
-            required
-          />
-          <span className='page-register__error'>Демонстрация ошибки</span>
-        </label>
+        <InputBlock
+          labelClass='page-register__field'
+          titleSpanClass='page-register__desctiption'
+          titleSpanContent='Имя'
+          inputClass='page-register__input page-register__input_type_string'
+          errSpanClass='page-register__error'
+          inputSettings={inputNameSettings}
+        />
+        <InputBlock
+          labelClass='page-register__field'
+          titleSpanClass='page-register__desctiption'
+          titleSpanContent='E&#8209;mail'
+          inputClass='page-register__input page-register__input_type_email'
+          errSpanClass='page-register__error'
+          inputSettings={inputEmailSettings}
+        />
+        <InputBlock
+          labelClass='page-register__field'
+          titleSpanClass='page-register__desctiption'
+          titleSpanContent='Пароль'
+          inputClass='page-register__input page-register__input_type_password'
+          errSpanClass='page-register__error'
+          inputSettings={inputPasswordSettings}
+        />
 
         <button
           className='page-register__btn-submit btn-reset btn-hover btn-active'
