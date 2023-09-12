@@ -97,6 +97,12 @@
   grid-column: span 2;
 }
 
+.page-profile__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .page-profile__btn-edit {
   padding: 0 5px 0;
 
@@ -132,12 +138,6 @@
   line-height: normal;
 
   width: 100%;
-}
-
-.page-profile__btns {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 }
 
 @media screen and (max-width: 768px) {

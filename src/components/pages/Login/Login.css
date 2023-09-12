@@ -2,17 +2,18 @@
   background-color: var(--background-color-light-black);
   padding: 70px 30px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   min-height: 100vh;
+  height: 1px;
   box-sizing: border-box;
 }
 
 .page-login__header {
   margin-bottom: 40px;
+}
+
+.page-login__env-link {
+  display: block;
+  line-height: 0;
 }
 
 .page-login__logo {
@@ -22,12 +23,14 @@
 }
 
 .page-login__form {
-  width: 100%;
-  max-width: 396px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
-  margin-bottom: 16px;
+  margin: auto;
+  width: 100%;
+  min-height: 100%;
+  max-width: 396px;
 }
 
 .page-login__title {
@@ -44,10 +47,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.page-login__field:last-of-type {
-  margin-bottom: 128px;
 }
 
 .page-login__desctiption {
@@ -93,6 +92,12 @@
   margin-bottom: 6px;
 }
 
+.page-login__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .page-login__btn-submit {
   border-radius: 3px;
   background: #4285f4;
@@ -106,6 +111,10 @@
   line-height: normal;
 
   width: 100%;
+}
+
+.page-login__yet-login {
+  text-align: center;
 }
 
 .page-login__yet-login-text {
@@ -136,15 +145,12 @@
 
   .page-login__header {
     margin-bottom: 50px;
-  }
-
-  .page-login__form {
-    margin-bottom: 14px;
-    align-items: center;
+    text-align: center;
   }
 
   .page-login__title {
     margin-bottom: 80px;
+    text-align: center;
   }
 
   .page-login__yet-login-text {
