@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../../images/logo.svg';
 import InputBlock from '../../others/InputBlock/InputBlock';
-import { inputEmailSettings, inputNameSettings, inputPasswordSettings } from '../../../helpers/constants';
+import { inputNameSettings, inputEmailSettings, inputPasswordSettings } from '../../../helpers/constants';
 
 interface IRegister {
   isValidForm: boolean,
@@ -22,7 +22,7 @@ export default function Register({
 
       <form
         className='page-register__form'
-        name='change-user-data-form'
+        name='register-user-form'
         noValidate
         onSubmit={onSubmit}
         autoComplete='off'

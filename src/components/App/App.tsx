@@ -16,41 +16,34 @@ import Header from '../common/Header/Header';
 import Footer from '../common/Footer/Footer';
 
 function App() {
+  const AddHeader = React.memo(() => (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  ));
+
+  const AddFooter = React.memo(() => (
+    <>
+      <Outlet />
+      <Footer />
+    </>
+  ));
+
   return (
     <CurrentUserProvider>
       <Routes>
         <Route path='/signin' element={<LoginContainer />} />
         <Route path='/signup' element={<RegisterContainer />} />
-
-        {/* // add header for pages */}
-        <Route
-          path='/'
-          element={(
-            <>
-              <Header />
-              <Outlet />
-            </>
-          )}
-        >
+        <Route path='/' element={<AddHeader />}>
           <Route path='/profile' element={<ProfileContainer />} />
-
-          {/* add footer for pages */}
-          <Route
-            path='/'
-            element={(
-              <>
-                <Outlet />
-                <Footer />
-              </>
-            )}
-          >
+          <Route path='/' element={<AddFooter />}>
             <Route path='/saved-movies' element={<SavedMoviesContainer />} />
             <Route path='/movies' element={<MoviesContainer />} />
             <Route index element={<MainContainer />} />
           </Route>
         </Route>
 
-        {/* otherRouter */}
         <Route path='*' element={<NotFoundContainer />} />
       </Routes>
     </CurrentUserProvider>

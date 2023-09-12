@@ -5,8 +5,8 @@ import Profile from '../components/pages/Profile/Profile';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 export default function ProfileContainer() {
-  const [isValidForm, setIsvalidForm] = useState(false);
   const [fetchCondition, setFetchCondition] = useState(false);
+  const [isDisabledInput, setIsDisabledInput] = useState(true);
 
   const navigate = useNavigate();
   const curUser = useCurrentUser();
@@ -14,7 +14,7 @@ export default function ProfileContainer() {
   const onSubmit = () => {
     setFetchCondition(true);
     setFetchCondition(false);
-    setIsvalidForm(true);
+    setIsDisabledInput(true);
   };
 
   const onLogout = () => {
@@ -22,14 +22,19 @@ export default function ProfileContainer() {
     navigate('/');
   };
 
+  const onEditBtnClick = () => {
+    setIsDisabledInput(false);
+  };
+
   return curUser ? (
     <Profile
       nameUser={curUser.name}
       userEmail={curUser.email}
-      isValidForm={isValidForm}
       onSubmit={onSubmit}
       fetchCondition={fetchCondition}
       onLogout={onLogout}
+      onEditBtnClick={onEditBtnClick}
+      isDisabledInput={isDisabledInput}
     />
   ) : null;
 }

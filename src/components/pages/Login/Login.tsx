@@ -21,7 +21,7 @@ export default function Login({
     <main className='page-login'>
       <form
         className='page-login__form'
-        name='change-user-data-form'
+        name='login-user-form'
         noValidate
         onSubmit={onSubmit}
         autoComplete='off'

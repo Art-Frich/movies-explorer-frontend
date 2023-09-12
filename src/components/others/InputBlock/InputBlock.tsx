@@ -8,6 +8,7 @@ interface IInputBlock {
   errSpanClass: string,
   inputSettings: IInputSettings,
   defaultValue?: string,
+  inputDisabled?: boolean,
 }
 
 interface IInputSettings {
@@ -21,7 +22,7 @@ interface IInputSettings {
 
 export default function InputBlock({
   labelClass, titleSpanClass, titleSpanContent, inputClass,
-  errSpanClass, inputSettings, defaultValue,
+  errSpanClass, inputSettings, defaultValue, inputDisabled,
 }: IInputBlock) {
   const {
     id, name, placeholder, type, pattern, title,
@@ -32,11 +33,11 @@ export default function InputBlock({
     if (ref.current?.validity.valid) {
       setNameErrMsg('');
     } else if (type !== 'email') {
-      setNameErrMsg(`Некорректный ввод. ${title}`);
-    } else if (ref.current?.value.length === 0) {
-      setNameErrMsg('Обязательное поле');
-    } else {
-      setNameErrMsg(ref.current?.validationMessage || 'Некоректный ввод');
+      if (ref.current?.value.length === 0) {
+        setNameErrMsg('Обязательное поле');
+      } else {
+        setNameErrMsg(`Некорректный ввод. ${title}`);
+      }
     }
   };
 
@@ -54,9 +55,8 @@ export default function InputBlock({
         required
         defaultValue={defaultValue}
         onChange={handleChange}
-        onSubmit={handleChange}
         ref={ref}
-
+        disabled={inputDisabled}
       />
       <span className={errSpanClass}>{nameErrMsg}</span>
     </label>
@@ -65,4 +65,5 @@ export default function InputBlock({
 
 InputBlock.defaultProps = {
   defaultValue: '',
+  inputDisabled: false,
 };

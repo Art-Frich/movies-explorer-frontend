@@ -1,6 +1,6 @@
 export const inputNameSettings = {
   id: 'user-name',
-  name: 'user name',
+  name: 'user-name',
   placeholder: 'Здесь должно быть ваше имя',
   type: 'string',
   pattern: '[A-Za-z0-9абвгдеёжзиклмнопрстуфхцчшщъыьэюя]{2,35}',
@@ -9,7 +9,7 @@ export const inputNameSettings = {
 
 export const inputEmailSettings = {
   id: 'user-email',
-  name: 'user email',
+  name: 'user-email',
   placeholder: 'Здесь должен быть ваш email',
   type: 'email',
   pattern: '[\\w\\.\\d]+@[\\w]+\\.[a-z]{2,}',
@@ -18,7 +18,7 @@ export const inputEmailSettings = {
 
 export const inputPasswordSettings = {
   id: 'user-password',
-  name: 'user password',
+  name: 'user-password',
   placeholder: 'Здесь должен быть ваш пароль',
   type: 'password',
   pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$',
