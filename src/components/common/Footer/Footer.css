@@ -64,7 +64,7 @@
   }
 
   .footer__dividing-line {
-    margin: 1px 0 10px;
+    margin: 1px 0 5px;
   }
 
   .footer__row {
@@ -74,7 +74,7 @@
 
   .footer__list {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .footer__signature {
