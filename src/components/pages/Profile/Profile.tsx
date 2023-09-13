@@ -76,7 +76,7 @@ export default function Profile({
 
           {!isDisabledInput && (
             <button
-              className='page-profile__btn-submit btn-reset btn-hover btn-active'
+              className='page-profile__btn-submit btn-reset btn-hover active-btn-effect'
               type='submit'
               name='submit-btn-user-data-form'
             >
