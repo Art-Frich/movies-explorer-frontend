@@ -2,7 +2,7 @@
 
 ### Ссылка на макет: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?node-id=1%3A10230&mode=dev (dark-4)
 
-### Ссылка на front-end: https://search-your-movies.nomoredomainsicu.ru/saved-movies
+### Ссылка на front-end: https://search-your-movies.nomoredomainsicu.ru
 
 ### Существующие роуты
 
