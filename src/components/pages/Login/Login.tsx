@@ -22,7 +22,6 @@ export default function Login({
       <form
         className='page-login__form'
         name='login-user-form'
-        noValidate
         onSubmit={onSubmit}
         autoComplete='off'
       >

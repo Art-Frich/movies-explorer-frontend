@@ -22,7 +22,6 @@ export default function Register({
       <form
         className='page-register__form'
         name='register-user-form'
-        noValidate
         onSubmit={onSubmit}
         autoComplete='off'
       >

@@ -12,12 +12,13 @@ interface ISearchForm {
 export default function SearchForm({ isShort, setIsShort }: ISearchForm) {
   return (
     <section className='sercher'>
-      <form className='sercher__form'>
+      <form className='sercher__form' name='search-movie-form' onSubmit={() => console.log('i work')}>
         <input
           className='sercher__input input-reset'
           placeholder='Введите название фильма'
+          name='name-movie'
           minLength={2}
-          maxLength={150}
+          required
         />
         <button type='submit' className='sercher__btn-submit btn-reset btn-hover active-btn-effect'>Поиск</button>
       </form>

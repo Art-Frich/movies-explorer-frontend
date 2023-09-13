@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Register from '../components/pages/Register/Register';
 
 export default function RegisterContainer() {
-  const [isValidForm, setIsvalidForm] = useState(false);
+  const [isValidForm, setIsvalidForm] = useState(true);
   const [fetchCondition, setFetchCondition] = useState(false);
 
   const onSubmit = () => {
