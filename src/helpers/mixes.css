@@ -1,3 +1,4 @@
+/* reset-ы */
 .btn-reset {
   border: none;
   padding: 0;
@@ -14,69 +15,124 @@
   list-style: none;
 }
 
+.input-reset {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  text-decoration: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+}
+
+/* link-hover */
 .link-hover {
-  transition: opacity var(--animation-hover-time) var(--animation-hover-type);
-}
-
-.link-active {
-  padding: 4px 0;
-  border-top: var(--border-active-size) solid transparent; /* для компенсации смещения нижней границы */
-  border-bottom: var(--border-active-size) solid transparent;
-  transition: border-bottom var(--animation-hover-time)
-    var(--animation-hover-type);
-}
-
-.link-active.link-hover {
-  transition: border-bottom var(--animation-hover-time)
-      var(--animation-hover-type),
-    opacity var(--animation-hover-time) var(--animation-hover-type);
+  transition: all var(--animation-time) var(--animation-type);
 }
 
 .link-hover:hover {
   opacity: 0.7;
 }
 
-.link-active:active {
-  border-bottom: var(--base-color-of-text) var(--border-active-size) solid;
-}
-
+/* btn-hover */
 .btn-hover {
-  transition: opacity var(--animation-hover-time) var(--animation-hover-type);
+  transition: all var(--animation-time) var(--animation-type);
 }
 
 .btn-hover:hover {
   opacity: 0.8;
 }
 
-.btn-active {
-  transition: box-shadow var(--animation-hover-time) var(--animation-hover-type);
+/* active-underline */
+.active-underline {
+  position: relative;
 }
 
-.btn-active:active {
-  box-shadow: 0 0 10px #000;
+.active-underline:active {
+  opacity: 1;
 }
 
-.btn-active.btn-hover {
-  transition: box-shadow var(--animation-hover-time) var(--animation-hover-type),
-    opacity var(--animation-hover-time) var(--animation-hover-type);
+.active-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0px;
+  width: 100%;
+  border-bottom: 1px solid transparent;
+  transition: all var(--animation-time) var(--animation-type);
 }
 
-/* .input-reset:-webkit-autofill,
-.input-reset:-internal-autofill-selected */
-.input-reset {
-  /* Убираем границу, которую браузер добавляет по умолчанию */
-  border: none;
-  /* Убираем внутренний отступ (padding), который браузер может устанавливать */
-  padding: 0;
-  /* Убираем фоновый цвет */
-  background-color: transparent;
-  /* Убираем текстовое подчеркивание в ссылках-кнопках (если используется type="submit" или type="button") */
-  text-decoration: none;
-  /* Убираем фокусное обрамление (outline) при активации элемента */
-  outline: none;
-  /* Устанавливаем шрифт и размер шрифта по умолчанию */
-  font-family: inherit;
-  font-size: inherit;
-  /* Убираем возможность изменения размера элемента */
-  resize: none;
+.active-underline:active::after {
+  border-color: var(--base-color-of-text);
+}
+
+/* active-btn-effect */
+.active-btn-effect:active {
+  transform: scale(0.98);
+}
+
+/* active-neon */
+.active-neon {
+  position: relative;
+  z-index: 1;
+}
+
+.active-neon:active {
+  opacity: 1;
+}
+
+.active-neon::after {
+  content: "";
+  background: transparent;
+  position: absolute;
+  z-index: 0;
+  top: -5px;
+  bottom: -5px;
+  left: -5px;
+  right: -5px;
+  border-radius: 5px;
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.active-neon:active:after {
+  box-shadow: 0 0 10px #ee3465;
+}
+
+/* input focus */
+.input-focus {
+  transition: all var(--animation-time) var(--animation-type);
+  box-shadow: 0 0 0 5px var(--background-color-light-black),
+    7px 0 4px rgba(66, 133, 244, 0), -7px 0 4px rgba(66, 133, 244, 0);
+}
+
+.input-focus:focus {
+  box-shadow: 0 0 0 5px var(--background-color-light-black),
+    7px 0 4px rgba(66, 133, 244, 1), -7px 0 4px rgba(66, 133, 244, 1);
+}
+
+/* .input-focus::after {
+  content: "";
+  background: transparent;
+  position: absolute;
+  z-index: 0;
+  top: -5px;
+  bottom: -5px;
+  left: -5px;
+  right: -5px;
+  border-radius: 5px;
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.input-focus:focus::after {
+  box-shadow: 0 0 10px #ee3465;
+} */
+
+/* input-hover */
+.input-hover {
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.input-hover:hover {
+  color: #4285f4;
 }

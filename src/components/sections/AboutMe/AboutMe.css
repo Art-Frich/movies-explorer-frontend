@@ -3,29 +3,12 @@
   background-color: var(--background-color-light-black);
 }
 
-.about-me__title {
-  color: var(--base-color-of-text);
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.88px;
-
-  margin: 0 0 23px;
-}
-
-.about-me__row {
-  width: 100%;
-  height: 1px;
-  background-color: #dadada;
-
-  margin: 0 0 66px;
-}
-
 .about-me__info {
   display: flex;
   justify-content: space-between;
   gap: 40px;
+
+  margin-top: 66px;
 }
 
 .about-me__info-description {
@@ -76,6 +59,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-decoration: none;
 }
 
 .about-me__info-photo {
@@ -115,6 +99,7 @@
   .about-me__info-photo {
     width: 255px;
     height: 307px;
+    margin: auto;
   }
 }
 
@@ -133,15 +118,8 @@
     padding: 70px 14px 35px;
   }
 
-  .about-me__title {
-    font-size: 18px;
-    letter-spacing: -0.72px;
-
-    margin-bottom: 28px;
-  }
-
-  .about-me__row {
-    margin-bottom: 60px;
+  .about-me__info {
+    margin-top: 60px;
   }
 
   .about-me__info-photo {

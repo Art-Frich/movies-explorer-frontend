@@ -3,9 +3,9 @@ import './Register.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../../../images/logo.svg';
-import InputBlock from '../../others/InputBlock/InputBlock';
 import { inputNameSettings, inputEmailSettings, inputPasswordSettings } from '../../../helpers/constants';
+import InputBlock from '../../others/InputBlock/InputBlock';
+import Logo from '../../others/Logo/Logo';
 
 interface IRegister {
   isValidForm: boolean,
@@ -28,9 +28,7 @@ export default function Register({
       >
         <div className='page-register__content'>
           <header className='page-register__header'>
-            <Link to='/' className='page-register__env-link'>
-              <img src={logo} alt='Логотип' className='page-register__logo btn-hover btn-active' />
-            </Link>
+            <Logo />
           </header>
           <h1 className='page-register__title'>Добро пожаловать!</h1>
 
@@ -61,7 +59,7 @@ export default function Register({
         </div>
         <div className='page-register__btns'>
           <button
-            className='page-register__btn-submit btn-reset btn-hover btn-active'
+            className='page-register__btn-submit btn-reset btn-hover active-btn-effect'
             type='submit'
             name='submit-btn-change-user-data-form'
             disabled={!isValidForm}
@@ -72,7 +70,7 @@ export default function Register({
             <span className='page-register__yet-register-text'>
               Уже зарегистрированы?
             </span>
-            <Link to='/signin' className='page-register__yet-register-link link-hover link-active'>
+            <Link to='/signin' className='page-register__yet-register-link link-hover active-underline'>
               Войти
             </Link>
           </div>

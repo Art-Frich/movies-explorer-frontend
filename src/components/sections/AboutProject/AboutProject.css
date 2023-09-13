@@ -3,30 +3,13 @@
   background-color: var(--background-color-light-black);
 }
 
-.about-project__title {
-  color: var(--base-color-of-text);
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.88px;
-
-  margin: 0 0 23px;
-}
-
-.about-project__row {
-  width: 100%;
-  height: 1px;
-  margin-bottom: 70px;
-  background-color: #dadada;
-}
-
 .about-project__info {
   display: flex;
   flex-direction: row;
   gap: 40px;
   justify-content: space-between;
 
+  margin-top: 70px;
   margin-bottom: 110px;
 }
 
@@ -131,21 +114,11 @@
     padding: 70px 18px;
   }
 
-  .about-project__title {
-    font-size: 18px;
-    letter-spacing: -0.72px;
-
-    margin: 0 0 28px;
-  }
-
-  .about-project__row {
-    margin-bottom: 60px;
-  }
-
   .about-project__info {
     flex-direction: column;
     gap: 56px;
 
+    margin-top: 60px;
     margin-bottom: 60px;
   }
 

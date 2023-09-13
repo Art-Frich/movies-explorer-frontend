@@ -3,7 +3,7 @@ import './Login.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../../../images/logo.svg';
+import Logo from '../../others/Logo/Logo';
 import InputBlock from '../../others/InputBlock/InputBlock';
 import { inputEmailSettings, inputPasswordSettings } from '../../../helpers/constants';
 
@@ -28,9 +28,7 @@ export default function Login({
       >
         <div className='page-login__content'>
           <header className='page-login__header'>
-            <Link to='/' className='page-login__env-link'>
-              <img src={logo} alt='Логотип' className='page-login__logo btn-hover btn-active' />
-            </Link>
+            <Logo />
           </header>
           <h1 className='page-login__title'>Рады видеть!</h1>
 
@@ -54,7 +52,7 @@ export default function Login({
 
         <div className='page-login__btns'>
           <button
-            className='page-login__btn-submit btn-reset btn-hover btn-active'
+            className='page-login__btn-submit btn-reset btn-hover active-btn-effect'
             type='submit'
             name='submit-btn-change-user-data-form'
             disabled={!isValidForm}
@@ -65,7 +63,7 @@ export default function Login({
             <span className='page-login__yet-login-text'>
               Ещё не зарегистрированы?
             </span>
-            <Link to='/signup' className='page-login__yet-login-link link-hover link-active'>
+            <Link to='/signup' className='page-login__yet-login-link link-hover active-underline'>
               Регистрация
             </Link>
           </div>

@@ -1,0 +1,15 @@
+.footer__link {
+  color: var(--base-color-of-text);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 400px) {
+  .footer__link {
+    font-size: 12px;
+  }
+}

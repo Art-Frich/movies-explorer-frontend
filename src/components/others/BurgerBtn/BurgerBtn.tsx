@@ -8,21 +8,15 @@ interface IBurgerBtnProps {
 }
 
 const BurgerBtn: React.FC<IBurgerBtnProps> = ({ onClick, isOpen }) => (
-  <div
-    className={`burger-menu ${isOpen ? 'burger-menu_open' : ''}`}
+  <button
+    className={`burger-menu btn-hover btn-reset ${isOpen ? 'burger-menu_open' : ''}`}
     onClick={onClick}
-    role='button'
-    tabIndex={0}
-    onKeyDown={(e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        onClick();
-      }
-    }}
+    type='button'
   >
     <div className='burger-menu__line burger-menu__line_type_top' />
     <div className='burger-menu__line burger-menu__line_type_middle' />
     <div className='burger-menu__line burger-menu__line_type_bottom' />
-  </div>
+  </button>
 );
 
 export default BurgerBtn;

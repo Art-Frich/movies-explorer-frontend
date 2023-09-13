@@ -11,17 +11,6 @@
   margin-bottom: 40px;
 }
 
-.page-login__env-link {
-  display: block;
-  line-height: 0;
-}
-
-.page-login__logo {
-  height: 38px;
-  width: 38px;
-  object-fit: cover;
-}
-
 .page-login__form {
   display: flex;
   flex-direction: column;

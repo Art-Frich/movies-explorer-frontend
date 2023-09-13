@@ -38,6 +38,8 @@ export default function InputBlock({
       } else {
         setNameErrMsg(`Некорректный ввод. ${title}`);
       }
+    } else {
+      setNameErrMsg(ref.current?.validationMessage || '');
     }
   };
 
@@ -45,7 +47,7 @@ export default function InputBlock({
     <label className={labelClass} htmlFor={id}>
       <span className={titleSpanClass}>{titleSpanContent}</span>
       <input
-        className={`${inputClass} input-reset`}
+        className={`${inputClass} input-reset input-focus input-hover`}
         id={id}
         name={name}
         placeholder={placeholder}

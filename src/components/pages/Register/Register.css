@@ -11,17 +11,6 @@
   margin-bottom: 40px;
 }
 
-.page-register__env-link {
-  display: block;
-  line-height: 0;
-}
-
-.page-register__logo {
-  height: 38px;
-  width: 38px;
-  object-fit: cover;
-}
-
 .page-register__form {
   display: flex;
   flex-direction: column;

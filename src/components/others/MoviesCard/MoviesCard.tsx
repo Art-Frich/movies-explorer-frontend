@@ -21,7 +21,7 @@ export default function MoviesCard({ data, type }: IMoviesCardProps) {
       </div>
       <img src={data.link} alt='контент карточки' className='movies-card__img' />
       <button
-        className={`movies-card__btn btn-reset btn-hover btn-active ${type}`}
+        className={`movies-card__btn btn-reset btn-hover active-btn-effect ${type}`}
         type='button'
         aria-label='movies-card-btn'
       />

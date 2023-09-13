@@ -20,6 +20,10 @@
   box-sizing: border-box;
 }
 
+.sercher__form:focus {
+  outline: 1px red solid;
+}
+
 .sercher__input {
   color: var(--base-color-of-text);
   font-size: 18px;

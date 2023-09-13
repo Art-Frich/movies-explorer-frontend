@@ -11,6 +11,7 @@
 
   transition: right 0.2s ease-in-out, opacity 0.2s ease-in-out;
   opacity: 0;
+  visibility: hidden;
 
   /* Добавляем растяжение по вертикали */
   display: flex;
@@ -19,6 +20,7 @@
 
 .aside-bar_visible {
   opacity: 1;
+  visibility: visible;
   right: 0;
 }
 
@@ -43,6 +45,7 @@
 
 .navigation-auth-burger__link {
   text-decoration: none;
+  padding-bottom: 4px;
   color: var(--base-color-of-text);
 
   font-size: 18px;

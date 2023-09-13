@@ -3,14 +3,14 @@ import './Header.css';
 
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from '@react-hook/media-query';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import logo from '../../../images/logo.svg';
 import { useCurrentUser } from '../../../contexts/CurrentUserContext';
 import LoggedInHeader from './LoggedInHeader';
 import GuestHeader from './GuestHeader';
 import BurgerLoggedInHeader from './BurgerLoggedInHeader';
 import BurgerBtn from '../../others/BurgerBtn/BurgerBtn';
+import Logo from '../../others/Logo/Logo';
 
 export default function Header() {
   const location = useLocation();
@@ -29,11 +29,13 @@ export default function Header() {
     setIsOpenBurger(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    setIsOpenBurger(false);
+  }, [isSmallScreen]);
+
   return (
     <header className={`header ${isMain ? 'main-header-style' : ''}`}>
-      <Link to='/'>
-        <img src={logo} alt='Логотип' className='header__logo btn-hover' />
-      </Link>
+      <Logo />
       {!curUser?.loggedIn ? (
         <GuestHeader />
       ) : !isSmallScreen ? (

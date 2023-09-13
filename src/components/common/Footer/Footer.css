@@ -48,16 +48,6 @@
   gap: 20px;
 }
 
-.footer__link {
-  color: var(--base-color-of-text);
-  font-feature-settings: "clig" off, "liga" off;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-decoration: none;
-}
-
 @media screen and (max-width: 768px) {
   .footer {
     padding: 79px 30px 20px;
@@ -79,29 +69,12 @@
 
   .footer__row {
     flex-direction: column-reverse;
-    /* по макету 30, но с учетом смещения... */
-    gap: 22px;
+    gap: 30px;
   }
 
   .footer__list {
     flex-direction: column;
     gap: 12px;
-  }
-
-  /* !Поправить */
-
-  .footer__link {
-    font-size: 12px;
-
-    /* т.к. линк имеет класс link-hover & link-active из-за чего чуть больше планового */
-    position: relative;
-    top: -4px;
-  }
-
-  /* т.к. смещение получается каскадным, то второй линк тоже нужно сдвинуть */
-  .footer__list-element:last-of-type {
-    position: relative;
-    top: -4px;
   }
 
   .footer__signature {

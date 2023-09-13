@@ -57,7 +57,7 @@ export default function Profile({
           {isDisabledInput && (
             <>
               <button
-                className='page-profile__btn-edit btn-reset btn-hover btn-active'
+                className='page-profile__btn-edit btn-reset btn-hover active-underline'
                 type='button'
                 name='btn-change-user-data-form'
                 onClick={onEditBtnClick}
@@ -65,7 +65,7 @@ export default function Profile({
                 Редактировать
               </button>
               <button
-                className='page-profile__btn-logout btn-reset btn-hover btn-active'
+                className='page-profile__btn-logout btn-reset btn-hover active-underline'
                 type='button'
                 onClick={onLogout}
               >

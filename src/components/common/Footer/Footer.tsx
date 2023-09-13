@@ -1,7 +1,7 @@
 import './Footer.css';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import FooterLinkElement from '../../others/FooterLinkElement/FooterLinkElement';
 
 export default function Footer() {
   return (
@@ -11,24 +11,8 @@ export default function Footer() {
       <div className='footer__row'>
         <span className='footer__signature'>© Art Frich 2023</span>
         <ul className='footer__list list-reset'>
-          <li className='footer__list-element'>
-            <Link
-              to='https://practicum.yandex.ru/'
-              className='footer__link link-hover link-active'
-              target='_blank'
-            >
-              Яндекс.Практикум
-            </Link>
-          </li>
-          <li className='footer__list-element'>
-            <Link
-              to='https://github.com/Art-Frich'
-              className='footer__link link-hover link-active'
-              target='_blank'
-            >
-              Github
-            </Link>
-          </li>
+          <FooterLinkElement url='https://practicum.yandex.ru/' content='Яндекс.Практикум' />
+          <FooterLinkElement url='https://github.com/Art-Frich' content='Github' />
         </ul>
       </div>
     </footer>

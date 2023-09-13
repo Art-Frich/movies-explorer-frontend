@@ -3,8 +3,8 @@
   --base-color-of-text: #fff;
   --base-color-of-text-contr: #000;
   --border-active-size: 2px;
-  --animation-hover-time: 0.2s;
-  --animation-hover-type: linear;
+  --animation-time: 0.2s;
+  --animation-type: linear;
   --background-color-light-black: #202020;
   --background-color-grey: #272727;
   --background-color-blue: #073042;

@@ -2,8 +2,8 @@ import './Movies.css';
 
 import React from 'react';
 
-import SearchForm from '../../others/SearchForm/SearchForm';
-import MoviesCardList from '../../others/MoviesCardList/MoviesCardList';
+import SearchForm from '../../sections/SearchForm/SearchForm';
+import MoviesCardList from '../../sections/MoviesCardList/MoviesCardList';
 
 interface IMovies {
   isShort: boolean,
