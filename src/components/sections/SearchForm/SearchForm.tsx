@@ -12,7 +12,7 @@ interface ISearchForm {
 export default function SearchForm({ isShort, setIsShort }: ISearchForm) {
   return (
     <section className='sercher'>
-      <form className='sercher__form' name='search-movie-form' onSubmit={() => console.log('i work')}>
+      <form className='sercher__form' name='search-movie-form'>
         <input
           className='sercher__input input-reset'
           placeholder='Введите название фильма'
