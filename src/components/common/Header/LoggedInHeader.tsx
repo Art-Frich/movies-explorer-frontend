@@ -14,11 +14,9 @@ export default function LoggedInHeader() {
           <NavLink className='navigation-auth__link link-hover active-underline' to='/saved-movies'>Сохраненные фильмы</NavLink>
         </li>
         <li className='navigation-auth__list-element'>
-          <NavLink className='navigation-auth__link link-hover' to='/profile'>
-            <button type='button' className='navigation-auth__account-btn btn-reset'>
-              <span className='navigation-auth__account-btn-text active-underline'>Аккаунт</span>
-              <span className='navigation-auth__account-btn-icon active-btn-effect' />
-            </button>
+          <NavLink className='navigation-auth__link navigation-auth__account-btn' to='/profile'>
+            <span className='navigation-auth__account-btn-text link-hover active-underline'>Аккаунт</span>
+            <span className='navigation-auth__account-btn-icon btn-hover active-btn-effect' />
           </NavLink>
         </li>
       </ul>

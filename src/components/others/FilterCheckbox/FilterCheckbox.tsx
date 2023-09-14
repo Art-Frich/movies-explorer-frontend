@@ -14,19 +14,18 @@ export default function FilterCheckbox({ content, state, setState }: IFilterChec
   }
 
   return (
-    <label className='checkbox' htmlFor={`filter-by-${state}`}>
-      <div>
+    <div className='checkbox'>
+      <label htmlFor={`filter-by-${content}`}>
         <input
-          id={`filter-by-${state}`}
+          id={`filter-by-${content}`}
           className='checkbox__input'
           type='checkbox'
           checked={state}
           onChange={chengeCheckbox}
         />
-        <div className='checkbox__container' />
-      </div>
-
+        <span className='checkbox__container' />
+      </label>
       <span className='checkbox__signature'>{content}</span>
-    </label>
+    </div>
   );
 }

@@ -16,7 +16,7 @@ export default function MoviesCard({ data, type }: IMoviesCardProps) {
   return (
     <article className='movies-card'>
       <div className='movies-card__header'>
-        <span className='movies-card__name'>{data.name}</span>
+        <h3 className='movies-card__name'>{data.name}</h3>
         <span className='movies-card__time'>{data.time}</span>
       </div>
       <img src={data.link} alt='контент карточки' className='movies-card__img' />

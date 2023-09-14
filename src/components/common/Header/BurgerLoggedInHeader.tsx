@@ -18,11 +18,9 @@ export default function BurgerLoggedInHeader({ isOpen }: { isOpen: boolean }) {
             <NavLink className='navigation-auth-burger__link link-hover active-underline' to='/saved-movies'>Сохраненные фильмы</NavLink>
           </li>
         </ul>
-        <NavLink className='navigation-auth-burger__link link-hover' to='/profile'>
-          <button type='button' className='navigation-auth-burger__account-btn btn-reset'>
-            <span className='navigation-auth-burger__account-btn-text active-underline'>Аккаунт</span>
-            <span className='navigation-auth-burger__account-btn-icon' />
-          </button>
+        <NavLink className='navigation-auth-burger__link navigation-auth-burger__account-btn ' to='/profile'>
+          <span className='navigation-auth-burger__account-btn-text link-hover active-underline'>Аккаунт</span>
+          <span className='navigation-auth-burger__account-btn-icon btn-hover active-btn-effect' />
         </NavLink>
       </nav>
     </aside>

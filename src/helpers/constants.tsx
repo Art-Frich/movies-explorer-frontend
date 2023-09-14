@@ -2,7 +2,7 @@ export const inputNameSettings = {
   id: 'user-name',
   name: 'user-name',
   placeholder: 'Здесь должно быть ваше имя',
-  type: 'string',
+  type: 'text',
   pattern: '[A-Za-z0-9абвгдеёжзиклмнопрстуфхцчшщъыьэюя]{2,35}',
   title: 'Ожидаемый формат: от 2 до 35 латинских символов.',
 };

@@ -7,10 +7,8 @@ export default function GuestHeader() {
   return (
     <nav className='navigation-guest'>
       <Link className='navigation-guest__link link-hover active-underline' to='/signup'>Регистрация</Link>
-      <Link className='navigation-guest__link' to='/signin'>
-        <button type='button' className='navigation-guest__signin-btn btn-reset btn-hover active-btn-effect'>
-          Войти
-        </button>
+      <Link className='navigation-guest__link navigation-guest__signin-btn btn-hover active-btn-effect' to='/signin'>
+        Войти
       </Link>
     </nav>
   );

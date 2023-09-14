@@ -35,6 +35,7 @@
 }
 
 .checkbox__container {
+  display: block;
   width: var(--width);
   height: var(--height);
   background-color: #adacac;

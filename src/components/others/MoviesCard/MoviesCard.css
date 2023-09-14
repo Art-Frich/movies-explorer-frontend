@@ -23,6 +23,8 @@
 }
 
 .movies-card__name {
+  margin: 0;
+
   color: var(--base-color-of-text);
   font-size: 15px;
   font-style: normal;

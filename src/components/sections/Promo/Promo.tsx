@@ -14,10 +14,8 @@ export default function Promo() {
         </h1>
         <span className='promo__subtitle'>Листайте ниже, чтобы узнать больше про этот проект и его создателя.</span>
 
-        <Link to='about-project' smooth duration={500} className='promo__link'>
-          <button type='button' className='promo__btn btn-reset btn-hover active-btn-effect'>
-            Узнать больше
-          </button>
+        <Link to='about-project' smooth duration={500} className='promo__link promo__btn btn-hover active-btn-effect'>
+          Узнать больше
         </Link>
         <img src={promoLogo} alt='символ веб-разработки' className='promo__logo' />
       </div>
