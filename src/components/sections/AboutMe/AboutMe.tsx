@@ -8,7 +8,7 @@ import SectionTitleRow from '../../others/SectionTitleRow/SectionTitleRow';
 
 export default function AboutMe() {
   return (
-    <section className='section about-me'>
+    <section className='section section about-me'>
       <SectionTitleRow content='Студент' />
       <div className='about-me__info'>
         <div className='about-me__info-description'>

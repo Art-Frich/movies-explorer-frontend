@@ -5,7 +5,7 @@ import SectionTitleRow from '../../others/SectionTitleRow/SectionTitleRow';
 
 export default function Techs() {
   return (
-    <section className='techs'>
+    <section className='section techs'>
       <SectionTitleRow content='Технологии' />
       <h3 className='techs__subtitle'>7 технологий</h3>
       <p className='techs__text'>

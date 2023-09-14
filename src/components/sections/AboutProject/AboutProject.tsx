@@ -5,7 +5,7 @@ import SectionTitleRow from '../../others/SectionTitleRow/SectionTitleRow';
 
 export default function AboutProject() {
   return (
-    <section className='about-project' id='about-project'>
+    <section className='section about-project' id='about-project'>
       <SectionTitleRow content='О проекте' />
       <div className='about-project__info'>
         <div className='about-project__info-element'>
