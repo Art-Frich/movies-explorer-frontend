@@ -1,0 +1,118 @@
+.techs {
+  padding: 100px 70px;
+  background-color: var(--background-color-grey);
+}
+
+.techs__subtitle {
+  color: var(--base-color-of-text);
+  text-align: center;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px; /* 116% */
+  letter-spacing: -2px;
+
+  margin: 90px 0 26px;
+}
+
+.techs__text {
+  color: var(--base-color-of-text);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.56px;
+
+  max-width: 460px;
+  margin: 0 auto 100px;
+}
+
+.techs__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--tech-cards-gap);
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 90px));
+  gap: 10px;
+  justify-content: center; */
+}
+
+.techs__list-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #303030;
+  border-radius: 10px;
+
+  min-width: var(--tech-card-width);
+  min-height: 60px;
+}
+
+.techs__list-element-text {
+  color: var(--base-color-of-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.56px;
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --tech-card-width: 84px;
+  }
+
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .techs__subtitle {
+    margin-top: 80px;
+    margin-bottom: 22px;
+  }
+
+  .techs__text {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.48px;
+
+    margin-bottom: 83px;
+  }
+
+  .techs__list-element {
+    min-height: 57px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.44px;
+
+    margin-bottom: 50px;
+  }
+
+  .techs__list {
+    max-width: calc(var(--tech-card-width) * 2 + var(--tech-cards-gap));
+    justify-content: flex-start;
+    margin: 0 auto 0;
+  }
+}

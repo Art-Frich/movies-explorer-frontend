@@ -1,13 +1,29 @@
-body {
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts.css);
+@import url(./helpers/variables.css);
+@import url(./helpers/mixes.css);
+
+.body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  max-width: 1280px;
+  margin: auto;
+
+  background-color: cadetblue;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* чтобы скрыть aside-bar абсолютно спозиционированный за экран справа */
+.root {
+  overflow-x: hidden;
+  position: relative;
 }

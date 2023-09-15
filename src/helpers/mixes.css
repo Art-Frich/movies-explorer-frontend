@@ -1,0 +1,138 @@
+/* reset-ы */
+.btn-reset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.input-reset {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  text-decoration: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+}
+
+/* link-hover */
+.link-hover {
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.link-hover:hover {
+  opacity: 0.7;
+}
+
+/* btn-hover */
+.btn-hover {
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.btn-hover:hover {
+  opacity: 0.8;
+}
+
+/* active-underline */
+.active-underline {
+  position: relative;
+}
+
+.active-underline:active {
+  opacity: 1;
+}
+
+.active-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0px;
+  width: 100%;
+  border-bottom: 1px solid transparent;
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.active-underline:active::after {
+  border-color: var(--base-color-of-text);
+}
+
+/* active-btn-effect */
+.active-btn-effect:active {
+  transform: scale(0.98);
+}
+
+/* active-neon */
+.active-neon {
+  position: relative;
+  z-index: 1;
+}
+
+.active-neon:active {
+  opacity: 1;
+}
+
+.active-neon::after {
+  content: "";
+  background: transparent;
+  position: absolute;
+  z-index: 0;
+  top: -5px;
+  bottom: -5px;
+  left: -5px;
+  right: -5px;
+  border-radius: 5px;
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.active-neon:active:after {
+  box-shadow: 0 0 10px #ee3465;
+}
+
+/* input focus */
+.input-focus {
+  transition: all var(--animation-time) var(--animation-type);
+  box-shadow: 0 0 0 5px var(--background-color-light-black),
+    7px 0 4px rgba(66, 133, 244, 0), -7px 0 4px rgba(66, 133, 244, 0);
+}
+
+.input-focus:focus {
+  box-shadow: 0 0 0 5px var(--background-color-light-black),
+    7px 0 4px rgba(66, 133, 244, 1), -7px 0 4px rgba(66, 133, 244, 1);
+}
+
+/* .input-focus::after {
+  content: "";
+  background: transparent;
+  position: absolute;
+  z-index: 0;
+  top: -5px;
+  bottom: -5px;
+  left: -5px;
+  right: -5px;
+  border-radius: 5px;
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.input-focus:focus::after {
+  box-shadow: 0 0 10px #ee3465;
+} */
+
+/* input-hover */
+.input-hover {
+  transition: all var(--animation-time) var(--animation-type);
+}
+
+.input-hover:hover {
+  color: #4285f4;
+}

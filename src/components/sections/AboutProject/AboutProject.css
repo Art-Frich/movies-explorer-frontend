@@ -1,0 +1,157 @@
+.about-project {
+  padding: 110px 70px;
+  background-color: var(--background-color-light-black);
+}
+
+.about-project__info {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: space-between;
+
+  margin-top: 70px;
+  margin-bottom: 110px;
+}
+
+.about-project__info-element {
+  display: flex;
+  width: 550px;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.about-project__info-title {
+  color: var(--base-color-of-text);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+
+  margin: 0;
+}
+
+.about-project__info-text {
+  color: var(--base-color-of-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+
+  margin: 0;
+}
+
+.about-project__graph {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 36px 31px;
+}
+
+.about-project__graph-ch1 {
+  background-color: var(--background-color-green);
+  height: 100%;
+
+  color: var(--base-color-of-text-contr);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about-project__graph-ch2 {
+  background-color: #303030;
+
+  color: var(--base-color-of-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about-project__graph-sign {
+  color: #8b8b8b;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px; /* 121.429% */
+  align-self: flex-end;
+}
+
+.about-project__graph-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__graph {
+    grid-template-columns: 140px 1fr;
+    grid-template-rows: 35px 31px;
+  }
+
+  .about-project__info-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__info {
+    gap: 30px;
+
+    margin-bottom: 93px;
+  }
+
+  .about-project__info-element {
+    gap: 22px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__info {
+    flex-direction: column;
+    gap: 56px;
+
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .about-project__info-element {
+    width: 100%;
+    gap: 16px;
+  }
+
+  .about-project__info-title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about-project__info-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__graph {
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 35px 24px;
+  }
+
+  .about-project__graph-ch1 {
+    font-size: 11px;
+  }
+
+  .about-project__graph-ch2 {
+    font-size: 11px;
+  }
+
+  .about-project__graph-sign {
+    font-size: 11px;
+    line-height: normal;
+  }
+}

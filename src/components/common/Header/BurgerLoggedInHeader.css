@@ -1,0 +1,96 @@
+.aside-bar {
+  min-width: 520px;
+
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  right: -520px;
+
+  background-color: #202020;
+
+  transition: right 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+
+  /* Добавляем растяжение по вертикали */
+  display: flex;
+  max-height: 100vh;
+}
+
+.aside-bar_visible {
+  opacity: 1;
+  visibility: visible;
+  right: 0;
+}
+
+.navigation-auth-burger {
+  margin: 159px 0 92px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Добавляем растяжение по вертикали */
+  flex-grow: 1;
+}
+
+.navigation-auth-burger__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.navigation-auth-burger__link {
+  text-decoration: none;
+  padding-bottom: 4px;
+  color: var(--base-color-of-text);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.navigation-auth-burger__link.active {
+  border-bottom: var(--base-color-of-text) var(--border-active-size) solid;
+}
+
+.navigation-auth-burger__account-btn {
+  min-width: 100px;
+  height: 32px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.navigation-auth-burger__account-btn-text {
+  font-size: 14px;
+  line-height: 16px; /* 128.571% */
+}
+
+.navigation-auth-burger__account-btn-icon {
+  border-radius: 6px;
+
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-image: url(../../../images/icon-account.svg);
+  background-color: #313131;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 520px) {
+  .aside-bar {
+    min-width: min-content;
+    width: 100%;
+  }
+}

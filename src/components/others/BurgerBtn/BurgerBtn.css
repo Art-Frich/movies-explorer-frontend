@@ -1,0 +1,63 @@
+:root {
+  /* 1 = поправочный коэффициент
+  /* 4 = т.к. смещение по х и у накладывается друг на друга, поэтому фактически смещение центра на половину высоты, но т.к. смещение одновременно по 2-м осям, которым повёрнуты на 45, то /2 и ещё раз /2 => /4 */
+  --size-menu-burger: 28px;
+  --shift: calc(var(--size-menu-burger) * 1 / 4);
+}
+
+.burger-menu {
+  position: relative;
+  z-index: 2;
+
+  width: 38px;
+  height: 38px;
+  padding: 8px 5px;
+  /* margin исключительно для соответствия кривоватому макету */
+  margin-right: 3px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.burger-menu__line {
+  width: var(--size-menu-burger);
+  height: 2px;
+
+  background-color: var(--base-color-of-text);
+  transition: transform 0.3s ease, opacity 0.2s ease, height 0.2s linear;
+}
+
+.burger-menu_open .burger-menu__line_type_top {
+  transform: rotate(45deg) translate(var(--shift), var(--shift));
+  height: 2.8px;
+}
+
+.burger-menu_open .burger-menu__line_type_middle {
+  opacity: 0;
+  z-index: -1;
+}
+
+.burger-menu_open .burger-menu__line_type_bottom {
+  transform: rotate(-45deg) translate(var(--shift), calc(0px - var(--shift)));
+  height: 2.8px;
+}
+
+.burger-menu_open .burger-menu__dropdown {
+  opacity: 1;
+  z-index: 1;
+}
+
+@media screen and (max-width: 400px) {
+  .burger-menu {
+    --size-menu-burger: 20px;
+    width: 32px;
+    height: 38px;
+    padding: 9px 9px;
+    --shift: calc(var(--size-menu-burger) * 1.2 / 4);
+  }
+}
