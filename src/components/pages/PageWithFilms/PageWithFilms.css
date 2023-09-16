@@ -1,0 +1,27 @@
+.page-with-films {
+  background-color: #202020;
+  padding: 70px 70px 90px;
+
+  flex-grow: 1;
+}
+
+.page-with-films__message-for-user {
+  text-align: center;
+  color: var(--base-color-of-text);
+  font-size: 14px;
+  font-weight: normal;
+  line-height: normal;
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .page-with-films {
+    padding: 70px 30px 160px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .page-with-films {
+    padding: 70px 10px 170px;
+  }
+}

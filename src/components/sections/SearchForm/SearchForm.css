@@ -25,6 +25,8 @@
 }
 
 .sercher__input {
+  align-self: stretch;
+
   color: var(--base-color-of-text);
   font-size: 18px;
   font-style: normal;
@@ -37,11 +39,15 @@
   text-overflow: ellipsis;
 }
 
+.sercher__input:active {
+  color: white;
+}
+
 .sercher__input::placeholder {
   color: #8b8b8b;
 }
 
-.sercher__btn-submit {
+.sercher__btn {
   border-radius: 5px;
   background: #4285f4;
 
@@ -92,7 +98,7 @@
     line-height: 16px; /* 100% */
   }
 
-  .sercher__btn-submit {
+  .sercher__btn {
     max-width: 80px;
     padding: 13px 10px;
   }

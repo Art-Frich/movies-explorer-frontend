@@ -3,20 +3,19 @@ import './MoviesCardList.css';
 import React from 'react';
 import MoviesCard from '../../others/MoviesCard/MoviesCard';
 
-import data from '../../../helpers/initialCards';
-
 interface IMoviesCardList {
   cardType: string,
+  films: any[],
 }
 
-export default function MoviesCardList({ cardType }: IMoviesCardList) {
+export default function MoviesCardList({ cardType, films }: IMoviesCardList) {
   return (
     <section className='movies-list'>
       <ul className='movies-list__list list-reset'>
-        {data.map((el, i) => (
+        {films.map((el) => (
           // eslint-disable-next-line react/no-array-index-key
-          <li className='movies-list__list-element' key={i}>
-            <MoviesCard data={el} type={i === 0 && cardType === 'movies-card__btn_save' ? 'movies-card__btn_saved' : cardType} />
+          <li className='movies-list__list-element' key={el.id}>
+            <MoviesCard data={el} type={cardType} />
           </li>
         ))}
       </ul>
