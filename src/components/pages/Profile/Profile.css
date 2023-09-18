@@ -99,6 +99,14 @@
   gap: 16px;
 }
 
+.page-profile__submit-result-msg {
+  color: #ee3465;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .page-profile__btn-edit {
   width: fit-content;
   padding: 0 5px 0;

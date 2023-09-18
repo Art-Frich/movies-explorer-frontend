@@ -21,7 +21,7 @@ const CurrentUserContext = createContext<CurrentUserContextType | undefined>(und
 export const useCurrentUser = () => useContext(CurrentUserContext);
 
 export function CurrentUserProvider({ children }: IReactChildren) {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [name, setName] = useState('Name');
   const [email, setEmail] = useState('Email@email.email');
 

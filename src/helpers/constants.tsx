@@ -26,3 +26,4 @@ export const inputPasswordSettings = {
 };
 
 export const urlMoviesApi = 'https://api.nomoreparties.co/';
+export const urlLocalMainApi = 'http://localhost:3002/';

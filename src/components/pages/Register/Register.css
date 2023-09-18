@@ -92,6 +92,14 @@
   gap: 16px;
 }
 
+.page-registor__submit-result-msg {
+  color: #ee3465;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .page-register__btn-submit {
   border-radius: 3px;
   background: #4285f4;

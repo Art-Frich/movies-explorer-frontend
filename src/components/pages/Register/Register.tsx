@@ -1,28 +1,37 @@
 import './Register.css';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { inputNameSettings, inputEmailSettings, inputPasswordSettings } from '../../../helpers/constants';
 import InputBlock from '../../others/InputBlock/InputBlock';
 import Logo from '../../others/Logo/Logo';
+import { IOnSubmitRegister } from '../../../helpers/Interfaces';
 
 interface IRegister {
-  isValidForm: boolean,
-  onSubmit: () => void,
-  fetchCondition: boolean,
-
+  onSubmit: (data: IOnSubmitRegister) => void;
+  fetchCondition: boolean;
+  submitMsg: string;
 }
 
 export default function Register({
-  isValidForm, onSubmit, fetchCondition,
+  onSubmit, fetchCondition, submitMsg,
 }: IRegister) {
+  const refName = useRef<HTMLInputElement | null>(null);
+  const refEmail = useRef<HTMLInputElement | null>(null);
+  const refPassword = useRef<HTMLInputElement | null>(null);
+
   return (
     <main className='page-register'>
       <form
         className='page-register__form'
         name='register-user-form'
-        onSubmit={onSubmit}
+        onSubmit={(e) => onSubmit({
+          e,
+          name: refName.current?.value || '',
+          email: refEmail.current?.value || '',
+          password: refPassword.current?.value || '',
+        })}
         autoComplete='off'
       >
         <div className='page-register__content'>
@@ -38,6 +47,7 @@ export default function Register({
             inputClass='page-register__input page-register__input_type_string'
             errSpanClass='page-register__error'
             inputSettings={inputNameSettings}
+            refParent={refName}
           />
           <InputBlock
             labelClass='page-register__field'
@@ -46,6 +56,7 @@ export default function Register({
             inputClass='page-register__input page-register__input_type_email'
             errSpanClass='page-register__error'
             inputSettings={inputEmailSettings}
+            refParent={refEmail}
           />
           <InputBlock
             labelClass='page-register__field'
@@ -54,14 +65,16 @@ export default function Register({
             inputClass='page-register__input page-register__input_type_password'
             errSpanClass='page-register__error'
             inputSettings={inputPasswordSettings}
+            refParent={refPassword}
           />
         </div>
         <div className='page-register__btns'>
+          <span className='page-registor__submit-result-msg'>{submitMsg}</span>
           <button
-            className='page-register__btn-submit btn-reset btn-hover active-btn-effect'
+            className='page-register__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
             type='submit'
             name='submit-btn-change-user-data-form'
-            disabled={!isValidForm}
+            disabled={fetchCondition}
           >
             {fetchCondition ? 'Попробуем-ка...' : 'Зарегистрироваться'}
           </button>

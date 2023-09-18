@@ -6,10 +6,9 @@ import changeTimeFormat from '../../../helpers/utils/utils';
 
 interface IMoviesCardProps {
   data: any,
-  type: string,
 }
 
-export default function MoviesCard({ data, type }: IMoviesCardProps) {
+export default function MoviesCard({ data }: IMoviesCardProps) {
   return (
     <article className='movies-card'>
       <div className='movies-card__header'>
@@ -18,7 +17,7 @@ export default function MoviesCard({ data, type }: IMoviesCardProps) {
       </div>
       <img src={urlMoviesApi + data.image.url} alt='контент карточки' className='movies-card__img' />
       <button
-        className={`movies-card__btn btn-reset btn-hover active-btn-effect ${type}`}
+        className={`movies-card__btn btn-reset btn-hover active-btn-effect ${data.btnType}`}
         type='button'
         aria-label='movies-card-btn'
       />

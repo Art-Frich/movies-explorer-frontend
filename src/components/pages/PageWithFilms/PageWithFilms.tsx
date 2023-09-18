@@ -11,13 +11,18 @@ interface IPageWithFilms {
   setIsShort: (newValue: boolean) => void,
   films: any[],
   onSearch: (e: FormEvent<HTMLFormElement>, value: string) => void,
-  fetchCondition: boolean,
+  isFilter: boolean,
   messageForUser: string,
-  onReset: () => void;
+  onReset: () => void,
+  onClickAddedContent: () => void,
+  cntFilms: number,
+  userQuery: string,
 }
 
 export default function PageWithFilms({
-  isShort, setIsShort, films, onSearch, messageForUser, fetchCondition, onReset,
+  isShort, setIsShort, films, onSearch, messageForUser,
+  isFilter, onReset, onClickAddedContent, cntFilms,
+  userQuery,
 }: IPageWithFilms) {
   return (
     <main className='page-with-films'>
@@ -25,14 +30,19 @@ export default function PageWithFilms({
         isShort={isShort}
         setIsShort={setIsShort}
         onSearch={onSearch}
-        fetchCondition={fetchCondition}
         onReset={onReset}
+        userQuery={userQuery}
       />
       {films.length > 0 && (
-        <MoviesCardList cardType='movies-card__btn_delete' films={films} />
+        <MoviesCardList
+          films={films}
+          onClickAddedContent={onClickAddedContent}
+          cntFilms={cntFilms}
+        />
       )}
-      {!fetchCondition && films.length === 0 && <p className='page-with-films__message-for-user'>{messageForUser}</p>}
-      {fetchCondition && <Preloader />}
+      {(isFilter || userQuery) && films.length === 0
+        && <p className='page-with-films__message-for-user'>{messageForUser}</p>}
+      {films.length === 0 && !userQuery && !isFilter && <Preloader />}
     </main>
   );
 }

@@ -9,6 +9,7 @@ interface IInputBlock {
   inputSettings: IInputSettings,
   defaultValue?: string,
   inputDisabled?: boolean,
+  refParent?: any,
 }
 
 interface IInputSettings {
@@ -23,11 +24,12 @@ interface IInputSettings {
 export default function InputBlock({
   labelClass, titleSpanClass, titleSpanContent, inputClass,
   errSpanClass, inputSettings, defaultValue, inputDisabled,
+  refParent,
 }: IInputBlock) {
   const {
     id, name, placeholder, type, pattern, title,
   } = inputSettings;
-  const ref = useRef<HTMLInputElement | null>(null);
+  const ref = refParent || useRef<HTMLInputElement | null>(null);
   const [nameErrMsg, setNameErrMsg] = useState('');
   const handleChange = () => {
     if (ref.current?.validity.valid) {
@@ -68,4 +70,5 @@ export default function InputBlock({
 InputBlock.defaultProps = {
   defaultValue: '',
   inputDisabled: false,
+  refParent: null,
 };

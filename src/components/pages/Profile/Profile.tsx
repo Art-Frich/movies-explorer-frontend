@@ -12,11 +12,12 @@ interface IProfile {
   onLogout: () => void,
   userEmail: string,
   onEditBtnClick: () => void,
-  isDisabledInput: boolean
+  isDisabledInput: boolean,
+  submitMsg: string,
 }
 
 export default function Profile({
-  nameUser, onSubmit, fetchCondition,
+  nameUser, onSubmit, fetchCondition, submitMsg,
   onLogout, userEmail, isDisabledInput, onEditBtnClick,
 }: IProfile) {
   return (
@@ -54,20 +55,23 @@ export default function Profile({
         </div>
 
         <div className='page-profile__btns'>
+          <span className='page-profile__submit-result-msg'>{submitMsg}</span>
           {isDisabledInput && (
             <>
               <button
-                className='page-profile__btn-edit btn-reset btn-hover active-underline'
+                className='page-profile__btn-edit btn-reset btn-hover active-underline color-text-disabled'
                 type='button'
                 name='btn-change-user-data-form'
                 onClick={onEditBtnClick}
+                disabled={fetchCondition}
               >
                 Редактировать
               </button>
               <button
-                className='page-profile__btn-logout btn-reset btn-hover active-underline'
+                className='page-profile__btn-logout btn-reset btn-hover active-underline color-text-disabled'
                 type='button'
                 onClick={onLogout}
+                disabled={fetchCondition}
               >
                 Выйти из аккаунта
               </button>
@@ -76,9 +80,10 @@ export default function Profile({
 
           {!isDisabledInput && (
             <button
-              className='page-profile__btn-submit btn-reset btn-hover active-btn-effect'
+              className='page-profile__btn-submit btn-reset btn-hover active-btn-effect colot-btn-disabled'
               type='submit'
               name='submit-btn-user-data-form'
+              disabled={fetchCondition}
             >
               {fetchCondition ? 'Попробуем-ка...' : 'Сохранить'}
             </button>

@@ -8,13 +8,12 @@ interface ISearchForm {
   isShort: boolean,
   setIsShort: (newValue: boolean) => void,
   onSearch: (e: FormEvent<HTMLFormElement>, value: string) => void,
-  fetchCondition: boolean,
   onReset: () => void;
-
+  userQuery: string,
 }
 
 export default function SearchForm({
-  isShort, setIsShort, onSearch, fetchCondition, onReset,
+  isShort, setIsShort, onSearch, onReset, userQuery,
 }: ISearchForm) {
   const ref = useRef<HTMLInputElement | null>(null);
 
@@ -26,11 +25,12 @@ export default function SearchForm({
           placeholder='Введите название фильма'
           name='name-movie'
           minLength={2}
+          defaultValue={userQuery}
           required
           ref={ref}
         />
         <button type='submit' className='sercher__btn btn-reset btn-hover active-btn-effect'>
-          {fetchCondition ? 'Ищу...' : 'Поиск'}
+          {userQuery ? 'Ищу...' : 'Поиск'}
         </button>
         <button
           type='button'
