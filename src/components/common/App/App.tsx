@@ -19,8 +19,10 @@ import Footer from '../Footer/Footer';
 import ProtectOfRoute from '../ProtectOfRoute';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../../helpers/utils/MainApi';
+import useUserData from '../../../сustomHooks/useUserData';
 
 function App() {
+  const { setUserDataAndLogin } = useUserData();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isCheckJwt, setIsCheckJwt] = useState(true);
   const curUser = useCurrentUser();
@@ -41,11 +43,11 @@ function App() {
   useEffect(() => {
     if (!curUser?.loggedIn) {
       mainApi.checkJWT()
-        .then(() => {
-          curUser?.login();
+        .then((res) => {
+          setUserDataAndLogin({ values: res, curUser });
         })
-        .catch(() => {
-          console.log('Не удалось авторизоваться автоматически');
+        .catch((err) => {
+          console.log(`Не удалось авторизоваться автоматически: ${err}`);
         })
         .finally(() => setIsCheckJwt(false));
     }
@@ -71,17 +73,3 @@ function App() {
 }
 
 export default App;
-
-{ /* <Routes>
-<Route path='/signin' element={<LoginContainer />} />
-<Route path='/signup' element={<RegisterContainer />} />
-<Route path='/' element={<AddHeader />}>
-  <Route path='/profile' element={<ProtectOfRoute element={ProfileContainer} />} />
-  <Route path='/' element={<AddFooter />}>
-    <Route path='/saved-movies' element={<ProtectOfRoute element={MoviesContainer} />} />
-    <Route path='/movies' element={<ProtectOfRoute element={MoviesContainer} />} />
-    <Route index element={<MainContainer />} />
-  </Route>
-</Route>
-<Route path='*' element={<NotFoundContainer />} />
-</Routes> */ }

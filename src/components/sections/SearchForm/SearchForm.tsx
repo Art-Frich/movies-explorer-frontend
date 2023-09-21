@@ -5,15 +5,15 @@ import React, { FormEvent, useRef } from 'react';
 import FilterCheckbox from '../../others/FilterCheckbox/FilterCheckbox';
 
 interface ISearchForm {
-  isShort: boolean,
-  setIsShort: (newValue: boolean) => void,
+  filters: Record<string, boolean>,
+  setFilters: (newValue: Record<string, boolean>) => void,
   onSearch: (e: FormEvent<HTMLFormElement>, value: string) => void,
   onReset: () => void;
   userQuery: string,
 }
 
 export default function SearchForm({
-  isShort, setIsShort, onSearch, onReset, userQuery,
+  filters, setFilters, onSearch, onReset, userQuery,
 }: ISearchForm) {
   const ref = useRef<HTMLInputElement | null>(null);
 
@@ -45,7 +45,7 @@ export default function SearchForm({
       </form>
       <ul className='sercher__filter-list list-reset'>
         <li className='sercher__filter-list-element'>
-          <FilterCheckbox content='Короткометражки' state={isShort} setState={setIsShort} />
+          <FilterCheckbox content='Короткометражки' state={filters.isShort} setState={setFilters} name='isShort' />
         </li>
       </ul>
       <div className='sercher__dividing-line' />

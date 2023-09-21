@@ -5,12 +5,15 @@ import React from 'react';
 interface IFilterCheckbox {
   content: string,
   state: boolean,
-  setState: (newValue: boolean) => void,
+  setState: any, // хер подберешь ему тип
+  name: string,
 }
 
-export default function FilterCheckbox({ content, state, setState }: IFilterCheckbox) {
+export default function FilterCheckbox({
+  content, state, setState, name,
+}: IFilterCheckbox) {
   function chengeCheckbox() {
-    setState(!state);
+    setState((prev: any) => ({ ...prev, [name]: !prev[name] }));
   }
 
   return (

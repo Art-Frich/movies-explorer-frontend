@@ -1,37 +1,43 @@
 import './Login.css';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../others/Logo/Logo';
 import InputBlock from '../../others/InputBlock/InputBlock';
 import { inputEmailSettings, inputPasswordSettings } from '../../../helpers/constants';
-import { IOnSubmitLogin } from '../../../helpers/Interfaces';
+import useForm from '../../../сustomHooks/useForm';
+import mainApi from '../../../helpers/utils/MainApi';
+import useUserData from '../../../сustomHooks/useUserData';
 
-interface ILogin {
-  isValidForm: boolean,
-  onSubmit: (data: IOnSubmitLogin) => void,
-  fetchCondition: boolean,
-  submitMsg: string;
+// import { IOnSubmitLogin } from '../../../helpers/Interfaces';
 
-}
+// interface ILogin {
+//   isValidForm: boolean,
+//   onSubmit: (data: IOnSubmitLogin) => void,
+//   fetchCondition: boolean,
+//   submitMsg: string,
+//   setIsValidForm: React.Dispatch<React.SetStateAction<boolean>>,
+// }
 
-export default function Login({
-  isValidForm, onSubmit, fetchCondition, submitMsg,
-}: ILogin) {
-  const refEmail = useRef<HTMLInputElement | null>(null);
-  const refPassword = useRef<HTMLInputElement | null>(null);
+export default function Login() {
+  const { setUserDataAndLoginAndNavToFilms } = useUserData();
+  const {
+    handleChangeInput,
+    handleSubmit,
+    errors,
+    values,
+    sbtMsg,
+    isFetching,
+    isValidForm,
+  } = useForm({ fetch: mainApi.toLoginUser, toEndFetch: setUserDataAndLoginAndNavToFilms });
 
   return (
     <main className='page-login'>
       <form
         className='page-login__form'
         name='login-user-form'
-        onSubmit={(e) => onSubmit({
-          e,
-          email: refEmail.current?.value || '',
-          password: refPassword.current?.value || '',
-        })}
+        onSubmit={(e) => handleSubmit({ e })}
         autoComplete='off'
       >
         <div className='page-login__content'>
@@ -47,7 +53,9 @@ export default function Login({
             inputClass='page-login__input page-login__input_type_email'
             errSpanClass='page-login__error'
             inputSettings={inputEmailSettings}
-            refParent={refEmail}
+            values={values}
+            onInput={handleChangeInput}
+            errors={errors}
           />
           <InputBlock
             labelClass='page-login__field'
@@ -56,25 +64,30 @@ export default function Login({
             inputClass='page-login__input page-login__input_type_password'
             errSpanClass='page-login__error'
             inputSettings={inputPasswordSettings}
-            refParent={refPassword}
+            values={values}
+            onInput={handleChangeInput}
+            errors={errors}
           />
         </div>
 
         <div className='page-login__btns'>
-          <span className='page-login__submit-result-msg'>{submitMsg}</span>
+          <span className='page-login__submit-result-msg'>{sbtMsg}</span>
           <button
             className='page-login__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
             type='submit'
             name='submit-btn-change-user-data-form'
-            disabled={!isValidForm || fetchCondition}
+            disabled={!isValidForm || isFetching}
           >
-            {fetchCondition ? 'Попробуем-ка...' : 'Войти'}
+            {isFetching ? 'Попробуем-ка...' : 'Войти'}
           </button>
           <div className='page-login__yet-login'>
             <span className='page-login__yet-login-text'>
               Ещё не зарегистрированы?
             </span>
-            <Link to='/signup' className='page-login__yet-login-link link-hover active-underline'>
+            <Link
+              to='/signup'
+              className='page-login__yet-login-link link-hover active-underline'
+            >
               Регистрация
             </Link>
           </div>

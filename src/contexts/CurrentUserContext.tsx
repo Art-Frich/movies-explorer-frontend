@@ -8,6 +8,8 @@ interface CurrentUserContextType {
   logout: () => void,
   setName: (name: string) => void,
   setEmail: (email: string) => void,
+  setId: (id: string) => void,
+  id: string,
   name: string,
   email: string,
 }
@@ -24,6 +26,7 @@ export function CurrentUserProvider({ children }: IReactChildren) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [name, setName] = useState('Name');
   const [email, setEmail] = useState('Email@email.email');
+  const [id, setId] = useState('');
 
   const login = () => {
     setLoggedIn(true);
@@ -34,8 +37,8 @@ export function CurrentUserProvider({ children }: IReactChildren) {
   };
 
   const contextValue = useMemo(() => ({
-    loggedIn, login, logout, name, email, setName, setEmail,
-  }), [loggedIn]);
+    loggedIn, login, logout, name, email, setName, setEmail, setId, id,
+  }), [loggedIn, name, email, id]);
 
   return (
     <CurrentUserContext.Provider value={contextValue}>

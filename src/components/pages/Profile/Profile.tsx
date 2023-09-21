@@ -4,32 +4,38 @@ import React from 'react';
 
 import { inputEmailSettings, inputNameSettings } from '../../../helpers/constants';
 import InputBlock from '../../others/InputBlock/InputBlock';
+import { useCurrentUser } from '../../../contexts/CurrentUserContext';
+// import { IFormEvent } from '../../../helpers/Interfaces';
 
-interface IProfile {
-  nameUser: string,
-  onSubmit: () => void,
-  fetchCondition: boolean,
-  onLogout: () => void,
-  userEmail: string,
-  onEditBtnClick: () => void,
-  isDisabledInput: boolean,
-  submitMsg: string,
-}
+// interface IProfile {
+// onSubmit: (data: IFormEvent) => void,
+// fetchCondition: boolean,
+// onLogout: () => void,
+// onEditBtnClick: () => void,
+// isDisabledInput: boolean,
+// submitMsg: string,
+// submitMsgIsErr: boolean,
+// setInputName: React.Dispatch<React.SetStateAction<string>>,
+// setInputEmail: React.Dispatch<React.SetStateAction<string>>,
+
+// }
 
 export default function Profile({
-  nameUser, onSubmit, fetchCondition, submitMsg,
-  onLogout, userEmail, isDisabledInput, onEditBtnClick,
-}: IProfile) {
+  onSubmit, fetchCondition, onLogout, onEditBtnClick, isDisabledInput,
+  submitMsg, submitMsgIsErr, errorsInput, onInput, isDisabledSubmitBtn,
+  valuesInput,
+}: any) {
+  const curUser = useCurrentUser();
   return (
     <main className='page-profile'>
       <form
         className='page-profile__form'
         name='change-user-data-form'
-        onSubmit={onSubmit}
+        onSubmit={(e) => onSubmit({ e })}
         autoComplete='off'
       >
         <div className='page-profile__content'>
-          <h1 className='page-profile__title'>{`Здравствуйте, ${nameUser} ;)`}</h1>
+          <h1 className='page-profile__title'>{`Здравствуйте, ${curUser?.name} ;)`}</h1>
 
           <InputBlock
             labelClass='page-profile__field'
@@ -38,7 +44,9 @@ export default function Profile({
             inputClass='page-profile__input page-profile__input_type_string'
             errSpanClass='page-profile__error'
             inputSettings={inputNameSettings}
-            defaultValue={nameUser}
+            values={valuesInput}
+            onInput={onInput}
+            errors={errorsInput}
             inputDisabled={isDisabledInput}
           />
 
@@ -49,13 +57,21 @@ export default function Profile({
             inputClass='page-profile__input page-profile__input_type_email'
             errSpanClass='page-profile__error'
             inputSettings={inputEmailSettings}
-            defaultValue={userEmail}
+            values={valuesInput}
+            onInput={onInput}
+            errors={errorsInput}
             inputDisabled={isDisabledInput}
           />
         </div>
 
         <div className='page-profile__btns'>
-          <span className='page-profile__submit-result-msg'>{submitMsg}</span>
+          <span className={`page-profile__submit-result-msg ${submitMsgIsErr
+            ? 'page-profile__submit-result-msg_err'
+            : 'page-profile__submit-result-msg_ok'}`}
+          >
+            {submitMsg}
+
+          </span>
           {isDisabledInput && (
             <>
               <button
@@ -80,10 +96,10 @@ export default function Profile({
 
           {!isDisabledInput && (
             <button
-              className='page-profile__btn-submit btn-reset btn-hover active-btn-effect colot-btn-disabled'
+              className='page-profile__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
               type='submit'
               name='submit-btn-user-data-form'
-              disabled={fetchCondition}
+              disabled={isDisabledSubmitBtn}
             >
               {fetchCondition ? 'Попробуем-ка...' : 'Сохранить'}
             </button>

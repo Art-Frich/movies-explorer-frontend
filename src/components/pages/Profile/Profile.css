@@ -100,11 +100,18 @@
 }
 
 .page-profile__submit-result-msg {
-  color: #ee3465;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.page-profile__submit-result-msg_err{
+  color: #ee3465;
+}
+
+.page-profile__submit-result-msg_ok{
+  color: #4285f4;
 }
 
 .page-profile__btn-edit {

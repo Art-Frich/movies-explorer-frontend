@@ -1,18 +1,12 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable class-methods-use-this */
-interface ImoviesApiConfig {
-  urlApi: string,
-}
 
-const moviesApiConfig = {
-  urlApi: 'https://api.nomoreparties.co/beatfilm-movies',
-};
+import { urlMoviesApi } from '../constants';
 
 class MoviesApi {
   urlApi: string;
 
-  constructor(moviesApiConfig: ImoviesApiConfig) {
-    this.urlApi = moviesApiConfig.urlApi;
+  constructor() {
+    this.urlApi = `${urlMoviesApi}/beatfilm-movies`;
   }
 
   getMovies(): Promise<any> {
@@ -27,5 +21,5 @@ class MoviesApi {
   }
 }
 
-const moviesApi = new MoviesApi(moviesApiConfig);
+const moviesApi = new MoviesApi();
 export default moviesApi;

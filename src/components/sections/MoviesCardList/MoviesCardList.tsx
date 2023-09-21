@@ -7,15 +7,19 @@ interface IMoviesCardList {
   films: any[],
   onClickAddedContent: () => void;
   cntFilms: number;
+  onClickSaveBtn: (data: any) => void;
+
 }
 
-export default function MoviesCardList({ films, onClickAddedContent, cntFilms }: IMoviesCardList) {
+export default function MoviesCardList({
+  films, onClickAddedContent, cntFilms, onClickSaveBtn,
+}: IMoviesCardList) {
   return (
     <section className='movies-list'>
       <ul className='movies-list__list list-reset'>
         {films.map((el) => (
           <li className='movies-list__list-element' key={el.id}>
-            <MoviesCard data={el} />
+            <MoviesCard data={el} onClickSaveBtn={onClickSaveBtn} />
           </li>
         ))}
       </ul>

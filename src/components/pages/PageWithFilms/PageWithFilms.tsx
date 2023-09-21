@@ -7,8 +7,11 @@ import MoviesCardList from '../../sections/MoviesCardList/MoviesCardList';
 import Preloader from '../../common/Preloader/Preloader';
 
 interface IPageWithFilms {
-  isShort: boolean,
-  setIsShort: (newValue: boolean) => void,
+  filters: Record<string, boolean>,
+  setFilters: (
+    ((newValue: Record<string, boolean>) => void) |
+    ((prev: Record<string, boolean>) => { [x: string]: boolean; })
+  )
   films: any[],
   onSearch: (e: FormEvent<HTMLFormElement>, value: string) => void,
   isFilter: boolean,
@@ -17,18 +20,19 @@ interface IPageWithFilms {
   onClickAddedContent: () => void,
   cntFilms: number,
   userQuery: string,
+  onClickSaveBtn: (data: any) => void;
 }
 
 export default function PageWithFilms({
-  isShort, setIsShort, films, onSearch, messageForUser,
+  filters, setFilters, films, onSearch, messageForUser,
   isFilter, onReset, onClickAddedContent, cntFilms,
-  userQuery,
+  userQuery, onClickSaveBtn,
 }: IPageWithFilms) {
   return (
     <main className='page-with-films'>
       <SearchForm
-        isShort={isShort}
-        setIsShort={setIsShort}
+        filters={filters}
+        setFilters={setFilters}
         onSearch={onSearch}
         onReset={onReset}
         userQuery={userQuery}
@@ -38,6 +42,7 @@ export default function PageWithFilms({
           films={films}
           onClickAddedContent={onClickAddedContent}
           cntFilms={cntFilms}
+          onClickSaveBtn={onClickSaveBtn}
         />
       )}
       {(isFilter || userQuery) && films.length === 0
