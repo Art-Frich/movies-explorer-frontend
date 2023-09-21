@@ -111,7 +111,7 @@ class MainApi {
 
   deleteMovie = (movieId: any) => this.handleFetch(
     fetch(`${urlLocalMainApi + this.pathFilms + movieId}`, {
-      method: 'POST',
+      method: 'DELETE',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',

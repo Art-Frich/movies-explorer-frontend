@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import './PageWithFilms.css';
 
 import React, { FormEvent } from 'react';
@@ -47,7 +48,7 @@ export default function PageWithFilms({
       )}
       {(isFilter || userQuery) && films.length === 0
         && <p className='page-with-films__message-for-user'>{messageForUser}</p>}
-      {films.length === 0 && !userQuery && !isFilter && <Preloader />}
+      {/* {films.length === 0 && !userQuery && !isFilter && <Preloader />} */}
     </main>
   );
 }

@@ -18,7 +18,7 @@ export default function MoviesCardList({
     <section className='movies-list'>
       <ul className='movies-list__list list-reset'>
         {films.map((el) => (
-          <li className='movies-list__list-element' key={el.id}>
+          <li className='movies-list__list-element' key={el.movieId}>
             <MoviesCard data={el} onClickSaveBtn={onClickSaveBtn} />
           </li>
         ))}

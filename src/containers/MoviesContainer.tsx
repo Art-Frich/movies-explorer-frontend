@@ -3,16 +3,16 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
-import React, { FormEvent, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@react-hook/media-query';
 import moviesApi from '../helpers/utils/MoviesApi';
 import PageWithFilms from '../components/pages/PageWithFilms/PageWithFilms';
 import mainApi from '../helpers/utils/MainApi';
-import { parseMovieData } from '../helpers/utils/utils';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import useSearcher from '../сustomHooks/useSearcher';
 import useSaveCardBtn from '../сustomHooks/useSaveCardBtn';
+import { parseMovieData } from '../helpers/utils/utils';
 
 export default function MoviesContainer() {
   const location = useLocation();
@@ -40,13 +40,6 @@ export default function MoviesContainer() {
 
   // Functions
 
-  // const onReset = () => {
-  //   setUserQuery('');
-  //   setFilters({isShort: false});
-  //   setCntAddedContent(0);
-  //   setMessageForUser('Здесь пока ничего нет =)');
-  // };
-
   const onClickAddedContent = () => { setCntAddedContent(cntAddedContent + 1); };
 
   // Use Effects
@@ -54,15 +47,17 @@ export default function MoviesContainer() {
     const getDataFilms = async () => {
       try {
         const filmsData = await moviesApi.getMovies();
-        const savedFilmsData = await mainApi.getAllSavedMovies();
+        const savedFilmsData = (await mainApi.getAllSavedMovies()).data;
 
         setSavedFilms(savedFilmsData.map((film: any) => ({
           ...film, btnType: 'movies-card__btn_delete',
         })));
 
         setAllFilms(filmsData.map((film: any) => {
-          const inSaved = savedFilmsData.some((el: any) => el.movieId === film.movieId);
-          return { ...film, btnType: inSaved ? 'movies-card__btn_saved' : 'movies-card__btn_save' };
+          const indexInSaved = savedFilmsData.findIndex((el: any) => el.movieId === film.id);
+          return indexInSaved > -1
+            ? { ...savedFilmsData[indexInSaved], btnType: 'movies-card__btn_saved' }
+            : { ...parseMovieData(film), btnType: 'movies-card__btn_save' };
         }));
       } catch (err) {
         console.log('Ошибка при попытке получить данные о фильмах с серверов');
@@ -80,6 +75,7 @@ export default function MoviesContainer() {
 
   useEffect(() => {
     setIsSavedPage(location.pathname !== '/movies');
+    onReset();
   }, [location.pathname]);
 
   useEffect(() => {
@@ -99,7 +95,7 @@ export default function MoviesContainer() {
     <PageWithFilms
       filters={filters}
       setFilters={setFilters}
-      films={visibleFilms}
+      films={visibleFilms.slice(0, baseLimit + addedLimit * cntAddedContent)}
       onSearch={onSearch}
       isFilter={isActiveFilters}
       messageForUser={messageForUser}
@@ -111,8 +107,3 @@ export default function MoviesContainer() {
     />
   );
 }
-
-// (visibleFilms.length === 0 && localSavedFilms.length > 0
-//   ? localSavedFilms
-//   : visibleFilms)
-//   .slice(0, baseLimit + addedLimit * cntAddedContent)
