@@ -19,12 +19,10 @@ import useUserData from '../../../сustomHooks/useUserData';
 
 export default function Register() {
   const { setUserDataAndLoginAndNavToFilms } = useUserData();
-  const toEndFetch = ({ values, curUser }: any) => {
-    mainApi.toLoginUser(values)
-      .then(() => setUserDataAndLoginAndNavToFilms({ values, curUser }))
-      // eslint-disable-next-line no-alert
-      .catch(() => alert('Непредвиденная богами ошибка при попытке автоматического логининга'));
-  };
+  const toEndFetch = ({ values, curUser }: any) => mainApi.toLoginUser(values)
+    .then(() => setUserDataAndLoginAndNavToFilms({ values, curUser }))
+    // eslint-disable-next-line no-alert
+    .catch(() => alert('Непредвиденная богами ошибка при попытке автоматического логининга'));
 
   const {
     handleChangeInput,

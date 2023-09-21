@@ -35,7 +35,7 @@ export default function MoviesContainer() {
   ] = useSearcher({ allFilms, savedFilms, isSavedPage });
 
   const [onClickSaveBtn] = useSaveCardBtn({
-    allFilms, savedFilms, setAllFilms, setSavedFilms, curUser, isSavedPage,
+    allFilms, setAllFilms, setSavedFilms, curUser, isSavedPage,
   });
 
   // Functions
@@ -54,10 +54,11 @@ export default function MoviesContainer() {
         })));
 
         setAllFilms(filmsData.map((film: any) => {
-          const indexInSaved = savedFilmsData.findIndex((el: any) => el.movieId === film.id);
+          const parsedFilm = parseMovieData(film);
+          const indexInSaved = savedFilmsData.findIndex((el: any) => el.movieId === film.movieId);
           return indexInSaved > -1
             ? { ...savedFilmsData[indexInSaved], btnType: 'movies-card__btn_saved' }
-            : { ...parseMovieData(film), btnType: 'movies-card__btn_save' };
+            : { ...parsedFilm, btnType: 'movies-card__btn_save' };
         }));
       } catch (err) {
         console.log('Ошибка при попытке получить данные о фильмах с серверов');

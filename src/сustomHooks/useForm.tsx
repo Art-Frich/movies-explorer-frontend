@@ -59,9 +59,10 @@ export default function useForm({ fetch, toEndFetch }: any) {
     fetch(values)
       .then((res: any) => {
         setResData(res);
-        setSbtMsg('Успешно!');
-        // объединить свойства, чтобы прокинуть name, который возвращает login()
-        toEndFetch({ values: { ...values, ...res }, curUser });
+        setSbtMsg('Успешно! Подождите ещё немного и я перекину вас к фильмам ;)');
+        // объединить свойства, чтобы прокинуть userName, который возвращает login() и хранит в res
+        // return чтобы оттянуть .finally и кнопка submit была заблокирована до конца toEndFetch
+        return toEndFetch({ values: { ...values, ...res }, curUser });
       })
       .catch(async (err: any) => {
         setSbtMsg(`Провал: ${(await err).message}`);

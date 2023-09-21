@@ -3,7 +3,7 @@
 import mainApi from '../helpers/utils/MainApi';
 
 export default function useSaveCardBtn({
-  allFilms, savedFilms, setAllFilms, setSavedFilms, curUser, isSavedPage,
+  allFilms, setAllFilms, setSavedFilms, curUser, isSavedPage,
 }: any) {
   const addMovies = (dataMovie: any): any => {
     const newDataMovie = dataMovie;
@@ -15,8 +15,9 @@ export default function useSaveCardBtn({
 
         setSavedFilms((prev: any) => ([...prev, { ...newDataFilm, btnType: 'movies-card__btn_delete' }]));
         setAllFilms((prev: any) => {
-          prev.splice(index, 1, { ...newDataFilm, btnType: 'movies-card__btn_saved' });
-          return [...prev];
+          const updatedFilms = [...prev];
+          updatedFilms[index] = { ...newDataFilm, btnType: 'movies-card__btn_saved' };
+          return updatedFilms;
         });
       }).catch(async (err) => (
         console.log(`Не удалось добавить фильм в сохраненные: ${(await err).message}`)
@@ -27,16 +28,19 @@ export default function useSaveCardBtn({
     mainApi
       .deleteMovie(data._id)
       .then(() => {
-        let index = savedFilms.findIndex((el: any) => el.movieId === data.movieId);
-        setSavedFilms((prev: any) => prev.splice(index, 1));
+        setSavedFilms((prev: any) => {
+          const updatedFilms = prev.filter((el: any) => el.movieId !== data.movieId);
+          return updatedFilms;
+        });
 
-        index = allFilms.findIndex((el: any) => el.movieId === data.movieId);
+        const index = allFilms.findIndex((el: any) => el.movieId === data.movieId);
         const updateData = data;
         delete updateData._id;
         delete updateData.__v;
         setAllFilms((prev: any) => {
-          prev.splice(index, 1, { ...updateData, btnType: 'movies-card__btn_save' });
-          return prev;
+          const updatedFilms = [...prev];
+          updatedFilms[index] = { ...updateData, btnType: 'movies-card__btn_save' };
+          return updatedFilms;
         });
       })
       .catch(async (err) => (
