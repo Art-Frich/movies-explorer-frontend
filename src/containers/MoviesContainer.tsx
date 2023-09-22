@@ -55,7 +55,8 @@ export default function MoviesContainer() {
 
         setAllFilms(filmsData.map((film: any) => {
           const parsedFilm = parseMovieData(film);
-          const indexInSaved = savedFilmsData.findIndex((el: any) => el.movieId === film.movieId);
+          const indexInSaved = savedFilmsData
+            .findIndex((el: any) => el.movieId === parsedFilm.movieId);
           return indexInSaved > -1
             ? { ...savedFilmsData[indexInSaved], btnType: 'movies-card__btn_saved' }
             : { ...parsedFilm, btnType: 'movies-card__btn_save' };
