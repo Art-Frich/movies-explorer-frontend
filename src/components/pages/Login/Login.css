@@ -93,11 +93,18 @@
 }
 
 .page-login__submit-result-msg {
-  color: #ee3465;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.page-login__submit-result-msg_err {
+  color: #ee3465;
+}
+
+.page-login__submit-result-msg_ok {
+  color: #4285f4;
 }
 
 .page-login__btn-submit {

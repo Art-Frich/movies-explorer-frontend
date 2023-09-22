@@ -46,6 +46,10 @@
   text-wrap: nowrap;
 }
 
+.movie-card__link {
+  line-height: 0;
+}
+
 .movies-card__img {
   display: block;
 

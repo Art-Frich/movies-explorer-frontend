@@ -47,7 +47,7 @@ export default function Profile({
             values={valuesInput}
             onInput={onInput}
             errors={errorsInput}
-            inputDisabled={isDisabledInput}
+            inputDisabled={isDisabledInput || fetchCondition}
           />
 
           <InputBlock
@@ -60,7 +60,7 @@ export default function Profile({
             values={valuesInput}
             onInput={onInput}
             errors={errorsInput}
-            inputDisabled={isDisabledInput}
+            inputDisabled={isDisabledInput || fetchCondition}
           />
         </div>
 
@@ -70,7 +70,6 @@ export default function Profile({
             : 'page-profile__submit-result-msg_ok'}`}
           >
             {submitMsg}
-
           </span>
           {isDisabledInput && (
             <>

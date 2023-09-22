@@ -32,6 +32,7 @@ export default function Register() {
     sbtMsg,
     isFetching,
     isValidForm,
+    resData,
   } = useForm({ fetch: mainApi.toRegisterUser, toEndFetch });
 
   return (
@@ -58,6 +59,7 @@ export default function Register() {
             values={values}
             onInput={handleChangeInput}
             errors={errors}
+            inputDisabled={isFetching}
           />
           <InputBlock
             labelClass='page-register__field'
@@ -69,6 +71,7 @@ export default function Register() {
             values={values}
             onInput={handleChangeInput}
             errors={errors}
+            inputDisabled={isFetching}
           />
           <InputBlock
             labelClass='page-register__field'
@@ -80,10 +83,18 @@ export default function Register() {
             values={values}
             onInput={handleChangeInput}
             errors={errors}
+            inputDisabled={isFetching}
           />
         </div>
         <div className='page-register__btns'>
-          <span className='page-registor__submit-result-msg'>{sbtMsg}</span>
+          <span className={
+            `page-register__submit-result-msg ${resData === null
+              ? 'page-register__submit-result-msg_err'
+              : 'page-register__submit-result-msg_ok'}`
+          }
+          >
+            {sbtMsg}
+          </span>
           <button
             className='page-register__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
             type='submit'

@@ -18,6 +18,7 @@ export default function useSearcher({ allFilms, savedFilms, isSavedPage }: any) 
     setUserQuery('');
     setFilters({ isShort: false });
     setMessageForUser('Здесь пока ничего нет =)');
+    window.localStorage.removeItem('movies-explorer-last-query');
   }, []);
 
   // при поиске установить новый запрос
@@ -53,9 +54,10 @@ export default function useSearcher({ allFilms, savedFilms, isSavedPage }: any) 
         localSaved: visibleFilms,
       };
       window.localStorage.setItem('movies-explorer-last-query', JSON.stringify(data));
-    } else {
-      window.localStorage.removeItem('movies-explorer-last-query');
     }
+    // else {
+    //   window.localStorage.removeItem('movies-explorer-last-query');
+    // }
   }, [visibleFilms]);
   // }, [userQuery, isActiveFilters, visibleFilms, filters, isSavedPage]);
 
@@ -84,22 +86,24 @@ export default function useSearcher({ allFilms, savedFilms, isSavedPage }: any) 
 
   // первый useEffect чекает локальные сохры
   useEffect(() => {
-    try {
-      const storedData = window.localStorage.getItem('movies-explorer-last-query');
-      if (storedData) {
-        const { localQuery, localFilters, localSaved } = JSON.parse(storedData) as {
-          localQuery: string;
-          localFilters: Record<string, boolean>;
-          localSaved: any[];
-        };
+    if (!isSavedPage) {
+      try {
+        const storedData = window.localStorage.getItem('movies-explorer-last-query');
+        if (storedData) {
+          const { localQuery, localFilters, localSaved } = JSON.parse(storedData) as {
+            localQuery: string;
+            localFilters: Record<string, boolean>;
+            localSaved: any[];
+          };
 
-        setUserQuery(localQuery);
-        setFilters((prev: Record<string, boolean>) => ({ ...prev, ...localFilters }));
-        setVisibleFilms(localSaved);
+          setUserQuery(localQuery);
+          setFilters((prev: Record<string, boolean>) => ({ ...prev, ...localFilters }));
+          setVisibleFilms(localSaved);
+        }
+      } catch (err) {
+        console.error('Ошибка при выгрузке локальных данных последнего запроса');
+        console.log(err);
       }
-    } catch (err) {
-      console.error('Ошибка при выгрузке локальных данных последнего запроса');
-      console.log(err);
     }
   }, []);
 

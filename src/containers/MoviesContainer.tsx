@@ -76,7 +76,6 @@ export default function MoviesContainer() {
 
   useEffect(() => {
     setIsSavedPage(location.pathname !== '/movies');
-    onReset();
   }, [location.pathname]);
 
   useEffect(() => {

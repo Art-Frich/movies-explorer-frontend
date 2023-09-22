@@ -30,6 +30,7 @@ export default function Login() {
     sbtMsg,
     isFetching,
     isValidForm,
+    resData,
   } = useForm({ fetch: mainApi.toLoginUser, toEndFetch: setUserDataAndLoginAndNavToFilms });
 
   return (
@@ -56,6 +57,7 @@ export default function Login() {
             values={values}
             onInput={handleChangeInput}
             errors={errors}
+            inputDisabled={isFetching}
           />
           <InputBlock
             labelClass='page-login__field'
@@ -67,11 +69,19 @@ export default function Login() {
             values={values}
             onInput={handleChangeInput}
             errors={errors}
+            inputDisabled={isFetching}
           />
         </div>
 
         <div className='page-login__btns'>
-          <span className='page-login__submit-result-msg'>{sbtMsg}</span>
+          <span className={
+            `page-login__submit-result-msg ${resData === null
+              ? 'page-login__submit-result-msg_err'
+              : 'page-login__submit-result-msg_ok'}`
+          }
+          >
+            {sbtMsg}
+          </span>
           <button
             className='page-login__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
             type='submit'

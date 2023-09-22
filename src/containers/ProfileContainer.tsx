@@ -40,6 +40,7 @@ export default function ProfileContainer() {
     mainApi.toLogout()
       .then(() => {
         curUser?.logout();
+        window.localStorage.removeItem('movies-explorer-last-query');
         navigate('/');
       })
       .catch(() => {

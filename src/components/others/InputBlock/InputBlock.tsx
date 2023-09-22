@@ -36,7 +36,7 @@ export default function InputBlock({
     <label className={labelClass} htmlFor={id}>
       <span className={titleSpanClass}>{titleSpanContent}</span>
       <input
-        className={`${inputClass} input-reset input-focus input-hover`}
+        className={`${inputClass} input-reset input-focus input-hover input-disabled`}
         id={id}
         name={name}
         placeholder={placeholder}

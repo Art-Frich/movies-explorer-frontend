@@ -92,12 +92,19 @@
   gap: 16px;
 }
 
-.page-registor__submit-result-msg {
-  color: #ee3465;
+.page-register__submit-result-msg {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.page-register__submit-result-msg_err {
+  color: #ee3465;
+}
+
+.page-register__submit-result-msg_ok {
+  color: #4285f4;
 }
 
 .page-register__btn-submit {
