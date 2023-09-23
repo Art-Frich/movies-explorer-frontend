@@ -3,7 +3,7 @@ export const inputNameSettings = {
   name: 'userName',
   placeholder: 'Здесь должно быть ваше имя',
   type: 'text',
-  pattern: '[A-Za-zабвгдеёжзиклмнопрстуфхцчшщъыьэюя \\-]{2,35}',
+  pattern: '[A-Za-zабвгдеёжзиклмнопрстуфхцчшщъыьэюяAБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ \\-]{2,35}',
   title: 'Ожидаемый формат: от 2 до 35 символов кириллицы или латиницы.',
 };
 
@@ -26,5 +26,5 @@ export const inputPasswordSettings = {
 };
 
 export const urlMoviesApi = 'https://api.nomoreparties.co';
-export const urlLocalMainApi = 'http://localhost:3002/';
-export const urlMainApi = 'https://api.search-your-movies.nomoredomainsicu.ru/';
+export const urlMainApi = 'http://localhost:3002/';
+// export const urlMainApi = 'https://api.search-your-movies.nomoredomainsicu.ru/';

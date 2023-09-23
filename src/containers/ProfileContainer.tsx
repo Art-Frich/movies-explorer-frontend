@@ -59,7 +59,7 @@ export default function ProfileContainer() {
       (values[inputNameSettings.name] !== curUser?.name)
       || (values[inputEmailSettings.name] !== curUser?.email)));
     setIsDisabledSubmitBtn(flag);
-  }, [isValidForm, values]);
+  }, [isValidForm, values, isFetching]);
 
   useEffect(() => {
     setValues({

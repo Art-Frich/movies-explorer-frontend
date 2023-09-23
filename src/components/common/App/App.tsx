@@ -81,7 +81,6 @@ function App() {
         mainApi.checkJWT()
           .then((res) => {
             setUserDataAndLogin({ values: res, curUser });
-            getDataFilms();
           })
           .catch((err) => {
             console.log(`Не удалось авторизоваться автоматически: ${err}`);
@@ -92,7 +91,10 @@ function App() {
       console.log('Ошибка при попытке получить данные предыдущего запроса пользователя и данные с серверов');
       console.log(err);
     }
-  }, []);
+
+    if (curUser?.loggedIn) getDataFilms();
+    // такая зависимость вызывает лишнее срабатывание при logout
+  }, [curUser?.loggedIn]);
 
   // useEffect(() => {
   //   console.log(allFilms);
