@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 
 import {
-  inputEmailSettings, inputNameSettings, inputPasswordSettings, urlLocalMainApi,
+  inputEmailSettings, inputNameSettings, inputPasswordSettings, urlMainApi,
 } from '../constants';
 import CheckJwtError from '../customErrors/CheckJwtError';
 
@@ -32,7 +32,7 @@ class MainApi {
       .then((res) => (res.ok ? res.json() : Promise.reject(res.json())));
   }
 
-  checkJWT = () => fetch(urlLocalMainApi + this.pathMe, {
+  checkJWT = () => fetch(urlMainApi + this.pathMe, {
     method: 'GET',
     credentials: 'include',
     headers: {
@@ -50,7 +50,7 @@ class MainApi {
     });
 
   toRegisterUser = (values: any) => this.handleFetch(
-    fetch(urlLocalMainApi + this.pathCreateUser, {
+    fetch(urlMainApi + this.pathCreateUser, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -66,7 +66,7 @@ class MainApi {
   );
 
   toLoginUser = (values: any) => this.handleFetch(
-    fetch(urlLocalMainApi + this.pathLoginUser, {
+    fetch(urlMainApi + this.pathLoginUser, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -80,13 +80,13 @@ class MainApi {
   );
 
   toLogout() {
-    return fetch(urlLocalMainApi + this.pathLogout, {
+    return fetch(urlMainApi + this.pathLogout, {
       method: 'POST',
       credentials: 'include',
     });
   }
 
-  toUpdateUserData = (values: any) => fetch(urlLocalMainApi + this.pathMe, {
+  toUpdateUserData = (values: any) => fetch(urlMainApi + this.pathMe, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
@@ -99,7 +99,7 @@ class MainApi {
   }).then(async (res) => (res.ok ? res.json() : Promise.reject(await res.json())));
 
   addMovie = (dataMovie: any) => this.handleFetch(
-    fetch(urlLocalMainApi + this.pathFilms, {
+    fetch(urlMainApi + this.pathFilms, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -110,7 +110,7 @@ class MainApi {
   );
 
   deleteMovie = (movieId: any) => this.handleFetch(
-    fetch(`${urlLocalMainApi + this.pathFilms + movieId}`, {
+    fetch(`${urlMainApi + this.pathFilms + movieId}`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
@@ -120,7 +120,7 @@ class MainApi {
   );
 
   getAllSavedMovies = () => this.handleFetch(
-    fetch(urlLocalMainApi + this.pathFilms, {
+    fetch(urlMainApi + this.pathFilms, {
       method: 'GET',
       credentials: 'include',
       headers: {

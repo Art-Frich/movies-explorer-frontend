@@ -1,10 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
+import { useCurrentUser } from '../contexts/CurrentUserContext';
 import mainApi from '../helpers/utils/MainApi';
 
 export default function useSaveCardBtn({
-  allFilms, setAllFilms, setSavedFilms, curUser, isSavedPage,
+  allFilms, setSavedFilms, setAllFilms, isSavedPage,
 }: any) {
+  const curUser = useCurrentUser();
+
   const addMovies = (dataMovie: any): any => {
     const newDataMovie = dataMovie;
     delete newDataMovie.btnType;

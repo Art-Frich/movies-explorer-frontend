@@ -25,3 +25,9 @@ export const parseMovieData = ({
   nameRU,
   nameEN,
 });
+
+export const getSideEffect: any = (func: any, time: number) => {
+  setTimeout(() => {
+    func();
+  }, time);
+};

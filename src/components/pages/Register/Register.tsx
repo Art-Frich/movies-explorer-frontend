@@ -18,6 +18,7 @@ import useUserData from '../../../сustomHooks/useUserData';
 // }
 
 export default function Register() {
+  const sbtSucMsg = 'Подождите ещё немного и я перекину вас к фильмам ;)';
   const { setUserDataAndLoginAndNavToFilms } = useUserData();
   const toEndFetch = ({ values, curUser }: any) => mainApi.toLoginUser(values)
     .then(() => setUserDataAndLoginAndNavToFilms({ values, curUser }))
@@ -33,7 +34,7 @@ export default function Register() {
     isFetching,
     isValidForm,
     resData,
-  } = useForm({ fetch: mainApi.toRegisterUser, toEndFetch });
+  } = useForm({ fetch: mainApi.toRegisterUser, toEndFetch, sbtSucMsg });
 
   return (
     <main className='page-register'>

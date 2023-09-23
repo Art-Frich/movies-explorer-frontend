@@ -3,22 +3,42 @@ import {
   useState, useEffect, FormEvent, useCallback,
 } from 'react';
 
-export default function useSearcher({ allFilms, savedFilms, isSavedPage }: any) {
-  const [userQuery, setUserQuery] = useState('');
-  const [messageForUser, setMessageForUser] = useState('Здесь пока ничего нет =)');
+export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) {
+  console.log('>>> render useSearcher');
 
-  const [filters, setFilters] = useState<any>({ isShort: false });
+  let defaultMsgForUser = 'Здесь пока ничего нет =)';
+  let parsedData = { localQuery: '', localFilters: { isShort: false }, localSaved: [] };
+  if (!isSavedPage) {
+    try {
+      const storedData = window.localStorage.getItem('movies-explorer-last-query');
+      if (storedData) {
+        parsedData = JSON.parse(storedData);
+        if (parsedData.localSaved.length === 0) {
+          defaultMsgForUser = 'Ничего не найдено =(';
+        }
+      }
+    } catch {
+      console.log('Не удалось разобрать json из localStorage');
+    }
+  }
+
+  const { localQuery, localFilters, localSaved } = parsedData;
+
+  const [userQuery, setUserQuery] = useState(localQuery);
+  const [messageForUser, setMessageForUser] = useState(defaultMsgForUser);
+
+  const [filters, setFilters] = useState<any>(localFilters);
   const [isActiveFilters, setIsActiveFilters] = useState(false);
 
   const [filteredFilms, setFilteredFilms] = useState<any>([]);
-  const [visibleFilms, setVisibleFilms] = useState<any>([]);
+  console.log(localSaved, isSavedPage);
+  const [visibleFilms, setVisibleFilms] = useState<any>(localSaved);
 
   // сброс поиска
   const onReset = useCallback(() => {
     setUserQuery('');
     setFilters({ isShort: false });
-    setMessageForUser('Здесь пока ничего нет =)');
-    window.localStorage.removeItem('movies-explorer-last-query');
+    if (isSavedPage) window.localStorage.removeItem('movies-explorer-last-query');
   }, []);
 
   // при поиске установить новый запрос
@@ -45,21 +65,16 @@ export default function useSearcher({ allFilms, savedFilms, isSavedPage }: any) 
   const updateLocalStorage = useCallback(() => {
     if ((userQuery || isActiveFilters) && visibleFilms.length === 0) {
       setMessageForUser('Ничего не найдено =(');
+    } else if (isSavedPage && visibleFilms.length === 0) {
+      setMessageForUser('Здесь пока ничего нет =)');
+    } else {
+      setMessageForUser('');
     }
 
     if ((userQuery || isActiveFilters) && !isSavedPage) {
-      const data = {
-        localQuery: userQuery,
-        localFilters: filters,
-        localSaved: visibleFilms,
-      };
-      window.localStorage.setItem('movies-explorer-last-query', JSON.stringify(data));
+      window.localStorage.setItem('movies-explorer-last-query', getJsonQuery());
     }
-    // else {
-    //   window.localStorage.removeItem('movies-explorer-last-query');
-    // }
   }, [visibleFilms]);
-  // }, [userQuery, isActiveFilters, visibleFilms, filters, isSavedPage]);
 
   // Функция для обновления фильтров
   const updateFilters = useCallback(() => {
@@ -84,29 +99,6 @@ export default function useSearcher({ allFilms, savedFilms, isSavedPage }: any) 
     setVisibleFilms(filteredByQuery);
   }, [filteredFilms, userQuery]);
 
-  // первый useEffect чекает локальные сохры
-  useEffect(() => {
-    if (!isSavedPage) {
-      try {
-        const storedData = window.localStorage.getItem('movies-explorer-last-query');
-        if (storedData) {
-          const { localQuery, localFilters, localSaved } = JSON.parse(storedData) as {
-            localQuery: string;
-            localFilters: Record<string, boolean>;
-            localSaved: any[];
-          };
-
-          setUserQuery(localQuery);
-          setFilters((prev: Record<string, boolean>) => ({ ...prev, ...localFilters }));
-          setVisibleFilms(localSaved);
-        }
-      } catch (err) {
-        console.error('Ошибка при выгрузке локальных данных последнего запроса');
-        console.log(err);
-      }
-    }
-  }, []);
-
   // Эффект для обновления фильтров и отфильтрованных фильмов
   useEffect(() => {
     updateFilters();
@@ -126,5 +118,6 @@ export default function useSearcher({ allFilms, savedFilms, isSavedPage }: any) 
   return [
     onReset, onSearch, visibleFilms, messageForUser,
     userQuery, isActiveFilters, filters, setFilters,
+    localQuery,
   ];
 }

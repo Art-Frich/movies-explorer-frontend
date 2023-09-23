@@ -7,9 +7,13 @@ export default function useUserData() {
 
   const setUserData = ({ values, curUser }: any) => {
     // values от useForm, values.data от main.toLogin(), т.к. name отсутствует в values при login
-    curUser?.setEmail(values[inputEmailSettings.name] || values?.data?.email);
-    curUser?.setName(values[inputNameSettings.name] || values?.data?.name);
-    curUser?.setId(values?.data?._id || curUser.id);
+    const newEmail = (values[inputEmailSettings.name] || values?.data?.email);
+    const newName = (values[inputNameSettings.name] || values?.data?.name);
+    const newId = (values?.data?._id || curUser.id);
+
+    curUser?.setEmail(newEmail);
+    curUser?.setName(newName);
+    curUser?.setId(newId);
   };
 
   const setUserDataAndLogin = (data: any) => {
