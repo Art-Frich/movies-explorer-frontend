@@ -14,9 +14,9 @@ interface ISearchForm {
 
 }
 
-const SearchForm = React.memo(({
+function SearchForm({
   filters, setFilters, onSearch, onReset, userQuery, isSearch,
-}: ISearchForm) => {
+}: ISearchForm) {
   const ref = useRef<HTMLInputElement | null>(null);
 
   return (
@@ -57,6 +57,6 @@ const SearchForm = React.memo(({
       <div className='sercher__dividing-line' />
     </section>
   );
-});
+}
 
 export default SearchForm;

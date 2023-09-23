@@ -29,48 +29,52 @@ interface IPageWithFilms {
   // onClickSaveBtn: (data: any) => void,
 }
 
-export default function PageWithFilms({
+const PageWithFilms = React.memo(({
   allFilms = [], savedFilms = [], setAllFilms, setSavedFilms,
-}: any) {
+  onClickSaveBtn, visibleFilms, filters, setFilters, isSavedPage,
+  isActiveFilters, userQuery, localQuery, onReset, onSearch,
+  messageForUser, onClickToAddContent, onClickToReset, cntVisibleFilms,
+}: any) => {
   console.log('>> render PageWithFilms');
 
   const location = useLocation();
 
   const [isSearch, setIsSearch] = useState(true);
-  const [isSavedPage, setIsSavedPage] = useState<any>(location.pathname === '/saved-movies');
+  // const [isSavedPage, setIsSavedPage] = useState<any>(location.pathname === '/saved-movies');
 
-  const [onClickToAddContent, cntVisibleFilms, onClickToReset] = useSetterVisibleFilms();
+  // const [onClickToAddContent, cntVisibleFilms, onClickToReset] = useSetterVisibleFilms();
 
-  const [
-    onReset, onSearch, visibleFilms, messageForUser,
-    userQuery, isActiveFilters, filters, setFilters, localQuery,
-  ] = useSearcher({
-    allFilms, savedFilms, isSavedPage,
-  });
+  // const [
+  //   onReset, onSearch, visibleFilms, messageForUser,
+  //   userQuery, isActiveFilters, filters, setFilters, localQuery,
+  // ] = useSearcher({
+  //   allFilms, savedFilms, isSavedPage,
+  // });
 
-  const [onClickSaveBtn] = useSaveCardBtn({
-    allFilms, setAllFilms, setSavedFilms, isSavedPage,
-  });
+  // const [onClickSaveBtn] = useSaveCardBtn({
+  //   allFilms, setAllFilms, setSavedFilms, isSavedPage,
+  // });
 
   // хитрая штука для отслеживания перерендеров
   // позволяет корректно отображать прелоадер и стейт кнопки
-  useEffect(() => {
-    setIsSearch(true);
+  // useEffect(() => {
+  //   setIsSearch(true);
 
-    if (visibleFilms.length !== 0 // если фильмы нашлись
-      || (visibleFilms.length === 0 && (userQuery || isActiveFilters) // или их нет, но был запрос
-        && ((isSavedPage) || (userQuery !== localQuery)))) { // и при этом...
-      setIsSearch(false);
-    } else { // иначе установить запланированную проверку попозже
-      clearTimeout(getSideEffect);
-      getSideEffect(() => setIsSearch(false), 5000);
-    }
-  }, [visibleFilms]);
+  //   if (visibleFilms.length !== 0 // если фильмы нашлись
+  //     || (visibleFilms.length === 0 && (userQuery || isActiveFilters)
+  // или их нет, но был запрос
+  //       && ((isSavedPage) || (userQuery !== localQuery)))) { // и при этом...
+  //     setIsSearch(false);
+  //   } else { // иначе установить запланированную проверку попозже
+  //     clearTimeout(getSideEffect);
+  //     getSideEffect(() => setIsSearch(false), 5000);
+  //   }
+  // }, [visibleFilms]);
 
   // // для корректной работы страниц с фильмами
-  useEffect(() => {
-    setIsSavedPage(location.pathname === '/saved-movies');
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   setIsSavedPage(location.pathname === '/saved-movies');
+  // }, [location.pathname]);
 
   return (
     <main className='page-with-films'>
@@ -97,4 +101,6 @@ export default function PageWithFilms({
       {isSearch && visibleFilms.length === 0 && <Preloader />}
     </main>
   );
-}
+});
+
+export default PageWithFilms;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  useState, useEffect, FormEvent, useCallback,
+  useState, useEffect, FormEvent, useCallback, useMemo,
 } from 'react';
 
 export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) {
@@ -115,9 +115,11 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
     updateVisibleFilms();
   }, [updateVisibleFilms]);
 
-  return [
+  const data = useMemo(() => ([
     onReset, onSearch, visibleFilms, messageForUser,
     userQuery, isActiveFilters, filters, setFilters,
     localQuery,
-  ];
+  ]), [visibleFilms, messageForUser, userQuery, isActiveFilters, filters]);
+
+  return data;
 }
