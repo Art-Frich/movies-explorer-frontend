@@ -52,7 +52,7 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
     setIsValidForm(target.closest('form')!.checkValidity());
   };
 
-  const handleSubmit = useCallback(async ({ e }: IhandleSubmit) => {
+  const handleSubmit = async ({ e }: IhandleSubmit) => {
     e.preventDefault();
     setResData(null);
     setIsFetching(true);
@@ -68,7 +68,7 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
         setSbtMsg(`Провал: ${(await err).message}`);
       })
       .finally(() => setIsFetching(false));
-  }, [fetch, sbtSucMsg, toEndFetch]);
+  };
 
   return {
     handleChangeInput,

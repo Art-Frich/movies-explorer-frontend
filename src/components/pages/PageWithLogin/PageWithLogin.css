@@ -1,4 +1,4 @@
-.page-register {
+.page-with-login {
   background-color: var(--background-color-light-black);
   padding: 70px 30px;
 
@@ -11,11 +11,11 @@
   align-items: center;
 }
 
-.page-register__header {
+.page-with-login__header {
   margin-bottom: 40px;
 }
 
-.page-register__form {
+.page-with-login__form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,7 +27,7 @@
   max-width: 396px;
 }
 
-.page-register__title {
+.page-with-login__title {
   color: var(--base-color-of-text);
   font-size: 24px;
   font-style: normal;
@@ -37,13 +37,13 @@
   margin: 0 0 40px;
 }
 
-.page-register__field {
+.page-with-login__field {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.page-register__desctiption {
+.page-with-login__desctiption {
   color: #8b8b8b;
   font-size: 10px;
   font-style: normal;
@@ -53,7 +53,7 @@
   margin-bottom: 5px;
 }
 
-.page-register__input {
+.page-with-login__input {
   color: var(--base-color-of-text);
   font-size: 14px;
   font-style: normal;
@@ -65,16 +65,16 @@
   margin-bottom: 6px;
 }
 
-.page-register__input::placeholder {
+.page-with-login__input::placeholder {
   color: var(--base-color-of-text);
   opacity: 0.3;
 }
 
-.page-register__input_type_password {
+.page-with-login__input_type_password {
   color: var(--color-neon);
 }
 
-.page-register__error {
+.page-with-login__error {
   color: var(--color-neon);
   font-size: 10px;
   font-style: normal;
@@ -86,47 +86,32 @@
   margin-bottom: 6px;
 }
 
-.page-register__btns {
+.page-with-login__btns {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.page-register__submit-result-msg {
+.page-with-login__submit-result-msg {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.page-register__submit-result-msg_err {
+.page-with-login__submit-result-msg_err {
   color: var(--color-neon);
 }
 
-.page-register__submit-result-msg_ok {
+.page-with-login__submit-result-msg_ok {
   color: var(--color-blue);
 }
 
-.page-register__btn-submit {
-  border-radius: 3px;
-  background: var(--color-blue);
-  padding: 13px 0;
-
-  color: var(--base-color-of-text);
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-
-  width: 100%;
-}
-
-.page-register__yet-register {
+.page-with-login__retrace {
   text-align: center;
 }
 
-.page-register__yet-register-text {
+.page-with-login__retrace-text {
   color: #8b8b8b;
   font-size: 14px;
   font-style: normal;
@@ -137,7 +122,7 @@
   margin-right: 6px;
 }
 
-.page-register__yet-register-link {
+.page-with-login__retrace-link {
   color: var(--color-blue);
   font-size: 14px;
   font-style: normal;
@@ -148,29 +133,29 @@
 }
 
 @media screen and (max-width: 400px) {
-  .page-register {
+  .page-with-login {
     padding: 56px 30px 30px;
   }
 
-  .page-register__form {
+  .page-with-login__form {
     max-height: 694px;
   }
 
-  .page-register__header {
+  .page-with-login__header {
     margin-bottom: 50px;
     text-align: center;
   }
 
-  .page-register__title {
+  .page-with-login__title {
     margin-bottom: 80px;
     text-align: center;
   }
 
-  .page-register__yet-register-text {
+  .page-with-login__retrace-text {
     font-size: 12px;
   }
 
-  .page-register__yet-register-link {
+  .page-with-login__retrace-link {
     font-size: 12px;
   }
 }
