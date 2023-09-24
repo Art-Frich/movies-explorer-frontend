@@ -2,12 +2,17 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
+import { useCurrentUser } from '../contexts/CurrentUserContext';
+import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 import mainApi from '../helpers/utils/MainApi';
 
 // DID вынес curUser обратно на вход
 export default function useSaveCardBtn({
-  allFilms, setSavedFilms, setAllFilms, isSavedPage, curUser,
+  allFilms, setSavedFilms, setAllFilms, isSavedPage,
 }: any) {
+  const curUser = useCurrentUser();
+  const popupContext = useErrorPopupContext();
+
   const addMovies = (dataMovie: any): any => {
     const newDataMovie = dataMovie;
     delete newDataMovie.btnType;
@@ -23,7 +28,7 @@ export default function useSaveCardBtn({
           return updatedFilms;
         });
       }).catch(async (err) => (
-        console.log(`Не удалось добавить фильм в сохраненные: ${(await err).message}`)
+        popupContext?.setErMsg('Не удалось добавить фильм в сохраненные')
       ));
   };
 
@@ -48,7 +53,7 @@ export default function useSaveCardBtn({
         });
       })
       .catch(async (err) => (
-        console.log(`Не удалось удалить фильм из сохраненных: ${(await err).message}`)
+        popupContext?.setErMsg('Не удалось удалить фильм из сохраненных')
       ));
   };
 

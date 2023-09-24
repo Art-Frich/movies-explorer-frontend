@@ -6,11 +6,11 @@
   --second-color: #3ddc84;
   --duration: 0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8),
     background-color 0.2s linear;
-  cursor: pointer;
 
   display: flex;
   gap: 14px;
   align-items: center;
+  cursor: default;
 }
 
 .checkbox:hover .checkbox__container::before {
@@ -42,6 +42,7 @@
   border-radius: var(--width);
   position: relative;
   transition: var(--duration);
+  cursor: pointer;
 }
 
 .checkbox__container::before {

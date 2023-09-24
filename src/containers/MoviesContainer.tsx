@@ -6,23 +6,23 @@ import React, {
 import { useLocation } from 'react-router-dom';
 import PageWithFilms from '../components/pages/PageWithFilms/PageWithFilms';
 import useSaveCardBtn from '../сustomHooks/useSaveCardBtn';
-import { useCurrentUser } from '../contexts/CurrentUserContext';
 import useSearcher from '../сustomHooks/useSearcher';
 import useSetterVisibleFilms from '../сustomHooks/useSetterVisibleFilms';
 import { parseMovieData } from '../helpers/utils/utils';
 import moviesApi from '../helpers/utils/MoviesApi';
 import mainApi from '../helpers/utils/MainApi';
+import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 
 function MoviesContainer() {
   const location = useLocation();
-  const curUser = useCurrentUser();
+  const popupContext = useErrorPopupContext();
 
   const [allFilms, setAllFilms] = useState<any>([]);
   const [savedFilms, setSavedFilms] = useState<any>([]);
   const [isSavedPage, setIsSavedPage] = useState<any>(location.pathname === '/saved-movies');
 
   const [onClickSaveBtn] = useSaveCardBtn({
-    allFilms, setAllFilms, setSavedFilms, curUser, isSavedPage,
+    allFilms, setAllFilms, setSavedFilms, isSavedPage,
   });
 
   const objSearchProps = useSearcher({ allFilms, savedFilms, isSavedPage });
@@ -53,8 +53,7 @@ function MoviesContainer() {
         Возможно, проблема с соединением или сервер недоступен.\n
         Подождите немного и попробуйте ещё раз`
       );
-      console.log('Ошибка при попытке получить данные о фильмах с серверов');
-      console.log(err);
+      popupContext?.setErMsg('Ошибка при попытке получить данные о фильмах с серверов');
     }
   }, []);
 

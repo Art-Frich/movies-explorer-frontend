@@ -24,6 +24,8 @@ import mainApi from '../../../helpers/utils/MainApi';
 import useUserData from '../../../сustomHooks/useUserData';
 import moviesApi from '../../../helpers/utils/MoviesApi';
 import { parseMovieData } from '../../../helpers/utils/utils';
+import ErrorPopup from '../ErrorPopup/ErrorPopup';
+import { useErrorPopupContext } from '../../../contexts/ErrorPopupContext';
 
 // DID убрал функционал клика по кнопке Save
 // разделил крючки авторизации и получения данных о фильмах
@@ -32,6 +34,7 @@ import { parseMovieData } from '../../../helpers/utils/utils';
 
 function App() {
   const curUser = useCurrentUser();
+  const errPopupContext = useErrorPopupContext();
   const { setUserDataAndLogin } = useUserData();
   const [isCheckJwt, setIsCheckJwt] = useState(true);
 
@@ -81,20 +84,14 @@ function App() {
 
   // проверяю токен
   useEffect(() => {
-    try {
-      if (!curUser?.loggedIn) {
-        mainApi.checkJWT()
-          .then((res) => {
-            setUserDataAndLogin({ values: res, curUser });
-          })
-          .catch((err) => {
-            console.log(`Не удалось авторизоваться автоматически: ${err}`);
-          })
-          .finally(() => setIsCheckJwt(false));
-      }
-    } catch (err) {
-      console.log('Ошибка при попытке получить данные предыдущего запроса пользователя и данные с серверов');
-      console.log(err);
+    if (!curUser?.loggedIn) {
+      mainApi.checkJWT()
+        .then((res) => {
+          setUserDataAndLogin({ values: res, curUser });
+        })
+        .catch(() => {
+        })
+        .finally(() => setIsCheckJwt(false));
     }
   }, []);
 
@@ -104,33 +101,36 @@ function App() {
   //   // TODO такая зависимость вызывает лишнее срабатывание при logout
   // }, [curUser?.loggedIn]);
 
+  // isCheckJwt чтобы избежать ложного срабатывания защиты ProtectOfRoute
   return (
-    // isCheckJwt чтобы избежать ложного срабатывания защиты ProtectOfRoute
-    isCheckJwt ? <Preloader /> : (
-      <Routes>
-        <Route path='/signin' element={<ProtectOfRoute Element={LoginContainer} />} />
-        <Route path='/signup' element={<ProtectOfRoute Element={RegisterContainer} />} />
-        <Route path='/' element={<AddHeader />}>
-          <Route path='/profile' element={<ProtectOfRoute Element={ProfileContainer} onlyLoggedIn />} />
-          <Route path='/' element={<AddFooter />}>
-            <Route
-              path='/saved-movies'
-              element={(
-                <ProtectOfRoute Element={MoviesContainer} onlyLoggedIn />
-              )}
-            />
-            <Route
-              path='/movies'
-              element={
-                <ProtectOfRoute Element={MoviesContainer} onlyLoggedIn />
-              }
-            />
-            <Route index element={<MainContainer />} />
+    <>
+      <ErrorPopup />
+      {isCheckJwt ? <Preloader /> : (
+        <Routes>
+          <Route path='/signin' element={<ProtectOfRoute Element={LoginContainer} />} />
+          <Route path='/signup' element={<ProtectOfRoute Element={RegisterContainer} />} />
+          <Route path='/' element={<AddHeader />}>
+            <Route path='/profile' element={<ProtectOfRoute Element={ProfileContainer} onlyLoggedIn />} />
+            <Route path='/' element={<AddFooter />}>
+              <Route
+                path='/saved-movies'
+                element={(
+                  <ProtectOfRoute Element={MoviesContainer} onlyLoggedIn />
+                )}
+              />
+              <Route
+                path='/movies'
+                element={
+                  <ProtectOfRoute Element={MoviesContainer} onlyLoggedIn />
+                }
+              />
+              <Route index element={<MainContainer />} />
+            </Route>
           </Route>
-        </Route>
-        <Route path='*' element={<NotFoundContainer />} />
-      </Routes>
-    )
+          <Route path='*' element={<NotFoundContainer />} />
+        </Routes>
+      )}
+    </>
   );
 }
 

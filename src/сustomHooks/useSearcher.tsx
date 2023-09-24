@@ -2,9 +2,12 @@
 import {
   useState, useEffect, FormEvent, useCallback, useMemo,
 } from 'react';
+import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 
 // DID убрал useMemo выходных пропсов
 export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) {
+  const popupContext = useErrorPopupContext();
+
   // TODO было бы слоавно переписать это лаконичнее
   let defaultMsgForUser = 'Здесь пока ничего нет =)';
   let parsedData = { localQuery: '', localFilters: { isShort: false }, localSaved: [] };
@@ -18,7 +21,7 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
         }
       }
     } catch {
-      console.log('Не удалось разобрать json из localStorage');
+      popupContext?.setErMsg('Попытка проверить был ли у вас предыдущий запрос окончилась провалом...');
     }
   }
 
