@@ -2,10 +2,9 @@ import './Profile.css';
 
 import React from 'react';
 
-import { inputEmailSettings, inputNameSettings } from '../../../helpers/constants';
-import InputBlock from '../../others/InputBlock/InputBlock';
 import { useCurrentUser } from '../../../contexts/CurrentUserContext';
 import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
+import InputsOfUserData from '../../others/InputsOfUserData/InputsOfUserData';
 // import { IFormEvent } from '../../../helpers/Interfaces';
 
 // interface IProfile {
@@ -38,30 +37,13 @@ export default function Profile({
         <div className='page-profile__content'>
           <h1 className='page-profile__title'>{`Здравствуйте, ${curUser?.name} ;)`}</h1>
 
-          <InputBlock
-            labelClass='page-profile__field'
-            titleSpanClass='page-profile__desctiption'
-            titleSpanContent='Имя'
-            inputClass='page-profile__input page-profile__input_type_string'
-            errSpanClass='page-profile__error'
-            inputSettings={inputNameSettings}
-            values={valuesInput}
-            onInput={onInput}
-            errors={errorsInput}
+          <InputsOfUserData
+            inputTypes={{ inputTypeName: true, inputTypeEmail: true }}
             inputDisabled={isDisabledInput || fetchCondition}
-          />
-
-          <InputBlock
-            labelClass='page-profile__field'
-            titleSpanClass='page-profile__desctiption'
-            titleSpanContent='E&#8209;mail'
-            inputClass='page-profile__input page-profile__input_type_email'
-            errSpanClass='page-profile__error'
-            inputSettings={inputEmailSettings}
-            values={valuesInput}
-            onInput={onInput}
             errors={errorsInput}
-            inputDisabled={isDisabledInput || fetchCondition}
+            values={valuesInput}
+            handleChangeInput={onInput}
+            isProfile
           />
         </div>
 
