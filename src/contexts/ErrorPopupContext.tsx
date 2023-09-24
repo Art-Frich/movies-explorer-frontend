@@ -1,12 +1,10 @@
 import React, {
-  useMemo, createContext, useState, useEffect, useContext, ReactNode,
+  useMemo, createContext, useContext, ReactNode, useState, useEffect,
 } from 'react';
 
 interface IErrorPopupContext {
-  isOpen: boolean,
   setErMsg: (newValue: string) => void,
-  erMsg: string,
-  setIsOpen: (newValue: boolean) => void,
+  er: string,
 }
 
 interface IReactChildren {
@@ -17,17 +15,24 @@ const ErrorPopupContext = createContext<IErrorPopupContext | undefined>(undefine
 export const useErrorPopupContext = () => useContext(ErrorPopupContext);
 
 export function ErrorPopupProvider({ children }: IReactChildren) {
-  const defaultMsg = 'Или нет...';
-  const [isOpen, setIsOpen] = useState(false);
-  const [erMsg, setErMsg] = useState(defaultMsg);
+  const [newVal, setnewVal] = useState('');
+  const [er, setEr] = useState('');
 
-  useEffect(() => {
-    if (erMsg && erMsg !== defaultMsg) setIsOpen(true);
-  }, [erMsg]);
+  const setErMsg = (val: string) => {
+    setEr('');
+    setnewVal(val);
+  };
 
   const contextValue = useMemo(() => ({
-    isOpen, setErMsg, erMsg, setIsOpen,
-  }), [isOpen]);
+    er, setErMsg,
+  }), [er]);
+
+  useEffect(() => {
+    if (newVal) {
+      setEr(newVal);
+      setnewVal('');
+    }
+  }, [newVal]);
 
   return (
     <ErrorPopupContext.Provider value={contextValue}>

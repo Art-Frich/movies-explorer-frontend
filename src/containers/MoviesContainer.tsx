@@ -22,7 +22,7 @@ function MoviesContainer() {
   const [isSavedPage, setIsSavedPage] = useState<any>(location.pathname === '/saved-movies');
 
   const [onClickSaveBtn] = useSaveCardBtn({
-    allFilms, setAllFilms, setSavedFilms, isSavedPage,
+    allFilms, setAllFilms, setSavedFilms, isSavedPage, savedFilms,
   });
 
   const objSearchProps = useSearcher({ allFilms, savedFilms, isSavedPage });
@@ -32,19 +32,11 @@ function MoviesContainer() {
   const getDataFilms = useCallback(async () => {
     try {
       const filmsData = await moviesApi.getMovies();
-      const savedFilmsData = (await mainApi.getAllSavedMovies()).data;
 
-      setSavedFilms(savedFilmsData.map((film: any) => ({
-        ...film, btnType: 'movies-card__btn_delete',
-      })));
-
+      setSavedFilms((await mainApi.getAllSavedMovies()).data);
       setAllFilms(filmsData.map((film: any) => {
         const parsedFilm = parseMovieData(film);
-        const indexInSaved = savedFilmsData
-          .findIndex((el: any) => el.movieId === parsedFilm.movieId);
-        return indexInSaved > -1
-          ? { ...savedFilmsData[indexInSaved], btnType: 'movies-card__btn_saved' }
-          : { ...parsedFilm, btnType: 'movies-card__btn_save' };
+        return { ...parsedFilm };
       }));
     } catch (err) {
       // \n не отрабатывают

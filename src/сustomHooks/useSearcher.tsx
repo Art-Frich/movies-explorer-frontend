@@ -96,7 +96,16 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
     const filteredByQuery = filteredFilms
       .filter((el: any): boolean => (
         el.nameRU.toLowerCase().includes(userQuery)
-        || el.nameEN.toLowerCase().includes(userQuery)));
+        || el.nameEN.toLowerCase().includes(userQuery)))
+      .map((el: any) => {
+        let btnType = '';
+        if (isSavedPage) { btnType = 'movies-card__btn_delete'; }
+        if (!btnType) {
+          const isSavedFilm = savedFilms.some((film: any) => film.movieId === el.movieId);
+          btnType = isSavedFilm ? 'movies-card__btn_saved' : 'movies-card__btn_save';
+        }
+        return { ...el, btnType };
+      });
 
     setVisibleFilms(filteredByQuery);
   }, [filteredFilms, userQuery]);
