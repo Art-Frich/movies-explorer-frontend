@@ -1,6 +1,8 @@
 import { useMediaQuery } from '@react-hook/media-query';
 import { useState, useEffect } from 'react';
 
+// DID ничего не трогал по факту, но этой логики ранее не было
+// попробовать оставить её в основном компоненте
 export default function useSetterVisibleFilms() {
   const [baseLimit, setBaseLimit] = useState(12);
   const [addedLimit, setAddedLimit] = useState(3);
@@ -32,5 +34,5 @@ export default function useSetterVisibleFilms() {
     setCntVisibleFilms(baseLimit + addedLimit * cntAddedContent);
   }, [baseLimit, addedLimit, cntAddedContent]);
 
-  return [onClickToAddContent, cntVisibleFilms, onClickToReset];
+  return { onClickToAddContent, cntVisibleFilms, onClickToReset };
 }

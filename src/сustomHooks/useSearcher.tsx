@@ -3,9 +3,9 @@ import {
   useState, useEffect, FormEvent, useCallback, useMemo,
 } from 'react';
 
+// DID убрал useMemo выходных пропсов
 export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) {
-  console.log('>>> render useSearcher');
-
+  // TODO было бы слоавно переписать это лаконичнее
   let defaultMsgForUser = 'Здесь пока ничего нет =)';
   let parsedData = { localQuery: '', localFilters: { isShort: false }, localSaved: [] };
   if (!isSavedPage) {
@@ -31,7 +31,6 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
   const [isActiveFilters, setIsActiveFilters] = useState(false);
 
   const [filteredFilms, setFilteredFilms] = useState<any>([]);
-  console.log(localSaved, isSavedPage);
   const [visibleFilms, setVisibleFilms] = useState<any>(localSaved);
 
   // сброс поиска
@@ -115,11 +114,16 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
     updateVisibleFilms();
   }, [updateVisibleFilms]);
 
-  const data = useMemo(() => ([
-    onReset, onSearch, visibleFilms, messageForUser,
-    userQuery, isActiveFilters, filters, setFilters,
+  return {
+    onReset,
+    onSearch,
+    visibleFilms,
+    messageForUser,
+    userQuery,
+    isActiveFilters,
+    filters,
+    setFilters,
     localQuery,
-  ]), [visibleFilms, messageForUser, userQuery, isActiveFilters, filters]);
-
-  return data;
+    setMessageForUser,
+  };
 }

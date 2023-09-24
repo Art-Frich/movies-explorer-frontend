@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import mainApi from '../helpers/utils/MainApi';
 // import { IAllString } from '../helpers/Interfaces';
@@ -52,7 +52,7 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
     setIsValidForm(target.closest('form')!.checkValidity());
   };
 
-  const handleSubmit = async ({ e }: IhandleSubmit) => {
+  const handleSubmit = useCallback(async ({ e }: IhandleSubmit) => {
     e.preventDefault();
     setResData(null);
     setIsFetching(true);
@@ -68,7 +68,7 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
         setSbtMsg(`Провал: ${(await err).message}`);
       })
       .finally(() => setIsFetching(false));
-  };
+  }, [fetch, sbtSucMsg, toEndFetch]);
 
   return {
     handleChangeInput,

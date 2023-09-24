@@ -26,10 +26,10 @@ function SearchForm({
           className='sercher__input input-reset input-focus'
           placeholder='Введите название фильма'
           name='name-movie'
-          minLength={2}
+          minLength={1}
           defaultValue={userQuery}
-          required
           ref={ref}
+          required
         />
         <button
           type='submit'

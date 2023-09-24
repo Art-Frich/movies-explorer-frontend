@@ -1,5 +1,5 @@
 .page-with-films {
-  background-color: #202020;
+  background-color: var(--background-color-light-black);
   padding: 70px 70px 90px;
 
   flex-grow: 1;
@@ -12,6 +12,9 @@
   font-weight: normal;
   line-height: normal;
   opacity: 0.7;
+
+  max-width: 80vw;
+  margin: 30px auto;
 }
 
 @media screen and (max-width: 800px) {

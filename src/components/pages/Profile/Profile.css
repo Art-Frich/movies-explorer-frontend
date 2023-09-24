@@ -78,7 +78,7 @@
 }
 
 .page-profile__error {
-  color: #ee3465;
+  color: var(--color-neon);
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -107,7 +107,7 @@
 }
 
 .page-profile__submit-result-msg_err{
-  color: #ee3465;
+  color: var(--color-neon);
 }
 
 .page-profile__submit-result-msg_ok{
@@ -130,7 +130,7 @@
   width: fit-content;
   padding: 0 5px 0;
 
-  color: #ee3465;
+  color: var(--color-neon);
   text-align: center;
   font-size: 13px;
   font-style: normal;

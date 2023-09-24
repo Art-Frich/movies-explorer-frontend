@@ -29,52 +29,39 @@ interface IPageWithFilms {
   // onClickSaveBtn: (data: any) => void,
 }
 
-const PageWithFilms = React.memo(({
-  allFilms = [], savedFilms = [], setAllFilms, setSavedFilms,
-  onClickSaveBtn, visibleFilms, filters, setFilters, isSavedPage,
-  isActiveFilters, userQuery, localQuery, onReset, onSearch,
-  messageForUser, onClickToAddContent, onClickToReset, cntVisibleFilms,
-}: any) => {
-  console.log('>> render PageWithFilms');
+// {
+//   onClickSaveBtn, visibleFilms, filters, setFilters, isSavedPage,
+//   isActiveFilters, userQuery, localQuery, onReset, onSearch,
+//   messageForUser, onClickToAddContent, onClickToReset, cntVisibleFilms,
+// }
 
-  const location = useLocation();
-
+const PageWithFilms = React.memo((props: any) => {
+  const {
+    onClickSaveBtn, visibleFilms, filters, setFilters, isSavedPage,
+    isActiveFilters, userQuery, localQuery, onReset, onSearch,
+    messageForUser, onClickToAddContent, onClickToReset, cntVisibleFilms,
+  } = props.data;
+  console.log(props);
   const [isSearch, setIsSearch] = useState(true);
-  // const [isSavedPage, setIsSavedPage] = useState<any>(location.pathname === '/saved-movies');
 
-  // const [onClickToAddContent, cntVisibleFilms, onClickToReset] = useSetterVisibleFilms();
-
-  // const [
-  //   onReset, onSearch, visibleFilms, messageForUser,
-  //   userQuery, isActiveFilters, filters, setFilters, localQuery,
-  // ] = useSearcher({
-  //   allFilms, savedFilms, isSavedPage,
-  // });
-
-  // const [onClickSaveBtn] = useSaveCardBtn({
-  //   allFilms, setAllFilms, setSavedFilms, isSavedPage,
-  // });
+  // TODO нужно что-то ещё придумывать, вроде отслеживания последнего действия,
+  // если его не было, то ждать, если было, то нет
 
   // хитрая штука для отслеживания перерендеров
   // позволяет корректно отображать прелоадер и стейт кнопки
-  // useEffect(() => {
-  //   setIsSearch(true);
+  useEffect(() => {
+    setIsSearch(true);
 
-  //   if (visibleFilms.length !== 0 // если фильмы нашлись
-  //     || (visibleFilms.length === 0 && (userQuery || isActiveFilters)
-  // или их нет, но был запрос
-  //       && ((isSavedPage) || (userQuery !== localQuery)))) { // и при этом...
-  //     setIsSearch(false);
-  //   } else { // иначе установить запланированную проверку попозже
-  //     clearTimeout(getSideEffect);
-  //     getSideEffect(() => setIsSearch(false), 5000);
-  //   }
-  // }, [visibleFilms]);
-
-  // // для корректной работы страниц с фильмами
-  // useEffect(() => {
-  //   setIsSavedPage(location.pathname === '/saved-movies');
-  // }, [location.pathname]);
+    if (visibleFilms.length !== 0 // если фильмы нашлись
+      || (visibleFilms.length === 0 && (userQuery || isActiveFilters) // или их нет, но был запрос
+        && ((isSavedPage) || (userQuery !== localQuery)))) { // и при этом этом...
+      setIsSearch(false);
+    } else { // иначе установить запланированную проверку попозже
+      clearTimeout(getSideEffect);
+      getSideEffect(() => setIsSearch(false), 5000); // 5000 для fast3G 10000 для slow3G
+      // не уверен, что это работает действительно так, как я хотел
+    }
+  }, [visibleFilms]);
 
   return (
     <main className='page-with-films'>
@@ -89,16 +76,18 @@ const PageWithFilms = React.memo(({
         userQuery={userQuery}
         isSearch={isSearch}
       />
-      {visibleFilms.length > 0 && (
+      {visibleFilms.length > 0 ? (
         <MoviesCardList
           films={visibleFilms.slice(0, cntVisibleFilms)}
           onClickToAddContent={onClickToAddContent}
           cntAllFilms={visibleFilms.length}
           onClickSaveBtn={onClickSaveBtn}
         />
-      )}
-      {!isSearch && visibleFilms.length === 0 && <p className='page-with-films__message-for-user'>{messageForUser}</p>}
-      {isSearch && visibleFilms.length === 0 && <Preloader />}
+      ) : null}
+      {!isSearch && visibleFilms.length === 0
+        ? <p className='page-with-films__message-for-user'>{messageForUser}</p>
+        : null}
+      {isSearch && visibleFilms.length === 0 ? <Preloader /> : null}
     </main>
   );
 });

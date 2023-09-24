@@ -2,16 +2,14 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
-import { useCurrentUser } from '../contexts/CurrentUserContext';
 import mainApi from '../helpers/utils/MainApi';
 
+// DID вынес curUser обратно на вход
 export default function useSaveCardBtn({
-  allFilms, setSavedFilms, setAllFilms, isSavedPage,
+  allFilms, setSavedFilms, setAllFilms, isSavedPage, curUser,
 }: any) {
-  const curUser = useCurrentUser();
-
   const addMovies = (dataMovie: any): any => {
-    const newDataMovie = { ...dataMovie };
+    const newDataMovie = dataMovie;
     delete newDataMovie.btnType;
     return mainApi.addMovie({ ...newDataMovie, owner: curUser?.id })
       .then((res) => {
@@ -39,9 +37,10 @@ export default function useSaveCardBtn({
         });
 
         const index = allFilms.findIndex((el: any) => el.movieId === data.movieId);
-        const updateData = { ...data };
+        const updateData = data;
         delete updateData._id;
         delete updateData.__v;
+
         setAllFilms((prev: any) => {
           const updatedFilms = [...prev];
           updatedFilms[index] = { ...updateData, btnType: 'movies-card__btn_save' };

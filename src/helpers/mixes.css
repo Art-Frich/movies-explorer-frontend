@@ -26,6 +26,11 @@
   resize: none;
 }
 
+.input-reset:-webkit-autofill {
+  transition: all 9999s;
+  transition-delay: 9999s;
+}
+
 /* link-hover */
 .link-hover {
   transition: all var(--animation-time) var(--animation-type);
@@ -82,6 +87,7 @@
 
 .active-btn-effect:disabled {
   transform: none;
+  cursor: default;
 }
 
 /* active-neon */
@@ -108,7 +114,7 @@
 }
 
 .active-neon:active:after {
-  box-shadow: 0 0 10px #ee3465;
+  box-shadow: 0 0 10px var(--color-neon);
 }
 
 /* input focus */

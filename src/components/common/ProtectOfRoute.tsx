@@ -5,19 +5,19 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 // interface IProtectRoute {
 //   Element: React.ComponentType,
-//   onlyLogedIn?: boolean,
+//   onlyLoggedIn?: boolean,
 // }
 
 export default function ProtectRoute(
-  { Element, onlyLogedIn, ...props }: any
+  { Element, onlyLoggedIn, ...props }: any
 ) {
   const curUser = useCurrentUser();
 
   return (
-    (onlyLogedIn ? curUser!.loggedIn : !curUser!.loggedIn) ? <Element {...props} /> : <Navigate to='/' replace />
+    (onlyLoggedIn ? curUser!.loggedIn : !curUser!.loggedIn) ? <Element {...props} /> : <Navigate to='/' replace />
   );
 }
 
 ProtectRoute.defaultProps = {
-  onlyLogedIn: false,
+  onlyLoggedIn: false,
 };

@@ -71,11 +71,11 @@
 }
 
 .page-register__input_type_password {
-  color: #ee3465;
+  color: var(--color-neon);
 }
 
 .page-register__error {
-  color: #ee3465;
+  color: var(--color-neon);
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -100,7 +100,7 @@
 }
 
 .page-register__submit-result-msg_err {
-  color: #ee3465;
+  color: var(--color-neon);
 }
 
 .page-register__submit-result-msg_ok {

@@ -3,7 +3,7 @@
 /* eslint-disable no-lone-blocks */
 import './App.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Outlet, Route, Routes,
 } from 'react-router-dom';
@@ -25,69 +25,22 @@ import useUserData from '../../../сustomHooks/useUserData';
 import moviesApi from '../../../helpers/utils/MoviesApi';
 import { parseMovieData } from '../../../helpers/utils/utils';
 
+// DID убрал функционал клика по кнопке Save
+// разделил крючки авторизации и получения данных о фильмах
+// возможно фильмы тоже нахер отсюда
+// возможно пропсы через ProtectedRoute - плохая затея
+
 function App() {
-  console.log('render App');
   const curUser = useCurrentUser();
   const { setUserDataAndLogin } = useUserData();
   const [isCheckJwt, setIsCheckJwt] = useState(true);
 
-  const [allFilms, setAllFilms] = useState<any>([]);
-  const [savedFilms, setSavedFilms] = useState<any>([]);
+  // const [allFilms, setAllFilms] = useState<any>([]);
+  // const [savedFilms, setSavedFilms] = useState<any>([]);
 
-  const addMovies = (dataMovie: any): any => {
-    const newDataMovie = { ...dataMovie };
-    delete newDataMovie.btnType;
-    return mainApi.addMovie({ ...newDataMovie, owner: curUser?.id })
-      .then((res) => {
-        const newDataFilm = res.data;
-        const index = allFilms.findIndex((el: any) => el.movieId === newDataFilm.movieId);
-
-        setSavedFilms((prev: any) => ([...prev, { ...newDataFilm, btnType: 'movies-card__btn_delete' }]));
-        setAllFilms((prev: any) => {
-          const updatedFilms = [...prev];
-          updatedFilms[index] = { ...newDataFilm, btnType: 'movies-card__btn_saved' };
-          return updatedFilms;
-        });
-      }).catch(async (err) => (
-        console.log(`Не удалось добавить фильм в сохраненные: ${(await err).message}`)
-      ));
-  };
-
-  const deleteMovie = (data: any) => {
-    mainApi
-      .deleteMovie(data._id)
-      .then(() => {
-        setSavedFilms((prev: any) => {
-          const updatedFilms = prev.filter((el: any) => el.movieId !== data.movieId);
-          return updatedFilms;
-        });
-
-        const index = allFilms.findIndex((el: any) => el.movieId === data.movieId);
-        const updateData = { ...data };
-        delete updateData._id;
-        delete updateData.__v;
-        setAllFilms((prev: any) => {
-          const updatedFilms = [...prev];
-          updatedFilms[index] = { ...updateData, btnType: 'movies-card__btn_save' };
-          return updatedFilms;
-        });
-      })
-      .catch(async (err) => (
-        console.log(`Не удалось удалить фильм из сохраненных: ${(await err).message}`)
-      ));
-  };
-
-  const onClickSaveBtn = (data: any, isSavedPage: boolean) => {
-    if (isSavedPage || data.btnType === 'movies-card__btn_saved') {
-      deleteMovie(data);
-    } else {
-      addMovies(data);
-    }
-  };
-
-  const moviesProps = {
-    allFilms, savedFilms, setAllFilms, setSavedFilms, onClickSaveBtn,
-  };
+  // const moviesProps = {
+  //   savedFilms, setSavedFilms,
+  // };
 
   const AddHeader = React.memo(() => (
     <>
@@ -103,31 +56,31 @@ function App() {
     </>
   ));
 
+  // const getDataFilms = useCallback(async () => {
+  //   try {
+  //     const filmsData = await moviesApi.getMovies();
+  //     const savedFilmsData = (await mainApi.getAllSavedMovies()).data;
+
+  //     setSavedFilms(savedFilmsData.map((film: any) => ({
+  //       ...film, btnType: 'movies-card__btn_delete',
+  //     })));
+
+  //     setAllFilms(filmsData.map((film: any) => {
+  //       const parsedFilm = parseMovieData(film);
+  //       const indexInSaved = savedFilmsData
+  //         .findIndex((el: any) => el.movieId === parsedFilm.movieId);
+  //       return indexInSaved > -1
+  //         ? { ...savedFilmsData[indexInSaved], btnType: 'movies-card__btn_saved' }
+  //         : { ...parsedFilm, btnType: 'movies-card__btn_save' };
+  //     }));
+  //   } catch (err) {
+  //     console.log('Ошибка при попытке получить данные о фильмах с серверов');
+  //     console.log(err);
+  //   }
+  // }, []);
+
   // проверяю токен
   useEffect(() => {
-    const getDataFilms = async () => {
-      try {
-        const filmsData = await moviesApi.getMovies();
-        const savedFilmsData = (await mainApi.getAllSavedMovies()).data;
-
-        setSavedFilms(savedFilmsData.map((film: any) => ({
-          ...film, btnType: 'movies-card__btn_delete',
-        })));
-
-        setAllFilms(filmsData.map((film: any) => {
-          const parsedFilm = parseMovieData(film);
-          const indexInSaved = savedFilmsData
-            .findIndex((el: any) => el.movieId === parsedFilm.movieId);
-          return indexInSaved > -1
-            ? { ...savedFilmsData[indexInSaved], btnType: 'movies-card__btn_saved' }
-            : { ...parsedFilm, btnType: 'movies-card__btn_save' };
-        }));
-      } catch (err) {
-        console.log('Ошибка при попытке получить данные о фильмах с серверов');
-        console.log(err);
-      }
-    };
-
     try {
       if (!curUser?.loggedIn) {
         mainApi.checkJWT()
@@ -143,43 +96,34 @@ function App() {
       console.log('Ошибка при попытке получить данные предыдущего запроса пользователя и данные с серверов');
       console.log(err);
     }
+  }, []);
 
-    if (curUser?.loggedIn) getDataFilms();
-    // такая зависимость вызывает лишнее срабатывание при logout
-  }, [curUser?.loggedIn]);
-
+  // // получаю фильмы
   // useEffect(() => {
-  //   console.log(allFilms);
-  // }, [allFilms]);
+  //   if (curUser?.loggedIn) getDataFilms();
+  //   // TODO такая зависимость вызывает лишнее срабатывание при logout
+  // }, [curUser?.loggedIn]);
 
   return (
-    // чтобы избежать ложного срабатывания защиты
+    // isCheckJwt чтобы избежать ложного срабатывания защиты ProtectOfRoute
     isCheckJwt ? <Preloader /> : (
       <Routes>
         <Route path='/signin' element={<ProtectOfRoute Element={LoginContainer} />} />
         <Route path='/signup' element={<ProtectOfRoute Element={RegisterContainer} />} />
         <Route path='/' element={<AddHeader />}>
-          <Route path='/profile' element={<ProtectOfRoute Element={ProfileContainer} onlyLogedIn />} />
+          <Route path='/profile' element={<ProtectOfRoute Element={ProfileContainer} onlyLoggedIn />} />
           <Route path='/' element={<AddFooter />}>
             <Route
               path='/saved-movies'
               element={(
-                <ProtectOfRoute
-                  Element={MoviesContainer}
-                  onlyLogedIn
-                  data={moviesProps}
-                />
+                <ProtectOfRoute Element={MoviesContainer} onlyLoggedIn />
               )}
             />
             <Route
               path='/movies'
-              element={(
-                <ProtectOfRoute
-                  Element={MoviesContainer}
-                  onlyLogedIn
-                  data={moviesProps}
-                />
-              )}
+              element={
+                <ProtectOfRoute Element={MoviesContainer} onlyLoggedIn />
+              }
             />
             <Route index element={<MainContainer />} />
           </Route>

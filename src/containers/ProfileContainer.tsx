@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Profile from '../components/pages/Profile/Profile';
@@ -8,7 +8,7 @@ import useForm from '../сustomHooks/useForm';
 import { inputEmailSettings, inputNameSettings } from '../helpers/constants';
 import useUserData from '../сustomHooks/useUserData';
 
-export default function ProfileContainer() {
+const ProfileContainer = React.memo(() => {
   const { setUserData } = useUserData();
   const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(true);
   const [isDisabledInput, setIsDisabledInput] = useState(true);
@@ -35,7 +35,7 @@ export default function ProfileContainer() {
     setValues,
   } = useForm({ fetch: mainApi.toUpdateUserData, toEndFetch });
 
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     setIsFetching(true);
     mainApi.toLogout()
       .then(() => {
@@ -47,12 +47,12 @@ export default function ProfileContainer() {
         setSbtMsg('Не удалось выйти из аккаунта... Я тоже в шоке...');
       })
       .finally(() => setIsFetching(false));
-  };
+  }, []);
 
-  const onEditBtnClick = () => {
+  const onEditBtnClick = useCallback(() => {
     setSbtMsg('');
     setIsDisabledInput(false);
-  };
+  }, []);
 
   useEffect(() => {
     const flag = !(isValidForm && !isFetching && (
@@ -69,7 +69,7 @@ export default function ProfileContainer() {
     });
   }, []);
 
-  return curUser ? (
+  return (
     <Profile
       onSubmit={handleSubmit}
       fetchCondition={isFetching}
@@ -83,5 +83,7 @@ export default function ProfileContainer() {
       isDisabledSubmitBtn={isDisabledSubmitBtn}
       valuesInput={values}
     />
-  ) : null;
-}
+  );
+});
+
+export default ProfileContainer;

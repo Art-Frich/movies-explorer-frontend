@@ -12,7 +12,7 @@ import BurgerLoggedInHeader from './BurgerLoggedInHeader';
 import BurgerBtn from '../../others/BurgerBtn/BurgerBtn';
 import Logo from '../../others/Logo/Logo';
 
-export default function Header() {
+function Header() {
   const location = useLocation();
   const curUser = useCurrentUser();
   const isSmallScreen = useMediaQuery('only screen and (max-width : 768px)');
@@ -47,3 +47,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;
