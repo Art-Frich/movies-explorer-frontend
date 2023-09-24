@@ -3,14 +3,15 @@ import React from 'react';
 import PageWithLogin from '../components/pages/PageWithLogin/PageWithLogin';
 import mainApi from '../helpers/utils/MainApi';
 import useUserData from '../сustomHooks/useUserData';
+import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 
 export default function RegisterContainer() {
+  const popupContext = useErrorPopupContext();
   const { setUserDataAndLoginAndNavToFilms } = useUserData();
 
   const toEndFetch = ({ values, curUser }: any) => mainApi.toLoginUser(values)
     .then(() => setUserDataAndLoginAndNavToFilms({ values, curUser }))
-    // eslint-disable-next-line no-alert
-    .catch(() => alert('Непредвиденная богами ошибка при попытке автоматического логининга'));
+    .catch(() => popupContext?.setErMsg('Непредвиденная богами ошибка при попытке автоматического логининга'));
 
   const propsOfUseForm = {
     fetch: mainApi.toRegisterUser,

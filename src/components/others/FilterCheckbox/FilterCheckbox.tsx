@@ -12,7 +12,7 @@ interface IFilterCheckbox {
 export default function FilterCheckbox({
   content, state, setState, name,
 }: IFilterCheckbox) {
-  function chengeCheckbox() {
+  function changeCheckbox() {
     setState((prev: any) => ({ ...prev, [name]: !prev[name] }));
   }
 
@@ -24,7 +24,7 @@ export default function FilterCheckbox({
           className='checkbox__input'
           type='checkbox'
           checked={state}
-          onChange={chengeCheckbox}
+          onChange={changeCheckbox}
         />
         <span className='checkbox__container' />
       </label>
