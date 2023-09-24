@@ -5,7 +5,7 @@ import React from 'react';
 interface IFilterCheckbox {
   content: string,
   state: boolean,
-  setState: any, // хер подберешь ему тип
+  setState: any,
   name: string,
 }
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import './LoggedInHeader.css';
 
 import React from 'react';
@@ -30,7 +29,6 @@ export default function LoggedInHeader() {
         </li>
         <li className='navigation-auth__list-element'>
           <NavLink
-            // className='navigation-auth__link navigation-auth__account-btn'
             className={({ isActive }) => (
               `navigation-auth__link navigation-auth__account-btn ${isActive ? 'navigation-auth__link_active' : 'active-underline link-hover'}`
             )}

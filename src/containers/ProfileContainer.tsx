@@ -22,17 +22,9 @@ const ProfileContainer = React.memo(() => {
   };
 
   const {
-    handleChangeInput,
-    handleSubmit,
-    resData,
-    errors,
-    values,
-    sbtMsg,
-    isFetching,
-    isValidForm,
-    setIsFetching,
-    setSbtMsg,
-    setValues,
+    handleChangeInput, handleSubmit, resData, errors,
+    values, sbtMsg, isFetching, isValidForm,
+    setIsFetching, setSbtMsg, setValues,
   } = useForm({ fetch: mainApi.toUpdateUserData, toEndFetch });
 
   const onLogout = useCallback(() => {

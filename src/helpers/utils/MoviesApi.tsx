@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-
 import { urlMoviesApi } from '../constants';
 
 class MoviesApi {

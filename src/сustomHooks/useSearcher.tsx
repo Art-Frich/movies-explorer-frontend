@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  useState, useEffect, FormEvent, useCallback, useMemo,
+  useState, useEffect, FormEvent, useCallback,
 } from 'react';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 
-// DID убрал useMemo выходных пропсов
 export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) {
   const popupContext = useErrorPopupContext();
 

@@ -11,7 +11,6 @@ interface ISearchForm {
   onReset: () => void;
   userQuery: string,
   isSearch: boolean,
-
 }
 
 function SearchForm({

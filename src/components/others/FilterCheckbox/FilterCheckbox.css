@@ -35,7 +35,7 @@
   width: calc(var(--height) - 2 * var(--offset));
 }
 
-.checkbox__input:focus ~ .checkbox__container::after{
+.checkbox__input:focus-visible ~ .checkbox__container::after{
   content: '';
   position: absolute;
   top: -3px;

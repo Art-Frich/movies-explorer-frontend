@@ -29,7 +29,6 @@ function MoviesContainer({ data }: any) {
   const objVisibleFilmsProps = useSetterVisibleFilms();
   const { setMessageForUser } = objSearchProps;
 
-  // получить фильмов, если их ещё нет
   const getDataFilms = useCallback(() => {
     try {
       if (isSavedPage) {
@@ -53,7 +52,13 @@ function MoviesContainer({ data }: any) {
   }, []);
 
   return (
-    <PageWithFilms data={{ ...objSearchProps, ...objVisibleFilmsProps, onClickSaveBtn }} />
+    <PageWithFilms data={{
+      ...objSearchProps,
+      ...objVisibleFilmsProps,
+      onClickSaveBtn,
+      isSavedPage,
+    }}
+    />
   );
 }
 

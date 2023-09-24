@@ -2,7 +2,6 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 import mainApi from '../helpers/utils/MainApi';
 
-// DID вынес curUser обратно на вход
 export default function useSaveCardBtn({
   setSavedFilms, isSavedPage, savedFilms,
 }: any) {

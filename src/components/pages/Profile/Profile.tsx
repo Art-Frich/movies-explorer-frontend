@@ -5,20 +5,6 @@ import React from 'react';
 import { useCurrentUser } from '../../../contexts/CurrentUserContext';
 import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
 import InputsOfUserData from '../../others/InputsOfUserData/InputsOfUserData';
-// import { IFormEvent } from '../../../helpers/Interfaces';
-
-// interface IProfile {
-// onSubmit: (data: IFormEvent) => void,
-// fetchCondition: boolean,
-// onLogout: () => void,
-// onEditBtnClick: () => void,
-// isDisabledInput: boolean,
-// submitMsg: string,
-// submitMsgIsErr: boolean,
-// setInputName: React.Dispatch<React.SetStateAction<string>>,
-// setInputEmail: React.Dispatch<React.SetStateAction<string>>,
-
-// }
 
 export default function Profile({
   onSubmit, fetchCondition, onLogout, onEditBtnClick, isDisabledInput,

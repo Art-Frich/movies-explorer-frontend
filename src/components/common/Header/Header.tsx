@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import './Header.css';
 
 import React, { useEffect, useState } from 'react';
@@ -24,6 +23,16 @@ function Header() {
     setIsOpenBurger(!isOpenBurger);
   };
 
+  let headerComponent;
+
+  if (!curUser?.loggedIn) {
+    headerComponent = <GuestHeader />;
+  } else if (!isSmallScreen) {
+    headerComponent = <LoggedInHeader />;
+  } else {
+    headerComponent = <BurgerBtn onClick={toggleBurgerState} isOpen={isOpenBurger} />;
+  }
+
   useEffect(() => {
     setIsMain(location.pathname === '/');
     setIsOpenBurger(false);
@@ -36,13 +45,7 @@ function Header() {
   return (
     <header className={`header ${isMain ? 'main-header-style' : ''}`}>
       <Logo />
-      {!curUser?.loggedIn ? (
-        <GuestHeader />
-      ) : !isSmallScreen ? (
-        <LoggedInHeader />
-      ) : (
-        <BurgerBtn onClick={toggleBurgerState} isOpen={isOpenBurger} />
-      )}
+      {headerComponent}
       <BurgerLoggedInHeader isOpen={isOpenBurger && isSmallScreen} />
     </header>
   );

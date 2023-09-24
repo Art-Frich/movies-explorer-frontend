@@ -22,11 +22,6 @@ import mainApi from '../../../helpers/utils/MainApi';
 import useUserData from '../../../сustomHooks/useUserData';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
-// DID убрал функционал клика по кнопке Save
-// разделил крючки авторизации и получения данных о фильмах
-// возможно фильмы тоже нахер отсюда
-// возможно пропсы через ProtectedRoute - плохая затея
-
 function App() {
   const curUser = useCurrentUser();
 

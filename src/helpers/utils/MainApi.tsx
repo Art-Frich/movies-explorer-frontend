@@ -3,7 +3,6 @@
 import {
   inputEmailSettings, inputNameSettings, inputPasswordSettings, urlMainApi,
 } from '../constants';
-import CheckJwtError from '../customErrors/CheckJwtError';
 
 class MainApi {
   pathCreateUser: string;
@@ -32,22 +31,15 @@ class MainApi {
       .then((res) => (res.ok ? res.json() : Promise.reject(res.json())));
   }
 
-  checkJWT = () => fetch(urlMainApi + this.pathMe, {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res);
+  checkJWT = () => this.handleFetch(
+    fetch(urlMainApi + this.pathMe, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .catch((err: any) => {
-      throw new CheckJwtError(err.status);
-    });
+  );
 
   toRegisterUser = (values: any) => this.handleFetch(
     fetch(urlMainApi + this.pathCreateUser, {

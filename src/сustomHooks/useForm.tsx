@@ -1,9 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
-import mainApi from '../helpers/utils/MainApi';
-// import { IAllString } from '../helpers/Interfaces';
 
 interface IhandleSubmit {
   e: React.FormEvent
@@ -14,10 +10,6 @@ interface IHandleChangeInput {
   typeInput: string,
   aboutPattern: string
 }
-
-// interface IUseForm {
-//   fetch: (data: IAllString) => Promise<any>;
-// }
 
 export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
   const curUser = useCurrentUser();
@@ -38,15 +30,15 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
       // т.к. валидация за счет pattern, кастомизируем вывод
       // иначе получим что-то вроде "не соответствует pattern"
       [name]: ((() => {
-        if (isValidInput) { // если поле валидно
-          return ''; // убрать сообщение об ошибке
+        if (isValidInput) {
+          return '';
         }
-        if (typeInput !== 'email') { // если это поле не email
-          if (value.length === 0) { // инпут пустой?
+        if (typeInput !== 'email') { // если это не email
+          if (value.length === 0) {
             return 'Обязательное поле';
           } return `Некорректный ввод: ${aboutPattern}`;
         }
-        return validationMessage; // если это email - т.к. браузерные сообщения хороши
+        return validationMessage; // если это email - то браузер сам справится
       })()),
     });
     setIsValidForm(target.closest('form')!.checkValidity());
