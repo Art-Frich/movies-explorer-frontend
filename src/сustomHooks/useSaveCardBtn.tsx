@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-console */
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 import mainApi from '../helpers/utils/MainApi';
 
 // DID вынес curUser обратно на вход
 export default function useSaveCardBtn({
-  allFilms, setSavedFilms, setAllFilms, isSavedPage, savedFilms,
+  setSavedFilms, isSavedPage, savedFilms,
 }: any) {
   const curUser = useCurrentUser();
   const popupContext = useErrorPopupContext();
@@ -20,13 +16,14 @@ export default function useSaveCardBtn({
       .then((res) => {
         const newDataFilm = res.data;
         setSavedFilms((prev: any) => ([...prev, { ...newDataFilm }]));
-      }).catch(async (err) => (
+      }).catch(() => (
         popupContext?.setErMsg('Не удалось добавить фильм в сохраненные')
       ));
   };
 
   const deleteMovie = (data: any) => {
     const index = savedFilms.findIndex((el: any) => el.movieId === data.movieId);
+    // eslint-disable-next-line no-underscore-dangle
     const id = savedFilms[index]._id;
     mainApi
       .deleteMovie(id)
@@ -36,7 +33,7 @@ export default function useSaveCardBtn({
           return updatedFilms;
         });
       })
-      .catch(async (err) => (
+      .catch(async () => (
         popupContext?.setErMsg('Не удалось удалить фильм из сохраненных')
       ));
   };

@@ -47,7 +47,7 @@ export default function InputsOfUserData({
       {!inputTypePassword ? null : (
         <InputBlock
           labelClass='page-with-login__field'
-          titleSpanClass='page-with-login__desctiption'
+          titleSpanClass='page-with-login__description'
           titleSpanContent='Пароль'
           inputClass='page-with-login__input page-with-login__input_type_password'
           errSpanClass='page-with-login__error'

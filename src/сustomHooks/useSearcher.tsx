@@ -40,7 +40,7 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
   const onReset = useCallback(() => {
     setUserQuery('');
     setFilters({ isShort: false });
-    if (isSavedPage) window.localStorage.removeItem('movies-explorer-last-query');
+    if (!isSavedPage) window.localStorage.removeItem('movies-explorer-last-query');
   }, []);
 
   // при поиске установить новый запрос

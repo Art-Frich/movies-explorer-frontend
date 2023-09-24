@@ -1,43 +1,42 @@
-/* eslint-disable react/destructuring-assignment */
 import React, {
-  useState, useEffect, useCallback,
+  useEffect, useCallback,
 } from 'react';
 
-import { useLocation } from 'react-router-dom';
 import PageWithFilms from '../components/pages/PageWithFilms/PageWithFilms';
 import useSaveCardBtn from '../сustomHooks/useSaveCardBtn';
 import useSearcher from '../сustomHooks/useSearcher';
 import useSetterVisibleFilms from '../сustomHooks/useSetterVisibleFilms';
-import { parseMovieData } from '../helpers/utils/utils';
-import moviesApi from '../helpers/utils/MoviesApi';
-import mainApi from '../helpers/utils/MainApi';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
+import { useMoviesApiContext } from '../contexts/MoviesApiContext';
 
-function MoviesContainer() {
-  const location = useLocation();
+function MoviesContainer({ data }: any) {
   const popupContext = useErrorPopupContext();
+  const moviesContext = useMoviesApiContext();
 
-  const [allFilms, setAllFilms] = useState<any>([]);
-  const [savedFilms, setSavedFilms] = useState<any>([]);
-  const [isSavedPage, setIsSavedPage] = useState<any>(location.pathname === '/saved-movies');
+  const { isSavedPage } = data;
 
   const [onClickSaveBtn] = useSaveCardBtn({
-    allFilms, setAllFilms, setSavedFilms, isSavedPage, savedFilms,
+    setSavedFilms: moviesContext?.setSavedFilms,
+    savedFilms: moviesContext?.savedFilms,
+    isSavedPage,
   });
 
-  const objSearchProps = useSearcher({ allFilms, savedFilms, isSavedPage });
+  const objSearchProps = useSearcher({
+    allFilms: moviesContext?.allFilms,
+    savedFilms: moviesContext?.savedFilms,
+    isSavedPage,
+  });
   const objVisibleFilmsProps = useSetterVisibleFilms();
   const { setMessageForUser } = objSearchProps;
 
-  const getDataFilms = useCallback(async () => {
+  // получить фильмов, если их ещё нет
+  const getDataFilms = useCallback(() => {
     try {
-      const filmsData = await moviesApi.getMovies();
-
-      setSavedFilms((await mainApi.getAllSavedMovies()).data);
-      setAllFilms(filmsData.map((film: any) => {
-        const parsedFilm = parseMovieData(film);
-        return { ...parsedFilm };
-      }));
+      if (isSavedPage) {
+        moviesContext?.getSavedFilms();
+      } else {
+        moviesContext?.getAllFilms();
+      }
     } catch (err) {
       // \n не отрабатывают
       setMessageForUser(
@@ -47,17 +46,11 @@ function MoviesContainer() {
       );
       popupContext?.setErMsg('Ошибка при попытке получить данные о фильмах с серверов');
     }
-  }, []);
+  }, [isSavedPage]);
 
-  // получаю фильмы
   useEffect(() => {
     getDataFilms();
-    // TODO такая зависимость вызывает лишнее срабатывание при logout
   }, []);
-
-  useEffect(() => {
-    setIsSavedPage(location.pathname !== '/movies');
-  }, [location.pathname]);
 
   return (
     <PageWithFilms data={{ ...objSearchProps, ...objVisibleFilmsProps, onClickSaveBtn }} />

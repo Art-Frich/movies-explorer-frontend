@@ -35,7 +35,7 @@ export default function Profile({
         autoComplete='off'
       >
         <div className='page-profile__content'>
-          <h1 className='page-profile__title'>{`Здравствуйте, ${curUser?.name} ;)`}</h1>
+          <h1 className='page-profile__title'>{`Здравствуйте, ${curUser?.name} :)`}</h1>
 
           <InputsOfUserData
             inputTypes={{ inputTypeName: true, inputTypeEmail: true }}

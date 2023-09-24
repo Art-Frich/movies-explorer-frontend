@@ -3,6 +3,10 @@
 @import url(./helpers/variables.css);
 @import url(./helpers/mixes.css);
 
+html {
+  overflow-y: scroll;
+}
+
 .body {
   margin: 0;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
