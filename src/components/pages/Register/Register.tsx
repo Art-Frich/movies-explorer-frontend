@@ -9,6 +9,7 @@ import Logo from '../../others/Logo/Logo';
 import useForm from '../../../сustomHooks/useForm';
 import mainApi from '../../../helpers/utils/MainApi';
 import useUserData from '../../../сustomHooks/useUserData';
+import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
 // import { IOnSubmitRegister } from '../../../helpers/Interfaces';
 
 // interface IRegister {
@@ -96,14 +97,11 @@ export default function Register() {
           >
             {sbtMsg}
           </span>
-          <button
-            className='page-register__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
-            type='submit'
-            name='submit-btn-change-user-data-form'
-            disabled={!isValidForm || isFetching}
-          >
-            {isFetching ? 'Попробуем-ка...' : 'Зарегистрироваться'}
-          </button>
+          <SbtBtnOfUserData
+            isFetching={isFetching}
+            isDisable={!isValidForm || isFetching}
+            btnText='Зарегистрироваться'
+          />
           <div className='page-register__yet-register'>
             <span className='page-register__yet-register-text'>
               Уже зарегистрированы?

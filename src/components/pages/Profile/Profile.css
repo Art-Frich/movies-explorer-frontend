@@ -111,7 +111,7 @@
 }
 
 .page-profile__submit-result-msg_ok{
-  color: #4285f4;
+  color: var(--color-blue);
 }
 
 .page-profile__btn-edit {
@@ -140,7 +140,7 @@
 
 .page-profile__btn-submit {
   border-radius: 3px;
-  background: #4285f4;
+  background: var(--color-blue);
   padding: 13px 0;
 
   color: var(--base-color-of-text);

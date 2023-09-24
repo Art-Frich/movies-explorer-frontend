@@ -49,7 +49,7 @@
 
 .sercher__btn {
   border-radius: 5px;
-  background: #4285f4;
+  background: var(--color-blue);
 
   padding: 17px 20px;
   flex-shrink: 0;

@@ -135,7 +135,7 @@
 }
 
 .input-hover:hover {
-  color: #4285f4;
+  color: var(--color-blue);
 }
 
 /* disabled */

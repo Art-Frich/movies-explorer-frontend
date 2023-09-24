@@ -9,6 +9,7 @@ import { inputEmailSettings, inputPasswordSettings } from '../../../helpers/cons
 import useForm from '../../../сustomHooks/useForm';
 import mainApi from '../../../helpers/utils/MainApi';
 import useUserData from '../../../сustomHooks/useUserData';
+import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
 
 // import { IOnSubmitLogin } from '../../../helpers/Interfaces';
 
@@ -82,14 +83,11 @@ export default function Login() {
           >
             {sbtMsg}
           </span>
-          <button
-            className='page-login__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
-            type='submit'
-            name='submit-btn-change-user-data-form'
-            disabled={!isValidForm || isFetching}
-          >
-            {isFetching ? 'Попробуем-ка...' : 'Войти'}
-          </button>
+          <SbtBtnOfUserData
+            isFetching={isFetching}
+            isDisable={!isValidForm || isFetching}
+            btnText='Войти'
+          />
           <div className='page-login__yet-login'>
             <span className='page-login__yet-login-text'>
               Ещё не зарегистрированы?

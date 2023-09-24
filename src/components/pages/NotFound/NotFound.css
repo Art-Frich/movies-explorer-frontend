@@ -34,7 +34,7 @@
 .not-found__link {
   margin: 0 0 60px;
 
-  color: #4285f4;
+  color: var(--color-blue);
   text-decoration: none;
   font-size: 14px;
   font-style: normal;

@@ -104,12 +104,12 @@
 }
 
 .page-register__submit-result-msg_ok {
-  color: #4285f4;
+  color: var(--color-blue);
 }
 
 .page-register__btn-submit {
   border-radius: 3px;
-  background: #4285f4;
+  background: var(--color-blue);
   padding: 13px 0;
 
   color: var(--base-color-of-text);
@@ -138,7 +138,7 @@
 }
 
 .page-register__yet-register-link {
-  color: #4285f4;
+  color: var(--color-blue);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

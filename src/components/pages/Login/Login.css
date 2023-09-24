@@ -104,22 +104,7 @@
 }
 
 .page-login__submit-result-msg_ok {
-  color: #4285f4;
-}
-
-.page-login__btn-submit {
-  border-radius: 3px;
-  background: #4285f4;
-  padding: 13px 0;
-
-  color: var(--base-color-of-text);
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-
-  width: 100%;
+  color: var(--color-blue);
 }
 
 .page-login__yet-login {
@@ -138,7 +123,7 @@
 }
 
 .page-login__yet-login-link {
-  color: #4285f4;
+  color: var(--color-blue);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

@@ -5,6 +5,7 @@ import React from 'react';
 import { inputEmailSettings, inputNameSettings } from '../../../helpers/constants';
 import InputBlock from '../../others/InputBlock/InputBlock';
 import { useCurrentUser } from '../../../contexts/CurrentUserContext';
+import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
 // import { IFormEvent } from '../../../helpers/Interfaces';
 
 // interface IProfile {
@@ -93,16 +94,13 @@ export default function Profile({
             </>
           )}
 
-          {!isDisabledInput && (
-            <button
-              className='page-profile__btn-submit btn-reset btn-hover active-btn-effect color-btn-disabled'
-              type='submit'
-              name='submit-btn-user-data-form'
-              disabled={isDisabledSubmitBtn}
-            >
-              {fetchCondition ? 'Попробуем-ка...' : 'Сохранить'}
-            </button>
-          )}
+          {!isDisabledInput ? (
+            <SbtBtnOfUserData
+              isFetching={fetchCondition}
+              isDisable={isDisabledSubmitBtn}
+              btnText='Сохранить'
+            />
+          ) : null}
         </div>
       </form>
 

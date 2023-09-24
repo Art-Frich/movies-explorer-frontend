@@ -41,7 +41,6 @@ const PageWithFilms = React.memo((props: any) => {
     isActiveFilters, userQuery, localQuery, onReset, onSearch,
     messageForUser, onClickToAddContent, onClickToReset, cntVisibleFilms,
   } = props.data;
-  console.log(props);
   const [isSearch, setIsSearch] = useState(true);
 
   // TODO нужно что-то ещё придумывать, вроде отслеживания последнего действия,
