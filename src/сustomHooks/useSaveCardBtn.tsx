@@ -1,12 +1,12 @@
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
+import { useMoviesApiContext } from '../contexts/MoviesApiContext';
 import mainApi from '../helpers/utils/MainApi';
 
-export default function useSaveCardBtn({
-  setSavedFilms, isSavedPage, savedFilms,
-}: any) {
+export default function useSaveCardBtn({ isSavedPage }: any) {
   const curUser = useCurrentUser();
   const popupContext = useErrorPopupContext();
+  const { savedFilms, setSavedFilms } = useMoviesApiContext()!;
 
   const addMovies = (dataMovie: any): any => {
     const newDataMovie = dataMovie;

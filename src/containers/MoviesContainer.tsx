@@ -15,18 +15,10 @@ function MoviesContainer({ data }: any) {
 
   const { isSavedPage } = data;
 
-  const [onClickSaveBtn] = useSaveCardBtn({
-    setSavedFilms: moviesContext?.setSavedFilms,
-    savedFilms: moviesContext?.savedFilms,
-    isSavedPage,
-  });
-
-  const objSearchProps = useSearcher({
-    allFilms: moviesContext?.allFilms,
-    savedFilms: moviesContext?.savedFilms,
-    isSavedPage,
-  });
   const objVisibleFilmsProps = useSetterVisibleFilms();
+  const objSearchProps = useSearcher({ isSavedPage });
+  const [onClickSaveBtn] = useSaveCardBtn({ isSavedPage });
+
   const { setMessageForUser } = objSearchProps;
 
   const getDataFilms = useCallback(() => {
@@ -34,7 +26,8 @@ function MoviesContainer({ data }: any) {
       if (isSavedPage) {
         moviesContext?.getSavedFilms();
       } else {
-        moviesContext?.getAllFilms();
+        // TODO раскомментировать после ревью
+        // moviesContext?.getAllFilms();
       }
     } catch (err) {
       // \n не отрабатывают

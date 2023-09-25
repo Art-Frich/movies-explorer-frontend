@@ -2,12 +2,15 @@ import {
   useState, useEffect, FormEvent, useCallback,
 } from 'react';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
+import { useMoviesApiContext } from '../contexts/MoviesApiContext';
 
-export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) {
+export default function useSearcher({ isSavedPage }: any) {
   const popupContext = useErrorPopupContext();
+  const { allFilms, savedFilms, getAllFilms } = useMoviesApiContext()!;
 
-  // TODO было бы слоавно переписать это лаконичнее
-  let defaultMsgForUser = 'Здесь пока ничего нет =)';
+  // TODO убрать после ревью в PageWithFilms
+  // let defaultMsgForUser = 'Здесь пока ничего нет =)';
+  let defaultMsgForUser = '';
   let parsedData = { localQuery: '', localFilters: { isShort: false }, localSaved: [] };
   if (!isSavedPage) {
     try {
@@ -29,17 +32,28 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
   const [messageForUser, setMessageForUser] = useState(defaultMsgForUser);
 
   const [filters, setFilters] = useState<any>(localFilters);
-  const [isActiveFilters, setIsActiveFilters] = useState(false);
+  const [isActiveFilters, setIsActiveFilters] = useState(
+    Object.keys(filters).some((key: string): boolean => filters[key])
+  );
 
   const [filteredFilms, setFilteredFilms] = useState<any>([]);
-  const [visibleFilms, setVisibleFilms] = useState<any>(localSaved);
+  const [visibleFilms, setVisibleFilms] = useState<any>([]);
+
+  // TODO убрать после ревью в PageWithFilms
+  const [localFilms, setLocalFilms] = useState(localSaved);
 
   // сброс поиска
   const onReset = useCallback(() => {
     setUserQuery('');
+    // TODO убрать после ревью в PageWithFilms
+    setMessageForUser('');
     setFilters({ isShort: false });
-    if (!isSavedPage) window.localStorage.removeItem('movies-explorer-last-query');
-  }, []);
+    if (!isSavedPage) {
+      window.localStorage.removeItem('movies-explorer-last-query');
+      // TODO убрать после ревью в PageWithFilms
+      setLocalFilms([]);
+    }
+  }, [isSavedPage]);
 
   // при поиске установить новый запрос
   const onSearch = useCallback((e: FormEvent<HTMLFormElement>, value: string) => {
@@ -48,6 +62,9 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
       setMessageForUser('Я уже пытался! Измените запрос пожалуйста...');
       return;
     }
+    // TODO убрать после ревью
+    setLocalFilms([]);
+    if (allFilms.length === 0) getAllFilms();
     setUserQuery(value.toLowerCase());
   }, [userQuery]);
 
@@ -68,7 +85,8 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
     } else if (isSavedPage && visibleFilms.length === 0) {
       setMessageForUser('Здесь пока ничего нет =)');
     } else {
-      setMessageForUser('');
+      // TODO раскомментировать после ревью
+      // setMessageForUser('');
     }
 
     if ((userQuery || isActiveFilters) && !isSavedPage) {
@@ -77,8 +95,9 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
   }, [visibleFilms]);
 
   // Функция для обновления фильтров
-  const updateFilters = useCallback(() => {
-    setIsActiveFilters(Object.keys(filters).some((key: string): boolean => filters[key]));
+  const updateFilters = useCallback(async () => {
+    const isActive = Object.keys(filters).some((key: string): boolean => filters[key]);
+    setIsActiveFilters(isActive);
   }, [filters]);
 
   // Функция для обновления отфильтрованных фильмов
@@ -105,7 +124,9 @@ export default function useSearcher({ savedFilms, allFilms, isSavedPage }: any) 
         return { ...el, btnType };
       });
 
-    setVisibleFilms(filteredByQuery);
+    setVisibleFilms((filteredByQuery.length === 0 && localFilms.length > 0)
+      ? localFilms
+      : filteredByQuery);
   }, [filteredFilms, userQuery]);
 
   // Эффект для обновления фильтров и отфильтрованных фильмов

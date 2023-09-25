@@ -1,34 +1,19 @@
 import './PageWithFilms.css';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import SearchForm from '../../others/SearchForm/SearchForm';
 import MoviesCardList from '../../others/MoviesCardList/MoviesCardList';
 import Preloader from '../../common/Preloader/Preloader';
+import { useMoviesApiContext } from '../../../contexts/MoviesApiContext';
 
 const PageWithFilms = React.memo((props: any) => {
   const {
-    onClickSaveBtn, visibleFilms, filters, setFilters, isSavedPage,
-    isActiveFilters, userQuery, localQuery, onReset, onSearch,
+    onClickSaveBtn, visibleFilms, filters, setFilters,
+    userQuery, onReset, onSearch,
     messageForUser, onClickToAddContent, onClickToReset, cntVisibleFilms,
-
   } = props.data;
-  const [isSearch, setIsSearch] = useState(true);
-
-  // позволяет корректно отображать прелоадер и стейт кнопки
-  useEffect(() => {
-    setIsSearch(true);
-
-    if (visibleFilms.length !== 0 // если фильмы нашлись
-      || (visibleFilms.length === 0 // или их нет, но
-        && (userQuery || isActiveFilters) // был запрос и
-        && ((isSavedPage) || (userQuery !== localQuery)))) { // это сохраненные или
-      // запрос пользователя отличается от последнего из localStorage
-      setIsSearch(false);
-    } else { // иначе дать время на загрузку
-      setTimeout(() => setIsSearch(false), 5000);
-    }
-  }, [visibleFilms]);
+  const { isSearch } = useMoviesApiContext()!;
 
   return (
     <main className='page-with-films'>
@@ -43,7 +28,7 @@ const PageWithFilms = React.memo((props: any) => {
         userQuery={userQuery}
         isSearch={isSearch}
       />
-      {visibleFilms.length > 0 ? (
+      {visibleFilms.length > 0 && !isSearch ? (
         <MoviesCardList
           films={visibleFilms.slice(0, cntVisibleFilms)}
           onClickToAddContent={onClickToAddContent}
@@ -51,10 +36,9 @@ const PageWithFilms = React.memo((props: any) => {
           onClickSaveBtn={onClickSaveBtn}
         />
       ) : null}
-      {!isSearch && visibleFilms.length === 0
-        ? <p className='page-with-films__message-for-user'>{messageForUser}</p>
-        : null}
-      {isSearch && visibleFilms.length === 0 ? <Preloader /> : null}
+      {(isSearch || (visibleFilms.length !== 0)) ? null
+        : <p className='page-with-films__message-for-user'>{messageForUser}</p>}
+      {isSearch ? <Preloader /> : null}
     </main>
   );
 });
