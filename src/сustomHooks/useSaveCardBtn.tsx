@@ -13,10 +13,8 @@ export default function useSaveCardBtn({ isSavedPage }: any) {
   const addMovies = (dataMovie: any): any => {
     const newDataMovie = dataMovie;
     delete newDataMovie.btnType;
-    console.log('i work');
     return mainApi.addMovie({ ...newDataMovie, owner: curUser?.id })
       .then((res) => {
-        console.log('i work2');
         const newDataFilm = res.data;
         setSavedFilms((prev: any) => ([...prev, { ...newDataFilm }]));
       }).catch(() => (
