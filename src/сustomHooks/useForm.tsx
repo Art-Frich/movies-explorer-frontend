@@ -47,6 +47,7 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
   const handleSubmit = async ({ e }: IhandleSubmit) => {
     e.preventDefault();
     setResData(null);
+    setSbtMsg('');
     setIsFetching(true);
     fetch(values)
       .then((res: any) => {

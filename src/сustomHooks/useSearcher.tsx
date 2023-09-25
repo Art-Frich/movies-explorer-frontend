@@ -52,6 +52,7 @@ export default function useSearcher({ isSavedPage }: any) {
       window.localStorage.removeItem('movies-explorer-last-query');
       // TODO убрать после ревью в PageWithFilms
       setLocalFilms([]);
+      if (allFilms.length === 0) getAllFilms();
     }
   }, [isSavedPage]);
 

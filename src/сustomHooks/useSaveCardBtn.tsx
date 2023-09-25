@@ -6,13 +6,17 @@ import mainApi from '../helpers/utils/MainApi';
 export default function useSaveCardBtn({ isSavedPage }: any) {
   const curUser = useCurrentUser();
   const popupContext = useErrorPopupContext();
-  const { savedFilms, setSavedFilms } = useMoviesApiContext()!;
+  const {
+    savedFilms, setSavedFilms, getAllFilms, allFilms,
+  } = useMoviesApiContext()!;
 
   const addMovies = (dataMovie: any): any => {
     const newDataMovie = dataMovie;
     delete newDataMovie.btnType;
+    console.log('i work');
     return mainApi.addMovie({ ...newDataMovie, owner: curUser?.id })
       .then((res) => {
+        console.log('i work2');
         const newDataFilm = res.data;
         setSavedFilms((prev: any) => ([...prev, { ...newDataFilm }]));
       }).catch(() => (
@@ -21,11 +25,13 @@ export default function useSaveCardBtn({ isSavedPage }: any) {
   };
 
   const deleteMovie = (data: any) => {
-    const index = savedFilms.findIndex((el: any) => el.movieId === data.movieId);
-    // eslint-disable-next-line no-underscore-dangle
-    const id = savedFilms[index]._id;
-    mainApi
-      .deleteMovie(id)
+    Promise.resolve()
+      .then(() => {
+        const index = savedFilms.findIndex((el: any) => el.movieId === data.movieId);
+        // eslint-disable-next-line no-underscore-dangle
+        const id = savedFilms[index]._id;
+        mainApi.deleteMovie(id);
+      })
       .then(() => {
         setSavedFilms((prev: any) => {
           const updatedFilms = prev.filter((el: any) => el.movieId !== data.movieId);
@@ -38,6 +44,7 @@ export default function useSaveCardBtn({ isSavedPage }: any) {
   };
 
   const onClickSaveBtn = (data: any) => {
+    if (allFilms.length === 0) { getAllFilms(); }
     if (isSavedPage || data.btnType === 'movies-card__btn_saved') {
       deleteMovie(data);
     } else {
