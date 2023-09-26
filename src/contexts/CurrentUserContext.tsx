@@ -57,10 +57,6 @@ export function CurrentUserProvider({ children }: IReactChildren) {
     setUserData(data);
   };
 
-  useEffect(() => {
-    console.log(sbtMsg);
-  }, [sbtMsg]);
-
   const checkToken = () => {
     if (!loggedIn) {
       return mainApi.checkJWT()
