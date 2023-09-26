@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, {
-  createContext, useContext, useState, useMemo, ReactNode, useEffect,
+  createContext, useContext, useState, useMemo, ReactNode,
 } from 'react';
 import mainApi from '../helpers/utils/MainApi';
 import { inputEmailSettings, inputNameSettings } from '../helpers/constants';
