@@ -8,7 +8,7 @@ import InputsOfUserData from '../../others/InputsOfUserData/InputsOfUserData';
 
 export default function Profile({
   onSubmit, fetchCondition, onLogout, onEditBtnClick, isDisabledInput,
-  submitMsg, submitMsgIsErr, errorsInput, onInput, isDisabledSubmitBtn,
+  submitMsg, resData, errorsInput, onInput, isDisabledSubmitBtn,
   valuesInput,
 }: any) {
   const curUser = useCurrentUser();
@@ -34,7 +34,7 @@ export default function Profile({
         </div>
 
         <div className='page-profile__btns'>
-          <span className={`page-profile__submit-result-msg ${submitMsgIsErr
+          <span className={`page-profile__submit-result-msg ${resData === 0
             ? 'page-profile__submit-result-msg_err'
             : 'page-profile__submit-result-msg_ok'}`}
           >

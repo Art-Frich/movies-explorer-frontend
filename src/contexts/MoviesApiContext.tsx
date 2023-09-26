@@ -61,7 +61,7 @@ export function MoviesApiProvider({ children }: IReactChildren) {
       funcSetAllFilms(allFilmsData);
       setIsSearch(false);
     }
-  }, [savedFilms]);
+  }, [savedFilms, allFilms]);
 
   const contextValue = useMemo(() => ({
     allFilms, setSavedFilms, savedFilms, getSavedFilms, getAllFilms, isSearch, setIsSearch,

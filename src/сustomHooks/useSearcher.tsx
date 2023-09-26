@@ -54,20 +54,23 @@ export default function useSearcher({ isSavedPage }: any) {
       setLocalFilms([]);
       if (allFilms.length === 0) getAllFilms();
     }
-  }, [isSavedPage]);
+  }, [isSavedPage, allFilms]);
 
   // при поиске установить новый запрос
-  const onSearch = useCallback((e: FormEvent<HTMLFormElement>, value: string) => {
-    e.preventDefault();
+  const onSearch = useCallback((e: FormEvent<HTMLFormElement> | null, value: string) => {
+    e?.preventDefault();
     if (value === userQuery) {
       setMessageForUser('Я уже пытался! Измените запрос пожалуйста...');
       return;
     }
     // TODO убрать после ревью
     setLocalFilms([]);
-    if (allFilms.length === 0) getAllFilms();
+    if (!isSavedPage) {
+      if (allFilms.length === 0) getAllFilms();
+    }
     setUserQuery(value.toLowerCase());
-  }, [userQuery]);
+    // TODO убрать после ревью
+  }, [userQuery, allFilms, savedFilms]);
 
   // создать объект для записи в localStorage
   const getJsonQuery = (): string => {
@@ -87,7 +90,7 @@ export default function useSearcher({ isSavedPage }: any) {
       setMessageForUser('Здесь пока ничего нет =)');
     } else {
       // TODO раскомментировать после ревью
-      // setMessageForUser('');
+      setMessageForUser('');
     }
 
     if ((userQuery || isActiveFilters) && !isSavedPage) {

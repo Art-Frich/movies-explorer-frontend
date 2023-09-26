@@ -1,16 +1,23 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import PageWithLogin from '../components/pages/PageWithLogin/PageWithLogin';
 import mainApi from '../helpers/utils/MainApi';
-import useUserData from '../сustomHooks/useUserData';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
+import { useCurrentUser } from '../contexts/CurrentUserContext';
+import { formRegisterSetting } from '../helpers/constants';
 
 export default function RegisterContainer() {
+  const navigate = useNavigate();
   const popupContext = useErrorPopupContext();
-  const { setUserDataAndLoginAndNavToFilms } = useUserData();
+  const { setUserDataAndLogin, sbtMsg, setSbtMsg } = useCurrentUser()!;
 
-  const toEndFetch = ({ values, curUser }: any) => mainApi.toLoginUser(values)
-    .then(() => setUserDataAndLoginAndNavToFilms({ values, curUser }))
+  const toEndFetch = ({ values }: any) => mainApi.toLoginUser(values)
+    .then(() => {
+      setUserDataAndLogin({ values });
+      navigate('/movies');
+      setSbtMsg('');
+    })
     .catch(() => popupContext?.setErMsg('Непредвиденная богами ошибка при попытке автоматического логининга'));
 
   const propsOfUseForm = {
@@ -20,20 +27,13 @@ export default function RegisterContainer() {
   };
 
   const inputTypes = { inputTypeEmail: true, inputTypePassword: true, inputTypeName: true };
-  const formSetting = {
-    name: 'register-user-form',
-    title: 'Добро пожаловать!',
-    sbtBtnText: 'Зарегистрироваться',
-    questionText: 'Уже зарегистрированы?',
-    pathLink: '/signin',
-    linkText: 'Войти',
-  };
 
   return (
     <PageWithLogin
       propsOfUseForm={propsOfUseForm}
       inputTypes={inputTypes}
-      formSetting={formSetting}
+      formSetting={formRegisterSetting}
+      sbtMsg={sbtMsg}
     />
   );
 }

@@ -6,7 +6,7 @@ import { changeTimeFormat } from '../../../helpers/utils/utils';
 
 interface IMoviesCardProps {
   data: any,
-  onClickSaveBtn: (data: any, isSavedPage: boolean) => void;
+  onClickSaveBtn: (data: any) => void;
 }
 
 function MoviesCard({ data, onClickSaveBtn }: IMoviesCardProps) {
@@ -21,8 +21,11 @@ function MoviesCard({ data, onClickSaveBtn }: IMoviesCardProps) {
       </Link>
       <button
         className={`movies-card__btn btn-reset btn-hover active-btn-effect ${data.btnType}`}
-        onClick={() => onClickSaveBtn(data, false)}
-        type='button'
+        onClick={(e) => {
+          e.preventDefault(); // думаю, поможет от двойного клика
+          onClickSaveBtn(data);
+        }}
+        type='submit'
         aria-label='movies-card-btn'
       />
     </article>

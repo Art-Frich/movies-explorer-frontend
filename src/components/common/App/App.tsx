@@ -18,14 +18,10 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import ProtectOfRoute from '../ProtectOfRoute';
 import Preloader from '../Preloader/Preloader';
-import mainApi from '../../../helpers/utils/MainApi';
-import useUserData from '../../../сustomHooks/useUserData';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
 function App() {
   const curUser = useCurrentUser();
-
-  const { setUserDataAndLogin } = useUserData();
   const [isCheckJwt, setIsCheckJwt] = useState(true);
 
   const AddHeader = React.memo(() => (
@@ -44,15 +40,8 @@ function App() {
 
   // проверяю токен
   useEffect(() => {
-    if (!curUser?.loggedIn) {
-      mainApi.checkJWT()
-        .then((res) => {
-          setUserDataAndLogin({ values: res, curUser });
-        })
-        .catch(() => {
-        })
-        .finally(() => setIsCheckJwt(false));
-    }
+    (curUser?.checkToken() || Promise.resolve())
+      .finally(() => setIsCheckJwt(false));
   }, []);
 
   // isCheckJwt чтобы избежать ложного срабатывания защиты ProtectOfRoute

@@ -20,7 +20,10 @@ const PageWithFilms = React.memo((props: any) => {
       <SearchForm
         filters={filters}
         setFilters={setFilters}
-        onSearch={onSearch}
+        onSearch={(e, value) => {
+          onSearch(e, value);
+          onClickToReset();
+        }}
         onReset={() => {
           onReset();
           onClickToReset();

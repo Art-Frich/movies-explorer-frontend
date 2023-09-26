@@ -70,10 +70,6 @@
   opacity: 0.3;
 }
 
-.page-with-login__input_type_password {
-  color: var(--color-neon);
-}
-
 .page-with-login__error {
   color: var(--color-neon);
   font-size: 10px;

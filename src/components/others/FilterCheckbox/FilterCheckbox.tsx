@@ -1,7 +1,6 @@
 import './FilterCheckbox.css';
 
 import React from 'react';
-import { useMoviesApiContext } from '../../../contexts/MoviesApiContext';
 
 interface IFilterCheckbox {
   content: string,
@@ -13,12 +12,7 @@ interface IFilterCheckbox {
 export default function FilterCheckbox({
   content, state, setState, name,
 }: IFilterCheckbox) {
-  const moviesContext = useMoviesApiContext();
   function changeCheckbox() {
-    if (moviesContext?.allFilms.length === 0) {
-      moviesContext.setIsSearch(false);
-      moviesContext.getAllFilms();
-    }
     setState((prev: any) => ({ ...prev, [name]: !prev[name] }));
   }
 

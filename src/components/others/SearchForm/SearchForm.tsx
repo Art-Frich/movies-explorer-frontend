@@ -1,8 +1,12 @@
 import './SearchForm.css';
 
-import React, { FormEvent, useRef } from 'react';
+import React, {
+  FormEvent, useRef, useState, useEffect,
+} from 'react';
 
+import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import { inputSearcherValiditySettings } from '../../../helpers/constants';
 
 interface ISearchForm {
   filters: Record<string, boolean>,
@@ -16,19 +20,47 @@ interface ISearchForm {
 function SearchForm({
   filters, setFilters, onSearch, onReset, userQuery, isSearch,
 }: ISearchForm) {
+  const { regEx, erTextNoLetter, erTextOneLetter } = inputSearcherValiditySettings;
+
   const ref = useRef<HTMLInputElement | null>(null);
+  const [erMsg, setErMsg] = useState('');
+
+  function checkPattern() {
+    const value = ref.current?.value || '';
+    const valid = regEx.test(value);
+    if (!valid) {
+      setErMsg(value.length === 0 ? erTextNoLetter : erTextOneLetter);
+    } else {
+      setErMsg('');
+    }
+    return valid;
+  }
+
+  const onSubmit = (e: any) => {
+    e?.preventDefault();
+    const valid = checkPattern();
+    if (valid) onSearch(e, ref.current?.value || '');
+    return valid;
+  };
+
+  useEffect(() => {
+    setErMsg('');
+    setFilters({ isShort: false });
+  }, [useLocation().pathname]);
 
   return (
     <section className='sercher'>
-      <form className='sercher__form' name='search-movie-form' onSubmit={(e) => onSearch(e, ref.current?.value || '')}>
+      <form
+        className='sercher__form'
+        name='search-movie-form'
+        onSubmit={onSubmit}
+      >
         <input
           className='sercher__input input-reset input-focus'
           placeholder='Введите название фильма'
           name='name-movie'
-          minLength={1}
           defaultValue={userQuery}
           ref={ref}
-          required
         />
         <button
           type='submit'
@@ -43,14 +75,21 @@ function SearchForm({
           onClick={() => {
             onReset();
             ref.current!.value = '';
+            setErMsg('');
           }}
         >
           Сброс
         </button>
+        <span className='sercher__err-msg'>{erMsg}</span>
       </form>
       <ul className='sercher__filter-list list-reset'>
         <li className='sercher__filter-list-element'>
-          <FilterCheckbox content='Короткометражки' state={filters.isShort} setState={setFilters} name='isShort' />
+          <FilterCheckbox
+            content='Короткометражки'
+            state={filters.isShort}
+            setState={setFilters}
+            name='isShort'
+          />
         </li>
       </ul>
       <div className='sercher__dividing-line' />

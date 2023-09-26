@@ -42,7 +42,7 @@ function MoviesContainer({ data }: any) {
 
   useEffect(() => {
     getDataFilms();
-  }, []);
+  }, [isSavedPage]);
 
   return (
     <PageWithFilms data={{

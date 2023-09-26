@@ -1,14 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PageWithLogin from '../components/pages/PageWithLogin/PageWithLogin';
 import mainApi from '../helpers/utils/MainApi';
-import useUserData from '../сustomHooks/useUserData';
+import { useCurrentUser } from '../contexts/CurrentUserContext';
+import { formLoginSetting } from '../helpers/constants';
 
 export default function LoginContainer() {
-  const { setUserDataAndLoginAndNavToFilms } = useUserData();
+  const navigate = useNavigate();
+  const { setUserDataAndLogin, setSbtMsg } = useCurrentUser()!;
 
-  const toEndFetch = ({ values, curUser }: any) => (
-    setUserDataAndLoginAndNavToFilms({ values, curUser })
-  );
+  const toEndFetch = (data: any) => {
+    setUserDataAndLogin(data);
+    navigate('/movies');
+    setSbtMsg('');
+  };
 
   const propsOfUseForm = {
     fetch: mainApi.toLoginUser,
@@ -16,20 +21,12 @@ export default function LoginContainer() {
   };
 
   const inputTypes = { inputTypeEmail: true, inputTypePassword: true };
-  const formSetting = {
-    name: 'login-user-form',
-    title: 'Рады видеть!',
-    sbtBtnText: 'Войти',
-    questionText: 'Ещё не зарегистрированы?',
-    pathLink: '/signup',
-    linkText: 'Регистрация',
-  };
 
   return (
     <PageWithLogin
       propsOfUseForm={propsOfUseForm}
       inputTypes={inputTypes}
-      formSetting={formSetting}
+      formSetting={formLoginSetting}
     />
   );
 }

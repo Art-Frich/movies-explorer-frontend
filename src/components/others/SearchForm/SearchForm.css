@@ -4,7 +4,10 @@
 }
 
 .sercher__form {
+  box-sizing: border-box;
+  position: relative;
   width: 100%;
+  margin-bottom: 26px;
   padding: 10px 10px 10px 25px;
 
   display: flex;
@@ -14,10 +17,6 @@
 
   border-radius: 8px;
   border: 1.5px solid rgba(170, 170, 170, 0.2);
-
-  margin-bottom: 26px;
-
-  box-sizing: border-box;
 }
 
 .sercher__form:focus {
@@ -62,6 +61,17 @@
 
   max-width: 100px;
   width: 100%;
+}
+
+.sercher__err-msg {
+  position: absolute;
+  right: 10px;
+  bottom: -20px;
+  font-size: 12px;
+  line-height: normal;
+  font-weight: normal;
+  font-style: normal;
+  color: var(--color-neon);
 }
 
 .sercher__filter-list {

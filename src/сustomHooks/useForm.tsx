@@ -12,12 +12,12 @@ interface IHandleChangeInput {
 }
 
 export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
-  const curUser = useCurrentUser();
+  const { setSbtMsg } = useCurrentUser()!;
+
   const [isValidForm, setIsValidForm] = useState(false);
   const [values, setValues] = useState<any>({});
   const [errors, setErrors] = useState({});
   const [isFetching, setIsFetching] = useState(false);
-  const [sbtMsg, setSbtMsg] = useState('');
   const [resData, setResData] = useState<any>(null);
 
   const handleChangeInput = ({ e, typeInput, aboutPattern }: IHandleChangeInput) => {
@@ -55,7 +55,7 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
         setSbtMsg(`Успешно! ${sbtSucMsg}`);
         // объединить свойства, чтобы прокинуть userName, который возвращает login() и хранит в res
         // return чтобы оттянуть .finally и кнопка submit была заблокирована до конца toEndFetch
-        return toEndFetch({ values: { ...values, ...res }, curUser });
+        return toEndFetch({ values: { ...values, ...res } });
       })
       .catch(async (err: any) => {
         setSbtMsg(`Провал: ${(await err).message}`);
@@ -69,11 +69,9 @@ export default function useForm({ fetch, toEndFetch, sbtSucMsg = '' }: any) {
     resData,
     errors,
     values,
-    sbtMsg,
     isFetching,
     isValidForm,
     setIsFetching,
-    setSbtMsg,
     setValues,
   };
 }

@@ -7,11 +7,13 @@ import Logo from '../../others/Logo/Logo';
 import useForm from '../../../сustomHooks/useForm';
 import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
 import InputsOfUserData from '../../others/InputsOfUserData/InputsOfUserData';
+import { useCurrentUser } from '../../../contexts/CurrentUserContext';
 
 export default function PageWithLogin({ propsOfUseForm, inputTypes, formSetting }: any) {
+  const { sbtMsg } = useCurrentUser()!;
   const {
     handleChangeInput, handleSubmit, errors,
-    values, sbtMsg, isFetching, isValidForm, resData,
+    values, isFetching, isValidForm, resData,
   } = useForm(propsOfUseForm);
   const {
     name, title, sbtBtnText, questionText, pathLink, linkText,

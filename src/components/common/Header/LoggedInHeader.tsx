@@ -30,7 +30,7 @@ export default function LoggedInHeader() {
         <li className='navigation-auth__list-element'>
           <NavLink
             className={({ isActive }) => (
-              `navigation-auth__link navigation-auth__account-btn ${isActive ? 'navigation-auth__link_active' : 'active-underline link-hover'}`
+              `navigation-auth__link navigation-auth__account-btn ${isActive ? 'navigation-auth__link_active' : ' link-hover'}`
             )}
             to='/profile'
           >

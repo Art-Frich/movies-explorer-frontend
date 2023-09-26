@@ -6,12 +6,12 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 import mainApi from '../helpers/utils/MainApi';
 import useForm from '../сustomHooks/useForm';
 import { inputEmailSettings, inputNameSettings } from '../helpers/constants';
-import useUserData from '../сustomHooks/useUserData';
 
 const ProfileContainer = React.memo(() => {
-  const { setUserData } = useUserData();
+  const { setUserData, setSbtMsg, sbtMsg } = useCurrentUser()!;
   const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(true);
   const [isDisabledInput, setIsDisabledInput] = useState(true);
+  const [localSbtMsg, setLocalSbtMsg] = useState(sbtMsg);
 
   const navigate = useNavigate();
   const curUser = useCurrentUser();
@@ -23,8 +23,7 @@ const ProfileContainer = React.memo(() => {
 
   const {
     handleChangeInput, handleSubmit, resData, errors,
-    values, sbtMsg, isFetching, isValidForm,
-    setIsFetching, setSbtMsg, setValues,
+    values, isFetching, isValidForm, setIsFetching, setValues,
   } = useForm({ fetch: mainApi.toUpdateUserData, toEndFetch });
 
   const onLogout = useCallback(() => {
@@ -42,8 +41,8 @@ const ProfileContainer = React.memo(() => {
   }, []);
 
   const onEditBtnClick = useCallback(() => {
-    setSbtMsg('');
     setIsDisabledInput(false);
+    setLocalSbtMsg('');
   }, []);
 
   useEffect(() => {
@@ -68,8 +67,8 @@ const ProfileContainer = React.memo(() => {
       onLogout={onLogout}
       onEditBtnClick={onEditBtnClick}
       isDisabledInput={isDisabledInput}
-      submitMsg={sbtMsg}
-      submitMsgIsErr={resData === null}
+      submitMsg={localSbtMsg}
+      resData={resData}
       errorsInput={errors}
       onInput={handleChangeInput}
       isDisabledSubmitBtn={isDisabledSubmitBtn}
