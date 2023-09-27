@@ -43,6 +43,7 @@ export function CurrentUserProvider({ children }: IReactChildren) {
 
   const logout = () => {
     setLoggedIn(false);
+    setSbtMsg('');
   };
 
   // values от useForm, values.data от main.toLogin(), т.к. name отсутствует в values при login

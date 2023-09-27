@@ -10,7 +10,7 @@ import { useMoviesApiContext } from '../../../contexts/MoviesApiContext';
 const PageWithFilms = React.memo((props: any) => {
   const {
     onClickSaveBtn, visibleFilms, filters, setFilters,
-    userQuery, onReset, onSearch,
+    userQuery, onReset, onSearch, isSavedPage,
     messageForUser, onClickToAddContent, onClickToReset, cntVisibleFilms,
   } = props.data;
   const { isSearch } = useMoviesApiContext()!;
@@ -30,6 +30,7 @@ const PageWithFilms = React.memo((props: any) => {
         }}
         userQuery={userQuery}
         isSearch={isSearch}
+        isSavedPage={isSavedPage}
       />
       {visibleFilms.length > 0 && !isSearch ? (
         <MoviesCardList

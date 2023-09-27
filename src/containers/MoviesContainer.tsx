@@ -23,12 +23,7 @@ function MoviesContainer({ data }: any) {
 
   const getDataFilms = useCallback(() => {
     try {
-      if (isSavedPage) {
-        moviesContext?.getSavedFilms();
-      } else {
-        // TODO раскомментировать после ревью
-        // moviesContext?.getAllFilms();
-      }
+      moviesContext?.getSavedFilms();
     } catch (err) {
       // \n не отрабатывают
       setMessageForUser(

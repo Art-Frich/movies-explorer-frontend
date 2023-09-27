@@ -15,10 +15,11 @@ interface ISearchForm {
   onReset: () => void;
   userQuery: string,
   isSearch: boolean,
+  isSavedPage: boolean,
 }
 
 function SearchForm({
-  filters, setFilters, onSearch, onReset, userQuery, isSearch,
+  filters, setFilters, onSearch, onReset, userQuery, isSearch, isSavedPage,
 }: ISearchForm) {
   const { regEx, erTextNoLetter, erTextOneLetter } = inputSearcherValiditySettings;
 
@@ -45,8 +46,11 @@ function SearchForm({
 
   useEffect(() => {
     setErMsg('');
-    setFilters({ isShort: false });
   }, [useLocation().pathname]);
+
+  useEffect(() => {
+    ref.current!.value = userQuery;
+  }, [userQuery]);
 
   return (
     <section className='sercher'>
@@ -89,6 +93,7 @@ function SearchForm({
             state={filters.isShort}
             setState={setFilters}
             name='isShort'
+            isSavedPage={isSavedPage}
           />
         </li>
       </ul>

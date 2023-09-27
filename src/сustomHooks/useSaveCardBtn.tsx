@@ -6,9 +6,7 @@ import mainApi from '../helpers/utils/MainApi';
 export default function useSaveCardBtn({ isSavedPage }: any) {
   const curUser = useCurrentUser();
   const popupContext = useErrorPopupContext();
-  const {
-    savedFilms, setSavedFilms, getAllFilms, allFilms,
-  } = useMoviesApiContext()!;
+  const { savedFilms, setSavedFilms } = useMoviesApiContext()!;
 
   const addMovies = (dataMovie: any): any => {
     const newDataMovie = dataMovie;
@@ -42,7 +40,6 @@ export default function useSaveCardBtn({ isSavedPage }: any) {
   };
 
   const onClickSaveBtn = (data: any) => {
-    if (allFilms.length === 0) { getAllFilms(); }
     if (isSavedPage || data.btnType === 'movies-card__btn_saved') {
       deleteMovie(data);
     } else {

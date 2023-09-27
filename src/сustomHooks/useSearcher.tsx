@@ -1,6 +1,7 @@
 import {
   useState, useEffect, FormEvent, useCallback,
 } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 import { useMoviesApiContext } from '../contexts/MoviesApiContext';
 
@@ -12,26 +13,24 @@ export default function useSearcher({ isSavedPage }: any) {
   // let defaultMsgForUser = 'Здесь пока ничего нет =)';
   let defaultMsgForUser = '';
   let parsedData = { localQuery: '', localFilters: { isShort: false }, localSaved: [] };
-  if (!isSavedPage) {
-    try {
-      const storedData = window.localStorage.getItem('movies-explorer-last-query');
-      if (storedData) {
-        parsedData = JSON.parse(storedData);
-        if (parsedData.localSaved.length === 0) {
-          defaultMsgForUser = 'Ничего не найдено =(';
-        }
+  try {
+    const storedData = window.localStorage.getItem('movies-explorer-last-query');
+    if (storedData) {
+      parsedData = JSON.parse(storedData);
+      if (parsedData.localSaved.length === 0) {
+        defaultMsgForUser = 'Ничего не найдено =(';
       }
-    } catch {
-      popupContext?.setErMsg('Попытка проверить был ли у вас предыдущий запрос окончилась провалом...');
     }
+  } catch {
+    popupContext?.setErMsg('Попытка проверить был ли у вас предыдущий запрос окончилась провалом...');
   }
 
   const { localQuery, localFilters, localSaved } = parsedData;
 
-  const [userQuery, setUserQuery] = useState(localQuery);
+  const [userQuery, setUserQuery] = useState(isSavedPage ? '' : localQuery);
   const [messageForUser, setMessageForUser] = useState(defaultMsgForUser);
 
-  const [filters, setFilters] = useState<any>(localFilters);
+  const [filters, setFilters] = useState<any>(isSavedPage ? { isShort: false } : localFilters);
   const [isActiveFilters, setIsActiveFilters] = useState(
     Object.keys(filters).some((key: string): boolean => filters[key])
   );
@@ -41,6 +40,17 @@ export default function useSearcher({ isSavedPage }: any) {
 
   // TODO убрать после ревью в PageWithFilms
   const [localFilms, setLocalFilms] = useState(localSaved);
+  const [isChangeLocal, setIsChangeLocal] = useState(false);
+
+  // создать объект для записи в localStorage
+  const getJsonQuery = (): string => {
+    const data = {
+      localQuery: userQuery,
+      localFilters: filters,
+      localSaved: visibleFilms,
+    };
+    return JSON.stringify(data);
+  };
 
   // сброс поиска
   const onReset = useCallback(() => {
@@ -54,7 +64,7 @@ export default function useSearcher({ isSavedPage }: any) {
       setLocalFilms([]);
       if (allFilms.length === 0) getAllFilms();
     }
-  }, [isSavedPage, allFilms]);
+  }, [isSavedPage, allFilms, savedFilms]);
 
   // при поиске установить новый запрос
   const onSearch = useCallback((e: FormEvent<HTMLFormElement> | null, value: string) => {
@@ -64,57 +74,55 @@ export default function useSearcher({ isSavedPage }: any) {
       return;
     }
     // TODO убрать после ревью
-    setLocalFilms([]);
     if (!isSavedPage) {
+      setLocalFilms([]);
+      setIsChangeLocal(true);
       if (allFilms.length === 0) getAllFilms();
     }
     setUserQuery(value.toLowerCase());
-    // TODO убрать после ревью
-  }, [userQuery, allFilms, savedFilms]);
-
-  // создать объект для записи в localStorage
-  const getJsonQuery = (): string => {
-    const data = {
-      localQuery: userQuery,
-      localFilters: filters,
-      localSaved: visibleFilms,
-    };
-    return JSON.stringify(data);
-  };
+  }, [userQuery, allFilms, savedFilms, isSavedPage]);
 
   // Функция для обновления локального хранилища и сообщения для пользователя
   const updateLocalStorage = useCallback(() => {
+    if ((userQuery || isActiveFilters) && !isSavedPage && isChangeLocal) {
+      window.localStorage.setItem('movies-explorer-last-query', getJsonQuery());
+      setIsChangeLocal(false);
+    }
+  }, [visibleFilms, isSavedPage, userQuery, isActiveFilters]);
+
+  // функци обновления сообщения для пользователя
+  const updateMsgForUser = useCallback(() => {
     if ((userQuery || isActiveFilters) && visibleFilms.length === 0) {
       setMessageForUser('Ничего не найдено =(');
     } else if (isSavedPage && visibleFilms.length === 0) {
       setMessageForUser('Здесь пока ничего нет =)');
     } else {
-      // TODO раскомментировать после ревью
       setMessageForUser('');
     }
-
-    if ((userQuery || isActiveFilters) && !isSavedPage) {
-      window.localStorage.setItem('movies-explorer-last-query', getJsonQuery());
-    }
-  }, [visibleFilms]);
+  }, [visibleFilms, isSavedPage, userQuery, isActiveFilters]);
 
   // Функция для обновления фильтров
   const updateFilters = useCallback(async () => {
+    if (!isSavedPage) setIsChangeLocal(true);
     const isActive = Object.keys(filters).some((key: string): boolean => filters[key]);
     setIsActiveFilters(isActive);
   }, [filters]);
 
   // Функция для обновления отфильтрованных фильмов
-  const updateFilteredFilms = useCallback(() => {
-    setFilteredFilms((isSavedPage ? savedFilms : allFilms)
+  const updateFilteredFilms = useCallback(
+    () => setFilteredFilms((
+      isSavedPage ? savedFilms : allFilms)
       .filter((el: any): boolean => (
         (filters.isShort ? el.duration < 40 : true)
-      )));
-  }, [filters, allFilms, savedFilms, isSavedPage]);
+      ))),
+    [filters, allFilms, savedFilms, isSavedPage]
+  );
 
   // Функция для обновления видимых фильмов
   const updateVisibleFilms = useCallback(() => {
-    const filteredByQuery = filteredFilms
+    const filteredByQuery = (
+      (filteredFilms.length === 0 && !isSavedPage && localFilms.length > 0)
+        ? localFilms : filteredFilms)
       .filter((el: any): boolean => (
         el.nameRU.toLowerCase().includes(userQuery)
         || el.nameEN.toLowerCase().includes(userQuery)))
@@ -128,10 +136,20 @@ export default function useSearcher({ isSavedPage }: any) {
         return { ...el, btnType };
       });
 
-    setVisibleFilms((filteredByQuery.length === 0 && localFilms.length > 0)
-      ? localFilms
-      : filteredByQuery);
-  }, [filteredFilms, userQuery]);
+    setVisibleFilms(filteredByQuery);
+  }, [filteredFilms, userQuery, isSavedPage, savedFilms, localFilms]);
+
+  // обновить под роут запрос и фильтры
+  // ? ранее в этом не было необходимости...
+  useEffect(() => {
+    setFilters(isSavedPage ? { isShort: false } : localFilters);
+    setUserQuery(isSavedPage ? '' : localQuery);
+  }, [useLocation().pathname]);
+
+  // установить видимые карточки
+  useEffect(() => {
+    updateVisibleFilms();
+  }, [updateVisibleFilms]);
 
   // Эффект для обновления фильтров и отфильтрованных фильмов
   useEffect(() => {
@@ -141,13 +159,9 @@ export default function useSearcher({ isSavedPage }: any) {
 
   // как только для пользователя установлен видимый массив карточек
   useEffect(() => {
+    updateMsgForUser();
     updateLocalStorage();
-  }, [updateLocalStorage]);
-
-  // // установить видимые карточки
-  useEffect(() => {
-    updateVisibleFilms();
-  }, [updateVisibleFilms]);
+  }, [visibleFilms]);
 
   return {
     onReset,
