@@ -28,6 +28,7 @@ export function MoviesApiProvider({ children }: IReactChildren) {
   const [allFilms, setAllFilms] = useState<any>([]);
   const [savedFilms, setSavedFilms] = useState<any>([]);
   const [isSearch, setIsSearch] = useState<boolean>(false);
+  const [isFirstQuery, setIsFirstQuery] = useState(true);
 
   const funcSetAllFilms = (allFilmsData: any) => {
     if (allFilms.length === 0) {
@@ -40,20 +41,22 @@ export function MoviesApiProvider({ children }: IReactChildren) {
   };
 
   const getSavedFilms = useCallback(async () => {
-    if (savedFilms.length === 0) {
+    if (savedFilms.length === 0 && isFirstQuery) {
       setIsSearch(true);
       const filmsData = (await mainApi.getAllSavedMovies()).data;
       setSavedFilms(filmsData);
+      setIsFirstQuery(false);
       setIsSearch(false);
     }
   }, [savedFilms]);
 
   const getAllFilms = useCallback(async () => {
-    if (savedFilms.length === 0) {
+    if (savedFilms.length === 0 && isFirstQuery) {
       setIsSearch(true);
       const savedFilmsData = (await mainApi.getAllSavedMovies()).data;
       const allFilmsData = await moviesApi.getMovies();
       setSavedFilms(savedFilmsData);
+      setIsFirstQuery(false);
       funcSetAllFilms(allFilmsData);
       setIsSearch(false);
     } else if (allFilms.length === 0) {
