@@ -13,6 +13,7 @@ interface IMoviesApiContext {
   getSavedFilms: () => void,
   getAllFilms: () => void,
   setIsSearch: (newVal: boolean) => void,
+  setAllFilms: (newVal: any) => void,
 }
 
 interface IReactChildren {
@@ -64,7 +65,14 @@ export function MoviesApiProvider({ children }: IReactChildren) {
   }, [savedFilms, allFilms]);
 
   const contextValue = useMemo(() => ({
-    allFilms, setSavedFilms, savedFilms, getSavedFilms, getAllFilms, isSearch, setIsSearch,
+    allFilms,
+    setSavedFilms,
+    savedFilms,
+    getSavedFilms,
+    getAllFilms,
+    isSearch,
+    setIsSearch,
+    setAllFilms,
   }), [allFilms, savedFilms, isSearch]);
 
   return (

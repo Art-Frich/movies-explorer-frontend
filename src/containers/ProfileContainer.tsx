@@ -6,9 +6,11 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 import mainApi from '../helpers/utils/MainApi';
 import useForm from '../сustomHooks/useForm';
 import { inputEmailSettings, inputNameSettings } from '../helpers/constants';
+import { useMoviesApiContext } from '../contexts/MoviesApiContext';
 
 const ProfileContainer = React.memo(() => {
   const { setUserData, setSbtMsg, sbtMsg } = useCurrentUser()!;
+  const { setAllFilms, setSavedFilms } = useMoviesApiContext()!;
   const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(true);
   const [isDisabledInput, setIsDisabledInput] = useState(true);
   const [localSbtMsg, setLocalSbtMsg] = useState(sbtMsg);
@@ -31,6 +33,8 @@ const ProfileContainer = React.memo(() => {
     mainApi.toLogout()
       .then(() => {
         curUser?.logout();
+        setAllFilms([]);
+        setSavedFilms([]);
         window.localStorage.removeItem('movies-explorer-last-query');
         navigate('/');
       })
