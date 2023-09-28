@@ -22,7 +22,7 @@ export default function FilterCheckbox({
   }
 
   return (
-    <div className='checkbox'>
+    <div className='checkbox' role='button'>
       <label htmlFor={`filter-by-${content}`}>
         <input
           id={`filter-by-${content}`}

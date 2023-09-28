@@ -69,6 +69,8 @@
 
   width: 270px;
   height: 327px;
+  border-radius: 5px;
+  border: 1px solid #000;
 }
 
 @media screen and (max-width: 768px) {

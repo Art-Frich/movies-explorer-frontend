@@ -15,7 +15,7 @@ export default function MoviesCardList({
   films, onClickToAddContent, cntAllFilms, onClickSaveBtn,
 }: IMoviesCardList) {
   return (
-    <section className='movies-list'>
+    <section className='movies-list' aria-label='cards'>
       <ul className='movies-list__list list-reset'>
         {films.map((el) => (
           <li className='movies-list__list-element' key={el.movieId}>

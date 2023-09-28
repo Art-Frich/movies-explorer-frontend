@@ -3,7 +3,7 @@ import './AboutMe.css';
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import photo from '../../../images/pic__COLOR_pic.png';
+import photo from '../../../images/delete-btn.svg';
 import SectionTitleRow from '../../others/SectionTitleRow/SectionTitleRow';
 
 export default function AboutMe() {
@@ -27,6 +27,8 @@ export default function AboutMe() {
               to='https://github.com/Art-Frich'
               className='about-me__info-link link-hover active-neon'
               target='_blank'
+              hrefLang='en'
+              rel='noopener noreferer'
             >
               Github
             </Link>

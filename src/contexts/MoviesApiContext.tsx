@@ -28,6 +28,7 @@ export function MoviesApiProvider({ children }: IReactChildren) {
   const [allFilms, setAllFilms] = useState<any>([]);
   const [savedFilms, setSavedFilms] = useState<any>([]);
   const [isSearch, setIsSearch] = useState<boolean>(false);
+  // отрабатывает, когда сохраненок нет, предотвращая постоянные запросы
   const [isFirstQuery, setIsFirstQuery] = useState(true);
 
   const funcSetAllFilms = (allFilmsData: any) => {
@@ -40,30 +41,36 @@ export function MoviesApiProvider({ children }: IReactChildren) {
     }
   };
 
+  const handleQuery = async (func: any) => {
+    setIsSearch(true);
+    await func();
+    setIsSearch(false);
+  };
+
   const getSavedFilms = useCallback(async () => {
     if (savedFilms.length === 0 && isFirstQuery) {
-      setIsSearch(true);
-      const filmsData = (await mainApi.getAllSavedMovies()).data;
-      setSavedFilms(filmsData);
-      setIsFirstQuery(false);
-      setIsSearch(false);
+      handleQuery(async () => {
+        const filmsData = (await mainApi.getAllSavedMovies()).data;
+        setSavedFilms(filmsData);
+        setIsFirstQuery(false);
+      });
     }
   }, [savedFilms]);
 
   const getAllFilms = useCallback(async () => {
     if (savedFilms.length === 0 && isFirstQuery) {
-      setIsSearch(true);
-      const savedFilmsData = (await mainApi.getAllSavedMovies()).data;
-      const allFilmsData = await moviesApi.getMovies();
-      setSavedFilms(savedFilmsData);
-      setIsFirstQuery(false);
-      funcSetAllFilms(allFilmsData);
-      setIsSearch(false);
+      handleQuery(async () => {
+        const savedFilmsData = (await mainApi.getAllSavedMovies()).data;
+        const allFilmsData = await moviesApi.getMovies();
+        setSavedFilms(savedFilmsData);
+        setIsFirstQuery(false);
+        funcSetAllFilms(allFilmsData);
+      });
     } else if (allFilms.length === 0) {
-      setIsSearch(true);
-      const allFilmsData = await moviesApi.getMovies();
-      funcSetAllFilms(allFilmsData);
-      setIsSearch(false);
+      handleQuery(async () => {
+        const allFilmsData = await moviesApi.getMovies();
+        funcSetAllFilms(allFilmsData);
+      });
     }
   }, [savedFilms, allFilms]);
 

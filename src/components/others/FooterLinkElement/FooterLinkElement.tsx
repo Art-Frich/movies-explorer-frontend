@@ -15,6 +15,7 @@ export default function FooterLinkElement({ url, content }: IFooterLinkElement) 
         to={url}
         className='footer__link link-hover active-underline'
         target='_blank'
+        rel='noopener noreferer'
       >
         {content}
       </Link>

@@ -23,12 +23,11 @@ function MoviesContainer({ data }: any) {
 
   const getDataFilms = useCallback(() => {
     try {
-      moviesContext?.getSavedFilms();
+      moviesContext?.[isSavedPage ? 'getSavedFilms' : 'getAllFilms']();
     } catch (err) {
-      // \n не отрабатывают
       setMessageForUser(
-        `Во время запроса произошла ошибка.\n
-        Возможно, проблема с соединением или сервер недоступен.\n
+        `Во время запроса произошла ошибка.
+        Возможно, проблема с соединением или сервер недоступен.
         Подождите немного и попробуйте ещё раз`
       );
       popupContext?.setErMsg('Ошибка при попытке получить данные о фильмах с серверов');

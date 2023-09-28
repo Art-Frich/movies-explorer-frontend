@@ -15,6 +15,7 @@ export default function PortfolioLinkElement({ url, content }: IPortfolioLinkEle
         to={url}
         className='portfolio__link link-hover active-neon'
         target='_blank'
+        rel='noopener noreferer'
       >
         <span className='portfolio__list-element-text'>{content}</span>
         <span>↗</span>
