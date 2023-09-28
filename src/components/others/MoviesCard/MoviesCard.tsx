@@ -16,7 +16,12 @@ function MoviesCard({ data, onClickSaveBtn }: IMoviesCardProps) {
         <h3 className='movies-card__name'>{data.nameRU}</h3>
         <span className='movies-card__time'>{changeTimeFormat(data.duration)}</span>
       </div>
-      <Link to={data.trailerLink} className='movie-card__link link-hover active-neon'>
+      <Link
+        to={data.trailerLink}
+        className='movie-card__link link-hover active-neon'
+        target='_blank'
+        rel='noopener noreferer'
+      >
         <img src={data.image} alt='контент карточки' className='movies-card__img' />
       </Link>
       <button

@@ -6,8 +6,19 @@ import { Link } from 'react-router-dom';
 export default function GuestHeader() {
   return (
     <nav className='navigation-guest'>
-      <Link className='navigation-guest__link link-hover active-underline' to='/signup'>Регистрация</Link>
-      <Link className='navigation-guest__link navigation-guest__signin-btn btn-hover active-btn-effect' to='/signin'>
+      <Link
+        className='navigation-guest__link link-hover active-underline'
+        to='/signup'
+        hrefLang='ru'
+      >
+        Регистрация
+
+      </Link>
+      <Link
+        className='navigation-guest__link navigation-guest__signin-btn btn-hover active-btn-effect'
+        to='/signin'
+        hrefLang='ru'
+      >
         Войти
       </Link>
     </nav>

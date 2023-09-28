@@ -53,7 +53,7 @@ function SearchForm({
   }, [userQuery]);
 
   return (
-    <section className='sercher'>
+    <section className='sercher' aria-label='search'>
       <form
         className='sercher__form'
         name='search-movie-form'
