@@ -4,16 +4,22 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-// eslint-disable-next-line import/extensions
 import App from './components/common/App/App';
-
-// import App from './components/App/App';
+import { CurrentUserProvider } from './contexts/CurrentUserContext';
+import { ErrorPopupProvider } from './contexts/ErrorPopupContext';
+import { MoviesApiProvider } from './contexts/MoviesApiContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+  <ErrorPopupProvider>
+    <CurrentUserProvider>
+      <MoviesApiProvider>
+        <React.StrictMode>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </React.StrictMode>
+      </MoviesApiProvider>
+    </CurrentUserProvider>
+  </ErrorPopupProvider>
 );

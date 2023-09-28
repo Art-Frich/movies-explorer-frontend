@@ -4,6 +4,8 @@
 
 ### Ссылка на front-end: https://search-your-movies.nomoredomainsicu.ru
 
+### Ссылка на pull-request: https://github.com/Art-Frich/movies-explorer-front-end/pull/2
+
 ### Существующие роуты
 
 - по роуту '/' отображается страница «О проекте»;

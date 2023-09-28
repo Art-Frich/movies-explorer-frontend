@@ -1,16 +1,24 @@
 import './FilterCheckbox.css';
 
 import React from 'react';
+import { useMoviesApiContext } from '../../../contexts/MoviesApiContext';
 
 interface IFilterCheckbox {
   content: string,
   state: boolean,
-  setState: (newValue: boolean) => void,
+  setState: any,
+  name: string,
+  isSavedPage: boolean,
 }
 
-export default function FilterCheckbox({ content, state, setState }: IFilterCheckbox) {
-  function chengeCheckbox() {
-    setState(!state);
+export default function FilterCheckbox({
+  content, state, setState, name, isSavedPage,
+}: IFilterCheckbox) {
+  const { getAllFilms } = useMoviesApiContext()!;
+
+  function changeCheckbox() {
+    if (!isSavedPage) getAllFilms();
+    setState((prev: any) => ({ ...prev, [name]: !prev[name] }));
   }
 
   return (
@@ -21,7 +29,7 @@ export default function FilterCheckbox({ content, state, setState }: IFilterChec
           className='checkbox__input'
           type='checkbox'
           checked={state}
-          onChange={chengeCheckbox}
+          onChange={changeCheckbox}
         />
         <span className='checkbox__container' />
       </label>

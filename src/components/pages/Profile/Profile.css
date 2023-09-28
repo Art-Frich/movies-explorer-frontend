@@ -53,7 +53,7 @@
   border: 0;
 }
 
-.page-profile__desctiption {
+.page-profile__description {
   color: var(--base-color-of-text);
   font-size: 11px;
   font-style: normal;
@@ -78,7 +78,7 @@
 }
 
 .page-profile__error {
-  color: #ee3465;
+  color: var(--color-neon);
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -99,6 +99,21 @@
   gap: 16px;
 }
 
+.page-profile__submit-result-msg {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.page-profile__submit-result-msg_err{
+  color: var(--color-neon);
+}
+
+.page-profile__submit-result-msg_ok{
+  color: var(--color-blue);
+}
+
 .page-profile__btn-edit {
   width: fit-content;
   padding: 0 5px 0;
@@ -115,7 +130,7 @@
   width: fit-content;
   padding: 0 5px 0;
 
-  color: #ee3465;
+  color: var(--color-neon);
   text-align: center;
   font-size: 13px;
   font-style: normal;
@@ -125,7 +140,7 @@
 
 .page-profile__btn-submit {
   border-radius: 3px;
-  background: #4285f4;
+  background: var(--color-blue);
   padding: 13px 0;
 
   color: var(--base-color-of-text);

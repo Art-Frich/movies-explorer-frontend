@@ -1,9 +1,53 @@
-import React, { useState } from 'react';
-import Movies from '../components/pages/Movies/Movies';
+import React, {
+  useEffect, useCallback,
+} from 'react';
 
-export default function MoviesContainer() {
-  const [isShort, setIsShort] = useState(false);
+import PageWithFilms from '../components/pages/PageWithFilms/PageWithFilms';
+import useSaveCardBtn from '../сustomHooks/useSaveCardBtn';
+import useSearcher from '../сustomHooks/useSearcher';
+import useSetterVisibleFilms from '../сustomHooks/useSetterVisibleFilms';
+import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
+import { useMoviesApiContext } from '../contexts/MoviesApiContext';
+
+function MoviesContainer({ data }: any) {
+  const popupContext = useErrorPopupContext();
+  const moviesContext = useMoviesApiContext();
+
+  const { isSavedPage } = data;
+
+  const objVisibleFilmsProps = useSetterVisibleFilms();
+  const objSearchProps = useSearcher({ isSavedPage });
+  const [onClickSaveBtn] = useSaveCardBtn({ isSavedPage });
+
+  const { setMessageForUser } = objSearchProps;
+
+  const getDataFilms = useCallback(() => {
+    try {
+      moviesContext?.getSavedFilms();
+    } catch (err) {
+      // \n не отрабатывают
+      setMessageForUser(
+        `Во время запроса произошла ошибка.\n
+        Возможно, проблема с соединением или сервер недоступен.\n
+        Подождите немного и попробуйте ещё раз`
+      );
+      popupContext?.setErMsg('Ошибка при попытке получить данные о фильмах с серверов');
+    }
+  }, [isSavedPage]);
+
+  useEffect(() => {
+    getDataFilms();
+  }, [isSavedPage]);
+
   return (
-    <Movies isShort={isShort} setIsShort={setIsShort} />
+    <PageWithFilms data={{
+      ...objSearchProps,
+      ...objVisibleFilmsProps,
+      onClickSaveBtn,
+      isSavedPage,
+    }}
+    />
   );
 }
+
+export default MoviesContainer;

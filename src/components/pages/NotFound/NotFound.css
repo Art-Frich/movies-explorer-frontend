@@ -6,9 +6,9 @@
 
   min-height: 100vh;
 
-  background: #202020;
+  background: var(--background-color-light-black);
 
-  color: #fff;
+  color: var(--base-color-of-text);
   text-align: center;
   font-family: Inter;
 }
@@ -34,7 +34,7 @@
 .not-found__link {
   margin: 0 0 60px;
 
-  color: #4285f4;
+  color: var(--color-blue);
   text-decoration: none;
   font-size: 14px;
   font-style: normal;

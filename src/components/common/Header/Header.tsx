@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import './Header.css';
 
 import React, { useEffect, useState } from 'react';
@@ -12,7 +11,7 @@ import BurgerLoggedInHeader from './BurgerLoggedInHeader';
 import BurgerBtn from '../../others/BurgerBtn/BurgerBtn';
 import Logo from '../../others/Logo/Logo';
 
-export default function Header() {
+function Header() {
   const location = useLocation();
   const curUser = useCurrentUser();
   const isSmallScreen = useMediaQuery('only screen and (max-width : 768px)');
@@ -23,6 +22,16 @@ export default function Header() {
   const toggleBurgerState = () => {
     setIsOpenBurger(!isOpenBurger);
   };
+
+  let headerComponent;
+
+  if (!curUser?.loggedIn) {
+    headerComponent = <GuestHeader />;
+  } else if (!isSmallScreen) {
+    headerComponent = <LoggedInHeader />;
+  } else {
+    headerComponent = <BurgerBtn onClick={toggleBurgerState} isOpen={isOpenBurger} />;
+  }
 
   useEffect(() => {
     setIsMain(location.pathname === '/');
@@ -36,14 +45,10 @@ export default function Header() {
   return (
     <header className={`header ${isMain ? 'main-header-style' : ''}`}>
       <Logo />
-      {!curUser?.loggedIn ? (
-        <GuestHeader />
-      ) : !isSmallScreen ? (
-        <LoggedInHeader />
-      ) : (
-        <BurgerBtn onClick={toggleBurgerState} isOpen={isOpenBurger} />
-      )}
+      {headerComponent}
       <BurgerLoggedInHeader isOpen={isOpenBurger && isSmallScreen} />
     </header>
   );
 }
+
+export default Header;

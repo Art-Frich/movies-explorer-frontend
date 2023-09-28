@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
-import Login from '../components/pages/Login/Login';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import PageWithLogin from '../components/pages/PageWithLogin/PageWithLogin';
+import mainApi from '../helpers/utils/MainApi';
+import { useCurrentUser } from '../contexts/CurrentUserContext';
+import { formLoginSetting } from '../helpers/constants';
 
 export default function LoginContainer() {
-  const [isValidForm, setIsvalidForm] = useState(true);
-  const [fetchCondition, setFetchCondition] = useState(false);
+  const navigate = useNavigate();
+  const { setUserDataAndLogin, setSbtMsg } = useCurrentUser()!;
 
-  const onSubmit = () => {
-    setFetchCondition(true);
-    setFetchCondition(false);
-    setIsvalidForm(true);
+  const toEndFetch = (data: any) => {
+    setUserDataAndLogin(data);
+    navigate('/movies');
+    setSbtMsg('');
   };
 
+  const propsOfUseForm = {
+    fetch: mainApi.toLoginUser,
+    toEndFetch,
+  };
+
+  const inputTypes = { inputTypeEmail: true, inputTypePassword: true };
+
   return (
-    <Login isValidForm={isValidForm} onSubmit={onSubmit} fetchCondition={fetchCondition} />
+    <PageWithLogin
+      propsOfUseForm={propsOfUseForm}
+      inputTypes={inputTypes}
+      formSetting={formLoginSetting}
+    />
   );
 }

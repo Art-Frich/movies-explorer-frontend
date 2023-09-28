@@ -1,30 +1,35 @@
 import './MoviesCard.css';
-import React from 'react';
 
-interface IMovieData {
-  name: string,
-  time: string,
-  link: string,
-}
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { changeTimeFormat } from '../../../helpers/utils/utils';
 
 interface IMoviesCardProps {
-  data: IMovieData,
-  type: string,
+  data: any,
+  onClickSaveBtn: (data: any) => void;
 }
 
-export default function MoviesCard({ data, type }: IMoviesCardProps) {
+function MoviesCard({ data, onClickSaveBtn }: IMoviesCardProps) {
   return (
     <article className='movies-card'>
       <div className='movies-card__header'>
-        <h3 className='movies-card__name'>{data.name}</h3>
-        <span className='movies-card__time'>{data.time}</span>
+        <h3 className='movies-card__name'>{data.nameRU}</h3>
+        <span className='movies-card__time'>{changeTimeFormat(data.duration)}</span>
       </div>
-      <img src={data.link} alt='контент карточки' className='movies-card__img' />
+      <Link to={data.trailerLink} className='movie-card__link link-hover active-neon'>
+        <img src={data.image} alt='контент карточки' className='movies-card__img' />
+      </Link>
       <button
-        className={`movies-card__btn btn-reset btn-hover active-btn-effect ${type}`}
-        type='button'
+        className={`movies-card__btn btn-reset btn-hover active-btn-effect ${data.btnType}`}
+        onClick={(e) => {
+          e.preventDefault(); // думаю, поможет от двойного клика
+          onClickSaveBtn(data);
+        }}
+        type='submit'
         aria-label='movies-card-btn'
       />
     </article>
   );
 }
+
+export default MoviesCard;
