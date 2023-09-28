@@ -3,7 +3,7 @@ import './AboutMe.css';
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import photo from '../../../images/delete-btn.svg';
+import photo from '../../../images/i_am.jpg';
 import SectionTitleRow from '../../others/SectionTitleRow/SectionTitleRow';
 
 export default function AboutMe() {
