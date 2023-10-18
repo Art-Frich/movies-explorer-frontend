@@ -1,3 +1,4 @@
+import { IdataFilmOriginal, IdataFilmResult } from '../InterfacesOfDataFilm';
 import { urlMoviesApi } from '../constants';
 
 export const changeTimeFormat = (duration: number): string => {
@@ -12,7 +13,7 @@ export const changeTimeFormat = (duration: number): string => {
 export const parseMovieData = ({
   country, year, duration, director, nameEN,
   nameRU, id, image, trailerLink, description,
-}: any): any => ({
+}: IdataFilmOriginal): IdataFilmResult => ({
   country,
   director,
   duration,

@@ -4,16 +4,19 @@ import React, {
 import mainApi from '../helpers/utils/MainApi';
 import { parseMovieData } from '../helpers/utils/utils';
 import moviesApi from '../helpers/utils/MoviesApi';
+import { IdataFilmOriginal, IdataFilmResult, IdataSavedFilm } from '../helpers/InterfacesOfDataFilm';
 
 interface IMoviesApiContext {
-  allFilms: any,
-  savedFilms: any,
+  allFilms: IdataFilmResult[],
+  savedFilms: IdataSavedFilm[],
   isSearch: boolean,
-  setSavedFilms: (newVal: any) => void,
+  setSavedFilms: (
+    newVal: IdataSavedFilm[] | ((prev: IdataSavedFilm[]) => IdataSavedFilm[])
+  ) => void,
   getSavedFilms: () => void,
   getAllFilms: () => void,
   setIsSearch: (newVal: boolean) => void,
-  setAllFilms: (newVal: any) => void,
+  setAllFilms: (newVal: IdataFilmResult[]) => void,
 }
 
 interface IReactChildren {
@@ -22,26 +25,34 @@ interface IReactChildren {
 
 const MoviesApiContext = createContext<IMoviesApiContext | undefined>(undefined);
 
-export const useMoviesApiContext = () => useContext(MoviesApiContext);
+export const useMoviesApiContext = () => {
+  const context = useContext(MoviesApiContext);
+
+  if (context === undefined) {
+    throw new Error('useCurrentUser must be used within a MoviesApiProvider');
+  }
+
+  return context;
+};
 
 export function MoviesApiProvider({ children }: IReactChildren) {
-  const [allFilms, setAllFilms] = useState<any>([]);
-  const [savedFilms, setSavedFilms] = useState<any>([]);
+  const [allFilms, setAllFilms] = useState<IdataFilmResult[] | []>([]);
+  const [savedFilms, setSavedFilms] = useState<IdataSavedFilm[] | []>([]);
   const [isSearch, setIsSearch] = useState<boolean>(false);
   // отрабатывает, когда сохраненок нет, предотвращая постоянные запросы
   const [isFirstQuery, setIsFirstQuery] = useState(true);
 
-  const funcSetAllFilms = (allFilmsData: any) => {
+  const funcSetAllFilms = (allFilmsData: IdataFilmOriginal[]) => {
     if (allFilms.length === 0) {
       setAllFilms(allFilmsData
-        .map((film: any) => {
+        .map((film: IdataFilmOriginal) => {
           const parsedFilm = parseMovieData(film);
           return { ...parsedFilm };
         }));
     }
   };
 
-  const handleQuery = async (func: any) => {
+  const handleQuery = async (func: () => void) => {
     setIsSearch(true);
     await func();
     setIsSearch(false);

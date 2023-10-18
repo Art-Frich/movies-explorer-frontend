@@ -15,8 +15,8 @@ function ErrorPopup() {
   }, [erMsg]);
 
   useEffect(() => {
-    setErMsg(errContext?.er || '');
-  }, [errContext?.er]);
+    setErMsg(errContext.er || '');
+  }, [errContext.er]);
 
   useEffect(() => {
     if (!isOpen) { setTimeout(() => setErMsg(defaultMsg), 200); }

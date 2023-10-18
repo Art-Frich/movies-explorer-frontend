@@ -2,12 +2,13 @@ import './MoviesCardList.css';
 
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import { IdataOfBtnSave } from '../../../helpers/InterfacesOfDataFilm';
 
 interface IMoviesCardList {
-  films: any[],
+  films: IdataOfBtnSave[],
   onClickToAddContent: () => void;
   cntAllFilms: number;
-  onClickSaveBtn: (data: any) => void;
+  onClickSaveBtn: (data: IdataOfBtnSave) => void;
 
 }
 

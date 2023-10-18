@@ -25,7 +25,7 @@ function Header() {
 
   let headerComponent;
 
-  if (!curUser?.loggedIn) {
+  if (!curUser.loggedIn) {
     headerComponent = <GuestHeader />;
   } else if (!isSmallScreen) {
     headerComponent = <LoggedInHeader />;

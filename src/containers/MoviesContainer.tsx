@@ -9,11 +9,9 @@ import useSetterVisibleFilms from '../сustomHooks/useSetterVisibleFilms';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 import { useMoviesApiContext } from '../contexts/MoviesApiContext';
 
-function MoviesContainer({ data }: any) {
+function MoviesContainer({ isSavedPage }: { isSavedPage: boolean }) {
   const popupContext = useErrorPopupContext();
   const moviesContext = useMoviesApiContext();
-
-  const { isSavedPage } = data;
 
   const objVisibleFilmsProps = useSetterVisibleFilms();
   const objSearchProps = useSearcher({ isSavedPage });
@@ -23,14 +21,14 @@ function MoviesContainer({ data }: any) {
 
   const getDataFilms = useCallback(() => {
     try {
-      moviesContext?.[isSavedPage ? 'getSavedFilms' : 'getAllFilms']();
+      moviesContext[isSavedPage ? 'getSavedFilms' : 'getAllFilms']();
     } catch (err) {
       setMessageForUser(
         `Во время запроса произошла ошибка.
         Возможно, проблема с соединением или сервер недоступен.
         Подождите немного и попробуйте ещё раз`
       );
-      popupContext?.setErMsg('Ошибка при попытке получить данные о фильмах с серверов');
+      popupContext.setErMsg('Ошибка при попытке получить данные о фильмах с серверов');
     }
   }, [isSavedPage]);
 

@@ -7,10 +7,11 @@ import mainApi from '../helpers/utils/MainApi';
 import useForm from '../сustomHooks/useForm';
 import { inputEmailSettings, inputNameSettings } from '../helpers/constants';
 import { useMoviesApiContext } from '../contexts/MoviesApiContext';
+import { IdataUserAndInputValues } from '../helpers/InterfacesOfDataUser';
 
-const ProfileContainer = React.memo(() => {
-  const { setUserData, setSbtMsg, sbtMsg } = useCurrentUser()!;
-  const { setAllFilms, setSavedFilms } = useMoviesApiContext()!;
+function ProfileContainer() {
+  const { setUserData, setSbtMsg, sbtMsg } = useCurrentUser();
+  const { setAllFilms, setSavedFilms } = useMoviesApiContext();
   const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(true);
   const [isDisabledInput, setIsDisabledInput] = useState(true);
   const [localSbtMsg, setLocalSbtMsg] = useState(sbtMsg);
@@ -18,7 +19,7 @@ const ProfileContainer = React.memo(() => {
   const navigate = useNavigate();
   const curUser = useCurrentUser();
 
-  const toEndFetch = (data: any) => {
+  const toEndFetch = (data: IdataUserAndInputValues) => {
     setUserData(data);
     setIsDisabledInput(true);
   };
@@ -32,7 +33,7 @@ const ProfileContainer = React.memo(() => {
     setIsFetching(true);
     mainApi.toLogout()
       .then(() => {
-        curUser?.logout();
+        curUser.logout();
         setAllFilms([]);
         setSavedFilms([]);
         window.localStorage.removeItem('movies-explorer-last-query');
@@ -51,34 +52,34 @@ const ProfileContainer = React.memo(() => {
 
   useEffect(() => {
     const flag = !(isValidForm && !isFetching && (
-      (values[inputNameSettings.name] !== curUser?.name)
-      || (values[inputEmailSettings.name] !== curUser?.email)));
+      (values[inputNameSettings.name] !== curUser.name)
+      || (values[inputEmailSettings.name] !== curUser.email)));
     setIsDisabledSubmitBtn(flag);
   }, [isValidForm, values, isFetching]);
 
   useEffect(() => {
     setValues({
       ...values,
-      [inputNameSettings.name]: curUser?.name,
-      [inputEmailSettings.name]: curUser?.email,
+      [inputNameSettings.name]: curUser.name,
+      [inputEmailSettings.name]: curUser.email,
     });
   }, []);
 
   return (
     <Profile
       onSubmit={handleSubmit}
-      fetchCondition={isFetching}
+      onInput={handleChangeInput}
       onLogout={onLogout}
       onEditBtnClick={onEditBtnClick}
+      fetchCondition={isFetching}
       isDisabledInput={isDisabledInput}
       submitMsg={localSbtMsg}
       resData={resData}
       errorsInput={errors}
-      onInput={handleChangeInput}
       isDisabledSubmitBtn={isDisabledSubmitBtn}
       valuesInput={values}
     />
   );
-});
+}
 
 export default ProfileContainer;

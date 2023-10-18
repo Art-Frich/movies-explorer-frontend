@@ -1,3 +1,4 @@
+import { IdataFilmOriginal } from '../InterfacesOfDataFilm';
 import { urlMoviesApi } from '../constants';
 
 class MoviesApi {
@@ -7,7 +8,7 @@ class MoviesApi {
     this.urlApi = `${urlMoviesApi}/beatfilm-movies`;
   }
 
-  getMovies(): Promise<any> {
+  getMovies(): Promise<IdataFilmOriginal[]> {
     return fetch(this.urlApi)
       .then((res) => {
         if (res.ok) {

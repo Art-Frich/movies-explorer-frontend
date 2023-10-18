@@ -3,21 +3,23 @@ import { Navigate } from 'react-router-dom';
 import React from 'react';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
-// interface IProtectRoute {
-//   Element: React.ComponentType,
-//   onlyLoggedIn?: boolean,
-// }
+interface IProtectRoute<T> {
+  Element: React.ComponentType<any>,
+  onlyLoggedIn?: boolean,
+  data?: T,
+}
 
-export default function ProtectRoute(
-  { Element, onlyLoggedIn, ...props }: any
+export default function ProtectRoute<T>(
+  { Element, onlyLoggedIn, data }: IProtectRoute<T | {}>
 ) {
-  const curUser = useCurrentUser();
+  const { loggedIn } = useCurrentUser();
 
   return (
-    (onlyLoggedIn ? curUser!.loggedIn : !curUser!.loggedIn) ? <Element {...props} /> : <Navigate to='/' replace />
+    (onlyLoggedIn ? loggedIn : !loggedIn) ? <Element {...data} /> : <Navigate to='/' replace />
   );
 }
 
 ProtectRoute.defaultProps = {
   onlyLoggedIn: false,
+  data: {},
 };

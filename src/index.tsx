@@ -9,17 +9,21 @@ import { CurrentUserProvider } from './contexts/CurrentUserContext';
 import { ErrorPopupProvider } from './contexts/ErrorPopupContext';
 import { MoviesApiProvider } from './contexts/MoviesApiContext';
 
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(
-  <ErrorPopupProvider>
-    <CurrentUserProvider>
-      <MoviesApiProvider>
-        <React.StrictMode>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </React.StrictMode>
-      </MoviesApiProvider>
-    </CurrentUserProvider>
-  </ErrorPopupProvider>
-);
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <ErrorPopupProvider>
+      <CurrentUserProvider>
+        <MoviesApiProvider>
+          <React.StrictMode>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </React.StrictMode>
+        </MoviesApiProvider>
+      </CurrentUserProvider>
+    </ErrorPopupProvider>
+  );
+}

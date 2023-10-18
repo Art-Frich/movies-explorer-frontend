@@ -1,4 +1,5 @@
 import React from 'react';
+import { IobjValStr } from '../../../helpers/InterfacesOthers';
 
 interface IInputBlock {
   labelClass: string,
@@ -7,9 +8,13 @@ interface IInputBlock {
   inputClass: string,
   errSpanClass: string,
   inputSettings: IInputSettings,
-  values: any,
-  errors: any,
-  onInput: any,
+  values: IobjValStr,
+  errors: IobjValStr,
+  onInput: (data: {
+    e: React.ChangeEvent<HTMLInputElement>,
+    typeInput: string,
+    aboutPattern: string,
+  }) => void,
   inputDisabled?: boolean,
 }
 

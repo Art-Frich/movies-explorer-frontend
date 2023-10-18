@@ -12,15 +12,23 @@ interface IReactChildren {
 }
 
 const ErrorPopupContext = createContext<IErrorPopupContext | undefined>(undefined);
-export const useErrorPopupContext = () => useContext(ErrorPopupContext);
+export const useErrorPopupContext = () => {
+  const context = useContext(ErrorPopupContext);
+
+  if (context === undefined) {
+    throw new Error('useCurrentUser must be used within a ErrorPopupProvider');
+  }
+
+  return context;
+};
 
 export function ErrorPopupProvider({ children }: IReactChildren) {
-  const [newVal, setnewVal] = useState('');
+  const [newErVal, setNewErVal] = useState('');
   const [er, setEr] = useState('');
 
   const setErMsg = (val: string) => {
     setEr('');
-    setnewVal(val);
+    setNewErVal(val);
   };
 
   const contextValue = useMemo(() => ({
@@ -28,11 +36,11 @@ export function ErrorPopupProvider({ children }: IReactChildren) {
   }), [er]);
 
   useEffect(() => {
-    if (newVal) {
-      setEr(newVal);
-      setnewVal('');
+    if (newErVal) {
+      setEr(newErVal);
+      setNewErVal('');
     }
-  }, [newVal]);
+  }, [newErVal]);
 
   return (
     <ErrorPopupContext.Provider value={contextValue}>

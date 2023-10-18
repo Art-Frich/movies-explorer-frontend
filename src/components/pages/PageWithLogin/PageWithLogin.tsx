@@ -8,9 +8,21 @@ import useForm from '../../../сustomHooks/useForm';
 import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
 import InputsOfUserData from '../../others/InputsOfUserData/InputsOfUserData';
 import { useCurrentUser } from '../../../contexts/CurrentUserContext';
+import { IformSettings } from '../../../helpers/InterfacedOfConstants';
+import { IobjValBool } from '../../../helpers/InterfacesOthers';
+import { IdataLogin, IdataUser, IdataUserAndInputValues } from '../../../helpers/InterfacesOfDataUser';
 
-export default function PageWithLogin({ propsOfUseForm, inputTypes, formSetting }: any) {
-  const { sbtMsg } = useCurrentUser()!;
+interface IPageWithLogin {
+  inputTypes: IobjValBool,
+  formSetting: IformSettings,
+  propsOfUseForm: {
+    fetch: (values: IdataLogin) => Promise<IdataUser>;
+    toEndFetch: (data: IdataUserAndInputValues) => void;
+  },
+}
+
+export default function PageWithLogin({ propsOfUseForm, inputTypes, formSetting }: IPageWithLogin) {
+  const { sbtMsg } = useCurrentUser();
   const {
     handleChangeInput, handleSubmit, errors,
     values, isFetching, isValidForm, resData,

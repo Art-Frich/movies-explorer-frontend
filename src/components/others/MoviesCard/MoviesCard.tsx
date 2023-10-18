@@ -3,10 +3,11 @@ import './MoviesCard.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { changeTimeFormat } from '../../../helpers/utils/utils';
+import { IdataOfBtnSave } from '../../../helpers/InterfacesOfDataFilm';
 
 interface IMoviesCardProps {
-  data: any,
-  onClickSaveBtn: (data: any) => void;
+  data: IdataOfBtnSave,
+  onClickSaveBtn: (data: IdataOfBtnSave) => void;
 }
 
 function MoviesCard({ data, onClickSaveBtn }: IMoviesCardProps) {

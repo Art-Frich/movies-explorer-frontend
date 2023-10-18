@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 
+import { IdataFilmToSave, IdataSavedFilm } from '../InterfacesOfDataFilm';
+import {
+  IdataLogin, IdataRegister, IdataUser, IdataUserUpdate,
+} from '../InterfacesOfDataUser';
 import {
   inputEmailSettings, inputNameSettings, inputPasswordSettings, urlMainApi,
 } from '../constants';
@@ -26,12 +30,12 @@ class MainApi {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  handleFetch(fetch: Promise<Response>) {
+  handleFetch<T>(fetch: Promise<Response>): Promise<T> {
     return fetch
       .then((res) => (res.ok ? res.json() : Promise.reject(res.json())));
   }
 
-  checkJWT = () => this.handleFetch(
+  checkJWT = () => this.handleFetch<IdataUser>(
     fetch(urlMainApi + this.pathMe, {
       method: 'GET',
       credentials: 'include',
@@ -41,7 +45,7 @@ class MainApi {
     })
   );
 
-  toRegisterUser = (values: any) => this.handleFetch(
+  toRegisterUser = (values: IdataRegister) => this.handleFetch<IdataUser>(
     fetch(urlMainApi + this.pathCreateUser, {
       method: 'POST',
       credentials: 'include',
@@ -57,7 +61,7 @@ class MainApi {
     })
   );
 
-  toLoginUser = (values: any) => this.handleFetch(
+  toLoginUser = (values: IdataLogin) => this.handleFetch<IdataUser>(
     fetch(urlMainApi + this.pathLoginUser, {
       method: 'POST',
       credentials: 'include',
@@ -71,26 +75,28 @@ class MainApi {
     })
   );
 
-  toLogout() {
+  toLogout(): Promise<Response> {
     return fetch(urlMainApi + this.pathLogout, {
       method: 'POST',
       credentials: 'include',
     });
   }
 
-  toUpdateUserData = (values: any) => fetch(urlMainApi + this.pathMe, {
-    method: 'PATCH',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: values[this.emailKey],
-      name: values[this.nameKey],
-    }),
-  }).then(async (res) => (res.ok ? res.json() : Promise.reject(await res.json())));
+  toUpdateUserData = (values: IdataUserUpdate): Promise<IdataUser> => (
+    fetch(urlMainApi + this.pathMe, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: values[this.emailKey],
+        name: values[this.nameKey],
+      }),
+    }).then(async (res) => (res.ok ? res.json() : Promise.reject(await res.json())))
+  );
 
-  addMovie = (dataMovie: any) => this.handleFetch(
+  addMovie = (dataMovie: IdataFilmToSave) => this.handleFetch<{ data: IdataSavedFilm }>(
     fetch(urlMainApi + this.pathFilms, {
       method: 'POST',
       credentials: 'include',
@@ -101,7 +107,7 @@ class MainApi {
     })
   );
 
-  deleteMovie = (movieId: any) => this.handleFetch(
+  deleteMovie = (movieId: string) => this.handleFetch<{ data: IdataSavedFilm }>(
     fetch(`${urlMainApi + this.pathFilms + movieId}`, {
       method: 'DELETE',
       credentials: 'include',
@@ -111,7 +117,7 @@ class MainApi {
     })
   );
 
-  getAllSavedMovies = () => this.handleFetch(
+  getAllSavedMovies = () => this.handleFetch<{ data: IdataSavedFilm[] }>(
     fetch(urlMainApi + this.pathFilms, {
       method: 'GET',
       credentials: 'include',

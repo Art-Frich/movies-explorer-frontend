@@ -2,11 +2,12 @@ import './FilterCheckbox.css';
 
 import React from 'react';
 import { useMoviesApiContext } from '../../../contexts/MoviesApiContext';
+import { IobjValBool } from '../../../helpers/InterfacesOthers';
 
 interface IFilterCheckbox {
   content: string,
   state: boolean,
-  setState: any,
+  setState: (newVal: (prev: IobjValBool) => IobjValBool) => void,
   name: string,
   isSavedPage: boolean,
 }
@@ -14,11 +15,11 @@ interface IFilterCheckbox {
 export default function FilterCheckbox({
   content, state, setState, name, isSavedPage,
 }: IFilterCheckbox) {
-  const { getAllFilms } = useMoviesApiContext()!;
+  const { getAllFilms } = useMoviesApiContext();
 
   function changeCheckbox() {
     if (!isSavedPage) getAllFilms();
-    setState((prev: any) => ({ ...prev, [name]: !prev[name] }));
+    setState((prev) => ({ ...prev, [name]: !prev[name] }));
   }
 
   return (

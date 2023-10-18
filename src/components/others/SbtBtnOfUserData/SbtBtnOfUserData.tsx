@@ -1,7 +1,13 @@
 import './SbtBtnOfUserData.css';
 import React from 'react';
 
-export default function SbtBtnOfUserData({ isFetching, isDisable, btnText }: any) {
+interface ISbtBtnOfUserData {
+  isFetching: boolean,
+  isDisable: boolean,
+  btnText: string,
+}
+
+export default function SbtBtnOfUserData({ isFetching, isDisable, btnText }: ISbtBtnOfUserData) {
   return (
     <button
       className='btn-submit-of-user-data btn-reset btn-hover active-btn-effect color-btn-disabled'

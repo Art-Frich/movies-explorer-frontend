@@ -1,6 +1,6 @@
 import { useMediaQuery } from '@react-hook/media-query';
 import { useState, useEffect } from 'react';
-import { optionsUseSetterBisibleFilms } from '../helpers/constants';
+import { optionsUseSetterVisibleFilms } from '../helpers/constants';
 
 export default function useSetterVisibleFilms() {
   const {
@@ -12,11 +12,11 @@ export default function useSetterVisibleFilms() {
     addedLimitThreeColumn,
     addedLimitTwoColumn,
     addedLimitOneColumn,
-  } = optionsUseSetterBisibleFilms;
+  } = optionsUseSetterVisibleFilms;
   const [baseLimit, setBaseLimit] = useState(12);
   const [addedLimit, setAddedLimit] = useState(3);
   const [cntAddedContent, setCntAddedContent] = useState(0);
-  const [cntVisibleFilms, setCntVisibleFilms] = useState<any>(null);
+  const [cntVisibleFilms, setCntVisibleFilms] = useState<number>(0);
 
   const toTwoColumn = useMediaQuery(`only screen and (max-width: ${toTwoColumnWidth}px)`);
   const toOneColumn = useMediaQuery(`only screen and (max-width: ${toOneColumnWidth}px)`);

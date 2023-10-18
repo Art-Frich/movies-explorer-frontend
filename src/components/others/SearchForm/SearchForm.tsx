@@ -7,10 +7,11 @@ import React, {
 import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { inputSearcherValiditySettings } from '../../../helpers/constants';
+import { IobjValBool } from '../../../helpers/InterfacesOthers';
 
 interface ISearchForm {
-  filters: Record<string, boolean>,
-  setFilters: (newValue: Record<string, boolean>) => void,
+  filters: IobjValBool,
+  setFilters: (newVal: (prev: IobjValBool) => IobjValBool) => void,
   onSearch: (e: FormEvent<HTMLFormElement>, value: string) => void,
   onReset: () => void;
   userQuery: string,
@@ -37,7 +38,7 @@ function SearchForm({
     return valid;
   }
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
     const valid = checkPattern();
     if (valid) onSearch(e, ref.current?.value || '');

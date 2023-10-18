@@ -1,10 +1,22 @@
 import React from 'react';
 import InputBlock from '../InputBlock/InputBlock';
 import { inputEmailSettings, inputNameSettings, inputPasswordSettings } from '../../../helpers/constants';
+import { IHandleChangeInput } from '../../../сustomHooks/useForm';
+import { IobjValBool, IobjValStr } from '../../../helpers/InterfacesOthers';
+
+interface IInputOfUserData {
+  inputTypes: IobjValBool,
+  inputDisabled: boolean,
+  errors: IobjValStr,
+  values: IobjValStr,
+  handleChangeInput: (data: IHandleChangeInput) => void,
+  // eslint-disable-next-line react/require-default-props
+  isProfile?: boolean,
+}
 
 export default function InputsOfUserData({
   inputTypes, inputDisabled, errors, values, handleChangeInput, isProfile = false,
-}: any) {
+}: IInputOfUserData) {
   const { inputTypeName, inputTypeEmail, inputTypePassword } = inputTypes;
   return (
     <>

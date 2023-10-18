@@ -5,12 +5,30 @@ import React from 'react';
 import { useCurrentUser } from '../../../contexts/CurrentUserContext';
 import SbtBtnOfUserData from '../../others/SbtBtnOfUserData/SbtBtnOfUserData';
 import InputsOfUserData from '../../others/InputsOfUserData/InputsOfUserData';
+import { IdataUser } from '../../../helpers/InterfacesOfDataUser';
+import { IobjValStr } from '../../../helpers/InterfacesOthers';
+import { IHandleChangeInput, IhandleSubmit } from '../../../сustomHooks/useForm';
+
+interface IProfile {
+  onSubmit: ({ e }: IhandleSubmit) => Promise<void>;
+  onInput: ({ e, typeInput, aboutPattern }: IHandleChangeInput) => void;
+  onLogout: () => void;
+  onEditBtnClick: () => void;
+
+  fetchCondition: boolean;
+  isDisabledInput: boolean;
+  submitMsg: string;
+  resData: IdataUser | null;
+  errorsInput: IobjValStr;
+  isDisabledSubmitBtn: boolean;
+  valuesInput: IobjValStr;
+}
 
 export default function Profile({
   onSubmit, fetchCondition, onLogout, onEditBtnClick, isDisabledInput,
   submitMsg, resData, errorsInput, onInput, isDisabledSubmitBtn,
   valuesInput,
-}: any) {
+}: IProfile) {
   const curUser = useCurrentUser();
   return (
     <main className='page-profile'>
@@ -21,7 +39,7 @@ export default function Profile({
         autoComplete='off'
       >
         <div className='page-profile__content'>
-          <h1 className='page-profile__title'>{`Здравствуйте, ${curUser?.name} :)`}</h1>
+          <h1 className='page-profile__title'>{`Здравствуйте, ${curUser.name} :)`}</h1>
 
           <InputsOfUserData
             inputTypes={{ inputTypeName: true, inputTypeEmail: true }}
@@ -34,7 +52,7 @@ export default function Profile({
         </div>
 
         <div className='page-profile__btns'>
-          <span className={`page-profile__submit-result-msg ${resData === 0
+          <span className={`page-profile__submit-result-msg ${resData === null
             ? 'page-profile__submit-result-msg_err'
             : 'page-profile__submit-result-msg_ok'}`}
           >

@@ -40,7 +40,7 @@ function App() {
 
   // проверяю токен
   useEffect(() => {
-    (curUser?.checkToken() || Promise.resolve())
+    (curUser.checkToken() || Promise.resolve())
       .finally(() => setIsCheckJwt(false));
   }, []);
 
@@ -58,7 +58,7 @@ function App() {
               <Route
                 path='/saved-movies'
                 element={(
-                  <ProtectOfRoute
+                  <ProtectOfRoute<{ isSavedPage: boolean }>
                     Element={MoviesContainer}
                     onlyLoggedIn
                     data={{ isSavedPage: true }}
@@ -68,7 +68,7 @@ function App() {
               <Route
                 path='/movies'
                 element={(
-                  <ProtectOfRoute
+                  <ProtectOfRoute<{ isSavedPage: boolean }>
                     Element={MoviesContainer}
                     onlyLoggedIn
                     data={{ isSavedPage: false }}

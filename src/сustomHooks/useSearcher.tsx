@@ -4,10 +4,12 @@ import {
 import { useLocation } from 'react-router-dom';
 import { useErrorPopupContext } from '../contexts/ErrorPopupContext';
 import { useMoviesApiContext } from '../contexts/MoviesApiContext';
+import { IobjValBool } from '../helpers/InterfacesOthers';
+import { IdataFilmResult, IdataOfBtnSave, IdataSavedFilm } from '../helpers/InterfacesOfDataFilm';
 
-export default function useSearcher({ isSavedPage }: any) {
+export default function useSearcher({ isSavedPage }: { isSavedPage: boolean }) {
   const popupContext = useErrorPopupContext();
-  const { allFilms, savedFilms } = useMoviesApiContext()!;
+  const { allFilms, savedFilms } = useMoviesApiContext();
 
   let defaultMsgForUser = '';
   let parsedData = { localQuery: '', localFilters: { isShort: false }, localSaved: [] };
@@ -20,7 +22,7 @@ export default function useSearcher({ isSavedPage }: any) {
       }
     }
   } catch {
-    popupContext?.setErMsg('Попытка проверить был ли у вас предыдущий запрос окончилась провалом...');
+    popupContext.setErMsg('Попытка проверить был ли у вас предыдущий запрос окончилась провалом...');
   }
 
   const { localQuery, localFilters, localSaved } = parsedData;
@@ -28,13 +30,15 @@ export default function useSearcher({ isSavedPage }: any) {
   const [userQuery, setUserQuery] = useState(isSavedPage ? '' : localQuery);
   const [messageForUser, setMessageForUser] = useState(defaultMsgForUser);
 
-  const [filters, setFilters] = useState<any>(isSavedPage ? { isShort: false } : localFilters);
+  const [filters, setFilters] = useState<IobjValBool>(
+    isSavedPage ? { isShort: false } : localFilters
+  );
   const [isActiveFilters, setIsActiveFilters] = useState(
     Object.keys(filters).some((key: string): boolean => filters[key])
   );
 
-  const [filteredFilms, setFilteredFilms] = useState<any>([]);
-  const [visibleFilms, setVisibleFilms] = useState<any>(localSaved);
+  const [filteredFilms, setFilteredFilms] = useState<IdataFilmResult[] | IdataSavedFilm[]>([]);
+  const [visibleFilms, setVisibleFilms] = useState<IdataOfBtnSave[]>(localSaved);
 
   // создать объект для записи в localStorage
   const getJsonQuery = (): string => {
@@ -94,7 +98,7 @@ export default function useSearcher({ isSavedPage }: any) {
   const updateFilteredFilms = useCallback(
     () => setFilteredFilms((
       isSavedPage ? savedFilms : allFilms)
-      .filter((el: any): boolean => (
+      .filter((el) => (
         (filters.isShort ? el.duration < 40 : true)
       ))),
     [filters, allFilms, savedFilms, isSavedPage]
@@ -103,14 +107,14 @@ export default function useSearcher({ isSavedPage }: any) {
   // Функция для обновления видимых фильмов
   const updateVisibleFilms = useCallback(() => {
     const filteredByQuery = filteredFilms
-      .filter((el: any): boolean => (
+      .filter((el) => (
         el.nameRU.toLowerCase().includes(userQuery)
         || el.nameEN.toLowerCase().includes(userQuery)))
-      .map((el: any) => {
+      .map((el) => {
         let btnType = '';
         if (isSavedPage) { btnType = 'movies-card__btn_delete'; }
         if (!btnType) {
-          const isSavedFilm = savedFilms.some((film: any) => film.movieId === el.movieId);
+          const isSavedFilm = savedFilms.some((film) => film.movieId === el.movieId);
           btnType = isSavedFilm ? 'movies-card__btn_saved' : 'movies-card__btn_save';
         }
         return { ...el, btnType };
