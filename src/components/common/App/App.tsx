@@ -18,23 +18,23 @@ import ProtectOfRoute from '../ProtectOfRoute';
 import Preloader from '../Preloader/Preloader';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
+const AddHeader = React.memo(() => (
+  <>
+    <Header />
+    <Outlet />
+  </>
+));
+
+const AddFooter = React.memo(() => (
+  <>
+    <Outlet />
+    <Footer />
+  </>
+));
+
 function App() {
   const curUser = useCurrentUser();
   const [isCheckJwt, setIsCheckJwt] = useState(true);
-
-  const AddHeader = React.memo(() => (
-    <>
-      <Header />
-      <Outlet />
-    </>
-  ));
-
-  const AddFooter = React.memo(() => (
-    <>
-      <Outlet />
-      <Footer />
-    </>
-  ));
 
   // проверяю токен
   useEffect(() => {

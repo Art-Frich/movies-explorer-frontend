@@ -12,6 +12,7 @@ function BurgerBtn({ onClick, isOpen }: IBurgerBtnProps) {
     <div
       className={`burger-menu btn-hover btn-reset ${isOpen ? 'burger-menu_open' : ''}`}
       role='button'
+      aria-label='Открыть меню'
       onClick={onClick}
       tabIndex={0}
       onKeyDown={(e) => {

@@ -24,7 +24,7 @@ export default function FilterCheckbox({
 
   return (
     <div className='checkbox' role='button'>
-      <label htmlFor={`filter-by-${content}`}>
+      <label htmlFor={`filter-by-${content}`} aria-label='Переключить фильтр'>
         <input
           id={`filter-by-${content}`}
           className='checkbox__input'
