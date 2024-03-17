@@ -2,7 +2,8 @@
 
 ### Ссылка на макет: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?node-id=1%3A10230&mode=dev (dark-4)
 
-### Ссылка на сайт: https://search-your-movies.nomoredomainsicu.ru (сервер снят с обслуживания, ссылка пока не актуальна)
+### Ссылка на сайт: https://search-your-movies.nomoredomainsicu.ru
+### pair frontend https://github.com/Art-Frich/movies-explorer-api
 
 ### About
 Сделан финальный проект на веб-факультете в @yandex.practicum.
@@ -19,7 +20,8 @@
 - проработаны авторизованные и неавторизованные состояния, сохранение фильмов в профиле;
 - полученные фильмы фильтруются на стороне клиента.
 
-Инструменты и стек: #HTML #CSS #React #Express #MongoDB #NodeJS #API #Nginx #JWT #Postman
+### Инструменты и стек: 
+#HTML5 #CSS3 #ReactJS #react-hook #react-router-dom #TS #eslint
 
 ### Существующие роуты
 
